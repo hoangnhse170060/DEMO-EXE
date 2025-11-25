@@ -54,7 +54,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -68,6 +68,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {item.label}
               </button>
             ))}
+          
           </nav>
 
           <button

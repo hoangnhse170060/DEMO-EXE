@@ -99,10 +99,10 @@
   }
 
   .sidebar-elegant {
-    background: linear-gradient(135deg, rgba(245, 239, 230, 0.98) 0%, rgba(232, 223, 202, 0.98) 50%, rgba(203, 220, 235, 0.98) 100%);
+    background: linear-gradient(135deg, rgba(24, 24, 24, 0.98) 0%, rgba(18, 18, 18, 0.98) 50%, rgba(12, 12, 12, 0.98) 100%);
     backdrop-filter: blur(12px);
-    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(109, 148, 197, 0.25);
+    box-shadow: 4px 0 30px rgba(251, 191, 36, 0.15);
+    border-right: 1px solid rgba(251, 191, 36, 0.2);
   }
 
   .menu-item-elegant {
@@ -117,7 +117,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #6D94C5;
+    background-color: #fbbf24;
     transition: width 0.35s ease;
   }
 
@@ -132,6 +132,19 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #6D94C5;
+    background-color: #fbbf24;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
   }
 }

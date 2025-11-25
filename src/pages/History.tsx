@@ -37,6 +37,16 @@ type PhaseContent = {
   reference: string;
 };
 
+type ModernEraSection = {
+  id: string;
+  title: string;
+  period: string;
+  summary: string;
+  details: string[];
+  image: string;
+  videoUrl: string;
+};
+
 const eraFromPhase: Record<PhaseKey, 'french' | 'american'> = {
   antiFrench: 'french',
   antiAmerican: 'american',
@@ -46,6 +56,8 @@ const phaseFromEra: Partial<Record<string, PhaseKey>> = {
   french: 'antiFrench',
   american: 'antiAmerican',
 };
+
+
 
 const phases: Record<PhaseKey, PhaseContent> = {
   antiFrench: {
@@ -152,7 +164,7 @@ const phases: Record<PhaseKey, PhaseContent> = {
         ],
         sources: ['Võ Nguyên Giáp, Điện Biên Phủ - điểm hẹn lịch sử', 'Hồ sơ chiến dịch lưu trữ Bộ Tổng tham mưu'],
       },
-      {
+      { 
         date: '21/07/1954',
         headline: 'Hiệp định Geneva lập lại hòa bình ở Đông Dương',
         location: 'Geneva - Thụy Sĩ',
@@ -324,6 +336,140 @@ reference: 'HOÀNG SA - TRƯỜNG SA LÀ CỦA VIỆT NAM.',
   },
 };
 const phaseOrder: PhaseKey[] = ['antiFrench', 'antiAmerican'];
+const modernEraSections: ModernEraSection[] = [
+  {
+    id: 'phap-xam-luoc',
+    title: 'Pháp xâm lược → mất nước',
+    period: '1858 – 1884',
+    summary: 'Pháp bắt đầu nổ súng vào Đà Nẵng, rồi dần chiếm toàn bộ ba kỳ và thiết lập hệ thống cai trị thuộc địa.',
+    details: [
+      '1/9/1858: Liên quân Pháp – Tây Ban Nha tấn công Đà Nẵng.',
+      'Hòa ước Nhâm Tuất 1862 và sự kiện chiếm toàn Nam Kỳ năm 1867.',
+      'Sự kiện chiếm Hà Nội 1873, 1882 và ký Hòa ước Patenôtre 1884 hoàn tất xâm lược.',
+    ],
+    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/LQ9Q4f31RcQ',
+  },
+  {
+    id: 'can-vuong',
+    title: 'Phong trào Cần Vương',
+    period: '1885 – 1896',
+    summary: 'Vua Hàm Nghi ra Chiếu Cần Vương, phong trào lan rộng ở Bắc Trung Bộ với các lãnh tụ như Phan Đình Phùng.',
+    details: [
+      'Khởi nghĩa Ba Đình, Bãi Sậy và Hương Khê là ba trung tâm lớn.',
+      'Đêm ngày 12/7/1896: Pháp bắt Phan Đình Phùng, đánh dấu sự suy yếu của Cần Vương.',
+      'Tinh thần Cần Vương tiếp sức cho các phong trào thanh niên sau này.',
+    ],
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
+    videoUrl: 'https://www.youtube.com/embed/G4VZqLw5Yp0',
+  },
+  {
+    id: 'dong-du-duy-tan',
+    title: 'Phong trào Đông Du - Duy Tân',
+    period: '1905 – 1908',
+    summary: 'Trí thức yêu nước tập trung sang Nhật Bản, vận động cải cách giáo dục và chống lại chế độ phong kiến bảo thủ.',
+    details: [
+      'Phong trào Đông Du do Phan Bội Châu khởi xướng, đưa nhiều thanh niên ra nước ngoài học tập.',
+      'Phan Châu Trinh thúc đẩy cải cách pháp luật, giáo dục và chống phong kiến quan liêu.',
+      'Khởi nghĩa chống thuế 1908 bộc lộ sức mạnh của quần chúng.',
+    ],
+    image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/oUQ0p0STLk8',
+  },
+  {
+    id: 'cong-nhan-yeu-nuoc',
+    title: 'Phong trào công nhân & yêu nước',
+    period: '1910 – 1920',
+    summary: 'Công nhân tại các nhà máy lớn tham gia đình công, đồng thời cổ vũ tinh thần yêu nước trong các thành thị.',
+    details: [
+      'Đình công tại Sài Gòn – Chợ Lớn, Hà Nội và Hải Phòng đòi tăng lương.',
+      'Các công hội bí mật hình thành dưới sự giám sát của thực dân.',
+      'Đây là tiền đề cho sự trưởng thành của giai cấp công nhân Việt Nam.',
+    ],
+    image: 'https://images.unsplash.com/photo-1554774853-aa456e7e82b1?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/AIRt8bN2Ygk',
+  },
+  {
+    id: 'nguyen-ai-quoc',
+    title: 'Nguyễn Ái Quốc tìm đường cứu nước',
+    period: '1911 – 1923',
+    summary: 'Nguyễn Tất Thành đi khắp thế giới, tiếp thu chủ nghĩa Mác – Lênin và trở thành người hạt nhân của công cuộc giải phóng dân tộc.',
+    details: [
+      '5/6/1911 – Người rời Việt Nam và đến nhiều cảng ở châu Âu.',
+      '1919 – Gửi Yêu sách 8 điểm tới Hội nghị hòa bình Paris.',
+      'Tham gia các phong trào cộng sản quốc tế, chuẩn bị thành lập Đảng.',
+    ],
+    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/R0kZX6OqJ7o',
+  },
+  {
+    id: 'dang-cs-ra-doi',
+    title: 'Đảng Cộng sản Việt Nam ra đời',
+    period: '1930',
+    summary: 'Ba tổ chức cộng sản thống nhất, lập ra một Đảng duy nhất dưới sự dẫn dắt của Nguyễn Ái Quốc.',
+    details: [
+      'Đông Dương Cộng sản Đảng, An Nam Cộng sản Đảng và Đông Dương Cộng sản Liên đoàn hợp nhất.',
+      'Cương lĩnh chính trị được đề ra với mục tiêu xây dựng chính quyền công - nông.',
+      'Đảng trở thành trung tâm điều phối mọi phong trào cách mạng.',
+    ],
+    image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/MhLUjTa9-6E',
+  },
+  {
+    id: 'xovit-nghe-tinh',
+    title: 'Xô Viết Nghệ Tĩnh',
+    period: '1930 – 1931',
+    summary: 'Khởi nghĩa công – nông lớn nhất thời Pháp thuộc, thiết lập các Xô Viết tự trị và bị đàn áp dữ dội.',
+    details: [
+      'Tổ chức cấp phát lương thực, phân phối ruộng đất và thành lập ủy ban tự quản.',
+      'Pháp đàn áp bằng cách xử tử với số lượng lớn cán bộ, chiến sĩ.',
+      'Xô Viết trở thành biểu tượng của thống nhất giai cấp và toàn dân kháng chiến.',
+    ],
+    image: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/7cQJq_HZAlg',
+  },
+  {
+    id: 'mat-tran-dan-chu',
+    title: 'Mặt trận Dân chủ',
+    period: '1936 – 1939',
+    summary: 'Phong trào đấu tranh pháp lý, báo chí và nghị trường để đòi dân chủ và quyền lợi người dân.',
+    details: [
+      'Báo chí khởi xướng phong trào phản đối chế độ thuộc địa.',
+      'Một số nghị sĩ đấu tranh trong Viện dân biểu, thu hút sự chú ý của chính quyền.',
+      'Đảng Cộng sản mở rộng mặt trận chính trị và xã hội.',
+    ],
+    image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/e1rL7vnMQ_c',
+  },
+  {
+    id: 'nhat-dao-chinh',
+    title: 'Nhật đảo chính Pháp',
+    period: '1940 – 1945',
+    summary: 'Nhật Bản chiếm Đông Dương, đảo chính Pháp 9/3/1945 và gây ra nạn đói làm hơn 2 triệu người chết.',
+    details: [
+      'Nhật kiểm soát quân sự nhưng để Pháp quản lý hành chính trong giai đoạn đầu.',
+      'Việt Minh được tổ chức để tranh thủ thời cơ tổng khởi nghĩa.',
+      'Nạn đói 1945 làm tăng sự hỗn loạn, thúc đẩy quần chúng đứng lên.',
+    ],
+    image: 'https://images.unsplash.com/photo-1473186578172-c1417a7c24c0?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/RRIy4k0MpkM',
+  },
+  {
+    id: 'cach-mang-thang-tam',
+    title: 'Cách mạng Tháng Tám',
+    period: '19/8/1945 – 2/9/1945',
+    summary: 'Việt Minh tổng khởi nghĩa, xử lý các cơ quan chính quyền cũ và tuyên bố độc lập.',
+    details: [
+      'Khởi nghĩa lan rộng tại Hà Nội, Huế, Sài Gòn và khắp các tỉnh.',
+      '2/9/1945 – Bác Hồ đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình.',
+      'Chấm dứt hoàn toàn thời kỳ Pháp thuộc và mở ra kháng chiến mới chống thực dân.',
+    ],
+    image: 'https://images.unsplash.com/photo-1459840131221-d47aab4f5af1?auto=format&fit=crop&w=1400&q=80',
+    videoUrl: 'https://www.youtube.com/embed/4iJvJQ6H38Y',
+  },
+];
+const heroModernBackground =
+  'linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.85)), url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Independence_Day_Quang_Trung%2C_Hanoi-2019.jpg/1280px-Independence_Day_Quang_Trung%2C_Hanoi-2019.jpg)';
 const PASSING_SCORE = 70;
 const QUESTIONS_PER_QUIZ = 5;
 const POINTS_PER_QUESTION = 100 / QUESTIONS_PER_QUIZ;
@@ -333,6 +479,13 @@ export default function History() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [activePhase, setActivePhase] = useState<PhaseKey>('antiAmerican');
+  const [activeModernSectionId, setActiveModernSectionId] = useState(modernEraSections[0].id);
+  const showModernEra = searchParams.get('era') === 'modern';
+  const [detailPreviewEvent, setDetailPreviewEvent] = useState<{
+    event: TimelineEvent;
+    locked: boolean;
+    lockTooltip?: string;
+  } | null>(null);
 
   useEffect(() => {
     const eraParam = searchParams.get('era');

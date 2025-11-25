@@ -21,6 +21,9 @@ import ShopRequest from './pages/ShopRequest';
 import ShopDashboard from './pages/ShopDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminWorkflow from './pages/AdminWorkflow';
+import HistoricalFigures from './pages/HistoricalFigures';
+import FigureDetail from './pages/FigureDetail';
+import Archives from './pages/Archives';
 
 function App() {
   return (
@@ -49,6 +52,9 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment-result" element={<PaymentResult />} />
             <Route path="/order-details" element={<OrderDetails />} />
+            <Route path="/culture/historical-figures" element={<HistoricalFigures />} />
+            <Route path="/culture/historical-figures/:id" element={<FigureDetail />} />
+            <Route path="/culture/archives" element={<Archives />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
