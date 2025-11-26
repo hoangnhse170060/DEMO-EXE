@@ -12,14 +12,11 @@ import { gradeQuiz, pickQuestions } from '../lib/quiz';
 import {
   getHistoryProgress,
   recordQuizAttempt,
-  setLockForEvent,
   updateHistoryProgress,
-  setPendingDigitalPurchase,
   type HistoryProgress,
 } from '../lib/storage';
 
 const DEFAULT_HERO = 'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=1600&h=900&fit=crop';
-const PASSING_SCORE = 70;
 
 type SectionGroup = {
   id: string;
@@ -120,13 +117,13 @@ export default function EventDetail() {
       },
       {
         id: 'analysis',
-        title: 'Giải thuật sự kiện',
+        title: 'Phân tích',
         tone: 'analysis' as const,
         sections: eventData.sections.filter((section) => section.kind === 'analysis'),
       },
       {
         id: 'impact',
-        title: 'Ảnh hưởng và di sản',
+        title: 'Kết Quả',
         tone: 'impact' as const,
         sections: eventData.sections.filter((section) => section.kind === 'impact'),
       },
@@ -149,12 +146,13 @@ export default function EventDetail() {
   );
 
   useEffect(() => {
-    if (!user || !eventData?.id) {
+    if (!eventData?.id) {
       setProgress(null);
       progressRatioRef.current = 0;
       return;
     }
-    const initial = getHistoryProgress(user.id, eventData.id);
+    const userId = user?.id ?? 'guest-user';
+    const initial = getHistoryProgress(userId, eventData.id);
     setProgress(initial);
     progressRatioRef.current = initial.readRatio ?? 0;
   }, [user?.id, eventData?.id]);
@@ -201,32 +199,14 @@ export default function EventDetail() {
     setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  useEffect(() => {
-    if (!user) {
-      const redirectTo = `${location.pathname}${location.search}` || '/event/detail';
-      if (typeof window !== 'undefined') {
-        window.sessionStorage.setItem('afterLogin', JSON.stringify({ page: redirectTo.replace(/^\//, '') }));
-        window.sessionStorage.setItem('lastVisitedPath', redirectTo);
-      }
-      navigate('/login', {
-        replace: true,
-        state: { from: redirectTo },
-      });
-    }
-  }, [user, navigate, location.pathname, location.search]);
-
-  if (!user) {
-    return null;
-  }
-
   if (!eventData) {
     return (
-      <div className="min-h-screen bg-[#f6f1e6] flex items-center justify-center px-6">
-        <div className="max-w-md rounded-3xl border border-amber-900/20 bg-white/80 p-8 text-center shadow-lg">
-          <p className="text-sm text-amber-900/80 mb-4">Không tìm thấy hồ sơ sự kiện. Vui lòng quay lại thư viện lịch sử.</p>
+      <div className="min-h-screen bg-charcoal-900 flex items-center justify-center px-6">
+        <div className="max-w-md rounded-3xl border border-brand-blue/20 bg-charcoal-800 p-8 text-center shadow-lg">
+          <p className="text-sm text-gray-300 mb-4">Không tìm thấy hồ sơ sự kiện. Vui lòng quay lại thư viện lịch sử.</p>
           <button
             onClick={() => navigate(-1)}
-            className="px-5 py-2 rounded-full bg-amber-700 text-white text-sm font-semibold shadow hover:bg-amber-800 transition"
+            className="px-5 py-2 rounded-full bg-brand-blue text-charcoal-900 text-sm font-semibold shadow hover:bg-brand-blue/90 transition"
           >
             Quay lại
           </button>
@@ -235,25 +215,15 @@ export default function EventDetail() {
     );
   }
 
-  const lockedUntilDate = progress?.lockedUntil ? new Date(progress.lockedUntil) : null;
-  const isLocked = lockedUntilDate ? lockedUntilDate.getTime() > Date.now() : false;
+  const canLaunchQuiz = true;
   const readRatioPercent = Math.round((progress?.readRatio ?? 0) * 100);
-  const canLaunchQuiz = !isLocked && (progress?.readRatio ?? 0) >= 0.8;
   const handleBackToHistory = useCallback(() => {
     window.location.assign('/history');
   }, []);
 
   const openQuiz = async () => {
-    if (!user || !eventData?.id) {
-      navigate('/login', { state: { redirectTo: location.pathname + location.search } });
-      return;
-    }
-    if (isLocked && lockedUntilDate) {
-      window.alert(`Quiz đã bị khóa đến ${lockedUntilDate.toLocaleString()}.`);
-      return;
-    }
-    if (!canLaunchQuiz) {
-      window.alert('Hãy đọc tối thiểu 80% nội dung để mở khóa quiz.');
+    if (!eventData?.id) {
+      window.alert('Không tìm thấy sự kiện.');
       return;
     }
     try {
@@ -277,7 +247,8 @@ export default function EventDetail() {
   };
 
   const handleQuizComplete = (summary: QuizSummary) => {
-    if (!user || !eventData?.id) return;
+    if (!eventData?.id) return;
+    const userId = user?.id ?? 'guest-user';
     const correct = summary.correct;
     const total = summary.total;
     const grade = gradeQuiz(correct, total, quizAttemptNumber);
@@ -291,27 +262,14 @@ export default function EventDetail() {
       questionIds: summary.answers.map((record) => record.questionId),
     };
 
-    let updatedProgress = recordQuizAttempt(user.id, eventData.id, attemptRecord);
-    const baseAllowed = 2;
-    const extra = updatedProgress.extraAttempts ?? 0;
-    const totalAllowed = baseAllowed + extra;
-    const passedByScore = grade.score >= PASSING_SCORE;
+    let updatedProgress = recordQuizAttempt(userId, eventData.id, attemptRecord);
 
-    if (!passedByScore) {
-      const failed = (updatedProgress.failedAttempts ?? 0) + 1;
-      if (failed >= totalAllowed) {
-        const untilIso = new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString();
-        updatedProgress = setLockForEvent(user.id, eventData.id, untilIso);
-      } else {
-        updatedProgress = updateHistoryProgress(user.id, eventData.id, { failedAttempts: failed });
-      }
-    } else {
-      updatedProgress = updateHistoryProgress(user.id, eventData.id, {
-        failedAttempts: 0,
-        lockedUntil: null,
-        completedAt: new Date().toISOString(),
-      });
-    }
+    // Always mark as completed regardless of score
+    updatedProgress = updateHistoryProgress(userId, eventData.id, {
+      failedAttempts: 0,
+      lockedUntil: null,
+      completedAt: new Date().toISOString(),
+    });
 
     setProgress(updatedProgress);
     setReviewAnswers(summary.answers);
@@ -319,86 +277,65 @@ export default function EventDetail() {
     setShowQuiz(false);
   };
 
-  const handlePurchaseAttempts = () => {
-    if (!user || !eventData?.id) {
-      navigate('/login');
-      return;
-    }
-    setPendingDigitalPurchase({
-      planId: 'attempt-pack-10',
-      eventId: eventData.id,
-      eventTitle: eventData.headline || 'Sự kiện lịch sử',
-      quantity: 10,
-      createdAt: new Date().toISOString(),
-    });
-    const checkoutUrl = `/checkout?productId=attempt-pack-10&eventId=${eventData.id}`;
-    window.location.assign(checkoutUrl);
-  };
-
 
   return (
-    <div className="min-h-screen bg-[#f6f1e6] text-amber-950">
+    <div className="min-h-screen bg-charcoal-900 text-gray-100">
       <div
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-700 z-50"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-blue via-brand-blue/70 to-brand-blue z-50"
         style={{ width: `${scrollProgress}%` }}
       />
 
       <button
         onClick={handleBackToHistory}
-        className="fixed top-8 left-3 z-40 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-transform duration-300"
+        className="fixed top-8 left-3 z-40 bg-charcoal-800/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-transform duration-300 border border-brand-blue/20"
         aria-label="Quay lại lịch sử"
       >
-        <ChevronLeft size={20} className="text-amber-800" />
+        <ChevronLeft size={20} className="text-brand-blue" />
       </button>
 
       <section className="relative min-h-[62vh] lg:min-h-[68vh] flex items-end">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(120deg, rgba(34,24,14,0.85), rgba(120,68,20,0.55)), url(${heroImage})`,
+            backgroundImage: `linear-gradient(120deg, rgba(15,15,15,0.85), rgba(50,50,50,0.65)), url(${heroImage})`,
           }}
         />
         <div className="relative z-10 w-full">
           <div className="max-w-6xl mx-auto px-6 py-20 lg:py-28 text-white">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-[11px] uppercase tracking-[0.4em]">
-              {phaseLabel || 'Hồ sơ nghiên cứu'}
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/30 bg-brand-blue/10 px-4 py-1 text-[11px] uppercase tracking-[0.4em] text-brand-blue">
+              {phaseLabel || 'LOADING...'}
             </div>
-            <h1 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-serif leading-snug drop-shadow-lg">
+            <h1 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-serif leading-snug drop-shadow-lg text-brand-blue">
               {eventData.headline}
             </h1>
-            <p className="mt-6 max-w-3xl text-sm md:text-base lg:text-lg text-white/85 leading-relaxed">
+            <p className="mt-6 max-w-3xl text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed">
               {eventData.summary}
             </p>
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/70">
+              <div className="rounded-2xl border border-brand-blue/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-blue">
                   <CalendarDays size={14} /> Ngày diễn ra
                 </div>
-                <p className="mt-2 text-base font-semibold text-white">
+                <p className="mt-2 text-base font-semibold text-gray-100">
                   {eventData.date || 'Đang bổ sung'}
                 </p>
               </div>
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/70">
+              <div className="rounded-2xl border border-brand-blue/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-blue">
                   <MapPin size={14} /> Địa điểm lịch sử
                 </div>
-                <p className="mt-2 text-base font-semibold text-white">
+                <p className="mt-2 text-base font-semibold text-gray-100">
                   {eventData.location || 'Không rõ'}
                 </p>
               </div>
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-widest text-white/70">Nguồn trích dẫn</div>
-                <p className="mt-2 text-base font-semibold text-white">
-                  {totalPrimarySources} sơ cấp • {totalSecondarySources} thứ cấp
-                </p>
-              </div>
+              
             </div>
 
             <div className="mt-10 flex flex-wrap gap-4">
               <button
                 onClick={() => document.getElementById('reading-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-amber-900 shadow-lg hover:shadow-xl transition"
+                className="rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-charcoal-900 shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] transition"
               >
                 Thông tin chi tiết
               </button>
@@ -413,29 +350,29 @@ export default function EventDetail() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr),minmax(290px,1fr)]">
             <article id="reading-start" className="space-y-12">
               {eventData.media?.images?.length ? (
-                <section className="rounded-3xl border border-amber-900/15 bg-white/90 shadow-sm p-6">
+                <section className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg p-6">
                   <header className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-amber-700/70">Tư liệu hình ảnh</p>
-                      <h2 className="text-2xl font-serif text-amber-900">Bộ ảnh hiện trường & minh họa</h2>
+                      <p className="text-xs uppercase tracking-widest text-brand-blue/70">Tư liệu hình ảnh</p>
+                      <h2 className="text-2xl font-serif text-brand-blue">Tư liệu hình ảnh</h2>
                     </div>
-                    <span className="text-xs text-amber-700/60">{eventData.media.images.length} mục</span>
+                    <span className="text-xs text-gray-300">{eventData.media.images.length} mục</span>
                   </header>
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-amber-900/10 bg-amber-50">
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-brand-blue/30 bg-charcoal-900 shadow-xl">
                     <img
                       src={eventData.media.images[activeImageIndex].src}
                       alt={eventData.media.images[activeImageIndex].title || 'Tư liệu hình ảnh'}
                       className="h-80 w-full object-cover"
                     />
-                    <div className="flex flex-col gap-1 border-t border-amber-900/10 bg-white/90 px-5 py-4 text-sm text-amber-800">
-                      <p className="font-semibold">
+                    <div className="flex flex-col gap-1 border-t border-brand-blue/20 bg-charcoal-800 px-5 py-4 text-sm text-gray-200">
+                      <p className="font-semibold text-brand-blue">
                         {eventData.media.images[activeImageIndex].title || 'Tư liệu sự kiện'}
                       </p>
-                      <p className="text-xs leading-relaxed text-amber-700">
+                      <p className="text-xs leading-relaxed text-gray-300">
                         {eventData.media.images[activeImageIndex].caption}
                       </p>
                       {(eventData.media.images[activeImageIndex].credit || eventData.media.images[activeImageIndex].year) && (
-                        <p className="text-[11px] uppercase tracking-widest text-amber-600/70">
+                        <p className="text-[11px] uppercase tracking-widest text-gray-400/70">
                           {eventData.media.images[activeImageIndex].credit}
                           {eventData.media.images[activeImageIndex].year ? ` • ${eventData.media.images[activeImageIndex].year}` : ''}
                         </p>
@@ -450,13 +387,13 @@ export default function EventDetail() {
                         onClick={() => setActiveImageIndex(index)}
                         className={`relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-xl border transition ${
                           activeImageIndex === index
-                            ? 'border-amber-700 shadow-lg'
-                            : 'border-amber-900/10 hover:border-amber-500'
+                            ? 'border-brand-blue shadow-lg shadow-brand-blue/50'
+                            : 'border-brand-blue/20 hover:border-brand-blue/50'
                         }`}
                       >
                         <img src={image.src} alt={image.title} className="h-full w-full object-cover" />
                         {activeImageIndex === index && (
-                          <span className="absolute inset-0 border-2 border-white/80" aria-hidden />
+                          <span className="absolute inset-0 border-2 border-brand-blue/80" aria-hidden />
                         )}
                       </button>
                     ))}
@@ -465,25 +402,25 @@ export default function EventDetail() {
               ) : null}
 
               {timelineSections.length > 0 && (
-                <section className="rounded-3xl border border-amber-900/20 bg-gradient-to-br from-amber-50 via-white to-amber-50 p-8 shadow-sm">
+                <section className="rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
                   <header className="mb-6">
-                    <p className="text-xs uppercase tracking-[0.45em] text-amber-700/70">Dòng thời gian</p>
-                    <h2 className="mt-2 text-2xl font-serif text-amber-900">Những nhịp chính trước và trong sự kiện</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Dòng thời gian</p>
+                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Những nhịp chính trước và trong sự kiện</h2>
                   </header>
-                  <ol className="relative border-s border-amber-900/20 pl-8 space-y-10">
+                  <ol className="relative border-s border-brand-blue/30 pl-8 space-y-10">
                     {timelineSections.map((section) => (
                       <li key={section.id} className="relative">
-                        <span className="absolute -left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-amber-900/30 bg-amber-100" />
-                        <div className="rounded-2xl bg-white/80 p-5 shadow-sm">
-                          <h3 className="text-lg font-serif text-amber-900">{section.title}</h3>
-                          <p className="mt-3 text-sm leading-relaxed text-amber-800 whitespace-pre-line">
+                        <span className="absolute -left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-brand-blue/50 bg-brand-blue/20" />
+                        <div className="rounded-2xl bg-charcoal-800/60 border border-brand-blue/10 p-5 shadow-md">
+                          <h3 className="text-lg font-serif text-brand-blue">{section.title}</h3>
+                          <p className="mt-3 text-sm leading-relaxed text-gray-200 whitespace-pre-line">
                             {section.content}
                           </p>
                           {section.bullets?.length ? (
-                            <ul className="mt-4 space-y-2 text-sm text-amber-800/90">
+                            <ul className="mt-4 space-y-2 text-sm text-gray-300">
                               {section.bullets.map((item) => (
                                 <li key={item} className="flex gap-2">
-                                  <span className="text-amber-600">•</span>
+                                  <span className="text-brand-blue">•</span>
                                   <span>{item}</span>
                                 </li>
                               ))}
@@ -499,21 +436,21 @@ export default function EventDetail() {
               {sectionGroups.map((group) => (
                 <section
                   key={group.id}
-                  className="rounded-3xl border border-amber-900/15 bg-white/95 shadow-sm"
+                  className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg"
                 >
-                  <header className="flex items-center justify-between gap-4 border-b border-amber-900/10 px-6 py-5">
+                  <header className="flex items-center justify-between gap-4 border-b border-brand-blue/10 px-6 py-5">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.45em] text-amber-700/70">
+                      <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">
                         {group.tone === 'context' && 'Bối cảnh'}
                         {group.tone === 'analysis' && 'Phân tích'}
-                        {group.tone === 'impact' && 'Ảnh hưởng'}
+                        {group.tone === 'impact' && 'Kết quả'}
                         {group.tone === 'appendix' && 'Phụ lục'}
                       </p>
-                      <h2 className="text-2xl font-serif text-amber-900">{group.title}</h2>
+                      <h2 className="text-2xl font-serif text-brand-blue">{group.title}</h2>
                     </div>
-                    <span className="text-xs text-amber-700/60">{group.sections.length} mục</span>
+                    <span className="text-xs text-gray-400">{group.sections.length} mục</span>
                   </header>
-                  <div className="divide-y divide-amber-900/10">
+                  <div className="divide-y divide-brand-blue/10">
                     {group.sections.map((section) => {
                       const isOpen = expandedSections[section.id] ?? false;
                       return (
@@ -521,23 +458,23 @@ export default function EventDetail() {
                           <button
                             type="button"
                             onClick={() => toggleSection(section.id)}
-                            className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left hover:bg-amber-50/60 transition"
+                            className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left hover:bg-charcoal-700/40 transition"
                             aria-expanded={isOpen}
                           >
-                            <span className="text-base font-semibold text-amber-900">{section.title}</span>
+                            <span className="text-base font-semibold text-brand-blue">{section.title}</span>
                             <ChevronDown
                               size={18}
-                              className={`text-amber-700 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                              className={`text-brand-blue transition-transform ${isOpen ? 'rotate-180' : ''}`}
                             />
                           </button>
                           {isOpen && (
-                            <div className="px-6 pb-6 text-sm leading-relaxed text-amber-800 animate-fade-in">
+                            <div className="px-6 pb-6 text-sm leading-relaxed text-gray-200 animate-fade-in">
                               <p className="whitespace-pre-line">{section.content}</p>
                               {section.bullets?.length ? (
-                                <ul className="mt-4 space-y-2 text-sm text-amber-800/90">
+                                <ul className="mt-4 space-y-2 text-sm text-gray-300">
                                   {section.bullets.map((item) => (
                                     <li key={item} className="flex gap-2">
-                                      <span className="text-amber-600">—</span>
+                                      <span className="text-brand-blue">—</span>
                                       <span>{item}</span>
                                     </li>
                                   ))}
@@ -553,16 +490,16 @@ export default function EventDetail() {
               ))}
 
               {eventData.people?.length ? (
-                <section className="rounded-3xl border border-amber-900/20 bg-gradient-to-br from-white via-amber-50/70 to-white p-8 shadow-sm">
+                <section className="rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
                   <header className="mb-6">
-                    <p className="text-xs uppercase tracking-[0.45em] text-amber-700/70">Nhân vật chủ chốt</p>
-                    <h2 className="mt-2 text-2xl font-serif text-amber-900">Biên chế nhân sự và dấu ấn cá nhân</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Nhân vật chủ chốt</p>
+                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Biên chế nhân sự và dấu ấn cá nhân</h2>
                   </header>
                   <div className="grid gap-6 md:grid-cols-2">
                     {eventData.people.map((person) => (
                       <article
                         key={person.id}
-                        className="rounded-2xl border border-amber-900/15 bg-white/90 p-5 shadow-sm"
+                        className="rounded-2xl border border-brand-blue/20 bg-charcoal-800/60 p-5 shadow-md hover:border-brand-blue/40 transition"
                       >
                         <div className="flex items-start gap-4">
                           {person.portrait ? (
@@ -572,18 +509,18 @@ export default function EventDetail() {
                               className="h-20 w-20 rounded-xl object-cover"
                             />
                           ) : (
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-amber-900/10 text-2xl font-serif text-amber-700">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-brand-blue/10 text-2xl font-serif text-brand-blue">
                               {person.name.slice(0, 1)}
                             </div>
                           )}
                           <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-amber-900">{person.name}</h3>
-                            <p className="text-xs uppercase tracking-widest text-amber-700/70">{person.role}</p>
-                            <p className="mt-3 text-sm leading-relaxed text-amber-800">{person.bio}</p>
+                            <h3 className="text-lg font-semibold text-brand-blue">{person.name}</h3>
+                            <p className="text-xs uppercase tracking-widest text-gray-400">{person.role}</p>
+                            <p className="mt-3 text-sm leading-relaxed text-gray-300">{person.bio}</p>
                           </div>
                         </div>
                         {person.quotes?.length ? (
-                          <div className="mt-4 rounded-xl border border-amber-900/10 bg-amber-50/80 px-4 py-3 text-sm italic text-amber-700">
+                          <div className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/10 px-4 py-3 text-sm italic text-brand-blue">
                             “{person.quotes[0]}”
                           </div>
                         ) : null}
@@ -593,37 +530,35 @@ export default function EventDetail() {
                 </section>
               ) : null}
 
-              <section className="rounded-3xl border border-amber-900/20 bg-white/95 shadow-sm p-8">
+              <section className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg p-8">
                 <header className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.45em] text-amber-700/70">Đánh giá nguồn</p>
-                    <h2 className="mt-2 text-2xl font-serif text-amber-900">Chú giải tài liệu trích dẫn</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Đánh giá nguồn</p>
+                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Chú giải tài liệu trích dẫn</h2>
                   </div>
-                  <span className="text-xs text-amber-700/60">{eventData.sources.length} nguồn được kiểm chứng</span>
+                  <span className="text-xs text-gray-400">{eventData.sources.length} nguồn được kiểm chứng</span>
                 </header>
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   {eventData.sources.map((source) => (
                     <article
                       key={source.id}
-                      className="rounded-2xl border border-amber-900/15 bg-amber-50/60 p-5 shadow-sm"
+                      className="rounded-2xl border border-brand-blue/20 bg-charcoal-800/50 p-5 shadow-md hover:border-brand-blue/40 transition"
                     >
-                      <div className="text-xs uppercase tracking-widest text-amber-700/70">
-                        {source.type === 'primary' ? 'Nguồn sơ cấp' : 'Nguồn thứ cấp'}
-                      </div>
-                      <h3 className="mt-2 text-base font-semibold text-amber-900">{source.title}</h3>
+                      
+                      <h3 className="mt-2 text-base font-semibold text-brand-blue">{source.title}</h3>
                       {source.author || source.year ? (
-                        <p className="mt-1 text-xs text-amber-700/80">
+                        <p className="mt-1 text-xs text-gray-400">
                           {source.author ? `${source.author}` : ''}
                           {source.author && source.year ? ' • ' : ''}
                           {source.year || ''}
                         </p>
                       ) : null}
                       {source.citation ? (
-                        <p className="mt-3 text-sm italic leading-relaxed text-amber-800/90">
+                        <p className="mt-3 text-sm italic leading-relaxed text-gray-300">
                           {source.citation}
                         </p>
                       ) : null}
-                      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-amber-700/70">
+                      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400">
                         <span>
                           Độ tin cậy: {source.reliability ? source.reliability.toUpperCase() : 'Chưa đánh giá'}
                         </span>
@@ -632,7 +567,7 @@ export default function EventDetail() {
                             href={source.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-amber-700 hover:text-amber-900"
+                            className="inline-flex items-center gap-1 text-brand-blue hover:text-brand-blue/80 transition"
                           >
                             Truy cập
                             <ExternalLink size={14} />
@@ -645,45 +580,27 @@ export default function EventDetail() {
               </section>
 
               <section className="space-y-6">
-                <div className="relative overflow-hidden rounded-3xl border border-amber-900/20 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 p-10 text-white shadow-lg">
-                  <div className="absolute inset-y-0 right-0 w-1/3 bg-white/10 blur-3xl" aria-hidden />
+                <div className="relative overflow-hidden rounded-3xl border border-brand-blue/30 bg-charcoal-800 p-10 shadow-lg">
                   <div className="relative z-10 space-y-4">
-                    <h2 className="text-3xl font-serif">Tự lượng giá kiến thức</h2>
-                    <p className="max-w-2xl text-sm md:text-base leading-relaxed text-white/90">
+                    <h2 className="text-3xl font-serif text-brand-blue">Tự lượng giá kiến thức</h2>
+                    <p className="max-w-2xl text-sm md:text-base leading-relaxed text-gray-100">
                       Hoàn tất bộ câu hỏi thời gian thực để ghi nhận tiến độ nghiên cứu và mở khóa các hồ sơ chuyên sâu tiếp theo.
                     </p>
-                    <p className="text-xs uppercase tracking-[0.45em] text-white/70">ĐÃ ĐỌC {readRatioPercent}% HỒ SƠ</p>
+                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/80">ĐÃ ĐỌC {readRatioPercent}% HỒ SƠ</p>
                   </div>
                 </div>
-
-                {isLocked && lockedUntilDate && (
-                  <div className="rounded-xl border border-rose-200 bg-rose-50 p-5 text-sm text-rose-700 shadow-sm">
-                    <div className="font-semibold">Quiz tạm thời bị khóa</div>
-                    <p className="mt-2">Bạn đã dùng hết lượt thử. Mở lại vào {lockedUntilDate.toLocaleString()} hoặc mua thêm lượt để tiếp tục.</p>
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        onClick={handlePurchaseAttempts}
-                        className="inline-flex items-center gap-2 rounded-full bg-rose-600 px-5 py-2 text-sm font-semibold text-white shadow transition hover:bg-rose-600/90"
-                      >
-                        Mua +10 lượt
-                      </button>
-                    </div>
-                  </div>
-                )}
 
                 <QuizLauncher
                   canLaunch={canLaunchQuiz}
                   onLaunch={openQuiz}
                   attempts={progress?.attempts.length ?? 0}
-                  purchasedAttempts={progress?.extraAttempts ?? 0}
                   bestScore={progress?.bestScore}
                   bestStars={progress?.bestStars}
                 />
 
                 {reviewAnswers && (
-                  <div className="rounded-xl border border-amber-400/30 bg-amber-50/80 p-6 text-sm text-amber-900 shadow-sm">
-                    <h4 className="text-base font-semibold text-amber-900">Giải thích câu hỏi gần nhất</h4>
+                  <div className="rounded-xl border border-brand-blue/30 bg-brand-blue/10 p-6 text-sm text-brand-blue shadow-md">
+                    <h4 className="text-base font-semibold text-brand-blue">Giải thích câu hỏi gần nhất</h4>
                     <ul className="mt-4 space-y-3">
                       {reviewAnswers.map((answer) => {
                         const question = quizQuestions.find((q) => q.id === answer.questionId);
@@ -692,12 +609,12 @@ export default function EventDetail() {
                           typeof answer.selectedIndex === 'number' ? question.options[answer.selectedIndex] : 'Chưa trả lời';
                         const correct = question.options[answer.correctIndex];
                         return (
-                          <li key={answer.questionId} className="rounded-lg bg-white/90 p-4 shadow-sm">
-                            <p className="font-semibold text-amber-900">{question.prompt}</p>
-                            <p className="mt-1 text-sm text-amber-700">Bạn chọn: {selected}</p>
-                            <p className="text-sm text-emerald-700">Đáp án đúng: {correct}</p>
+                          <li key={answer.questionId} className="rounded-lg bg-charcoal-800/80 border border-brand-blue/20 p-4 shadow-md">
+                            <p className="font-semibold text-brand-blue">{question.prompt}</p>
+                            <p className="mt-1 text-sm text-brand-blue/80">Bạn chọn: {selected}</p>
+                            <p className="text-sm text-emerald-400">Đáp án đúng: {correct}</p>
                             {answer.explanation ? (
-                              <p className="mt-2 text-sm text-amber-800/80">{answer.explanation}</p>
+                              <p className="mt-2 text-sm text-gray-300">{answer.explanation}</p>
                             ) : null}
                           </li>
                         );
@@ -715,7 +632,7 @@ export default function EventDetail() {
         </div>
       </main>
 
-      <footer className="bg-[#ede3d2] py-10 text-center text-xs text-amber-700/70">
+      <footer className="bg-charcoal-900 border-t border-brand-blue/20 py-10 text-center text-xs text-gray-400">
         Hồ sơ trình bày nhằm minh họa bố cục nghiên cứu. Cập nhật {new Date().getFullYear()}.
       </footer>
 

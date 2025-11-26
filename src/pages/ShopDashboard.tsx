@@ -25,7 +25,7 @@ const insightCards = [
     value: '86 đơn',
     trend: '+8 đơn trong 7 ngày',
     icon: PackageCheck,
-    color: 'from-blue-500 via-sky-500 to-cyan-500',
+    color: 'from-yellow-500 via-amber-500 to-orange-500',
   },
   {
     title: 'Khách hàng trung thành',

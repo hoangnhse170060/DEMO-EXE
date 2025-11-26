@@ -195,40 +195,40 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
       </div>
       <div
         ref={dialogRef}
-        className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-white/40 bg-gradient-to-br from-[#ffe6f0] via-white to-[#efeaff] shadow-[0_30px_60px_-25px_rgba(90,70,140,0.35)]"
+        className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 shadow-[0_30px_60px_-25px_rgba(255,215,0,0.2)]"
       >
         <div className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-brand-blue/20 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-amber-400/25 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden />
 
-        <header className="relative z-10 flex flex-col gap-4 border-b border-white/40 px-8 pt-8 pb-6">
+        <header className="relative z-10 flex flex-col gap-4 border-b border-brand-blue/20 px-8 pt-8 pb-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.45em] text-brand-blue">
                 Quiz lần {attemptNumber}
                 <span aria-hidden>⚡</span>
               </p>
-              <h2 id="quiz-dialog-title" className="mt-2 text-3xl font-serif text-brand-text">Quiz Time!</h2>
-              <p className="mt-1 text-sm text-brand-text/70" aria-live="polite">
+              <h2 id="quiz-dialog-title" className="mt-2 text-3xl font-serif text-brand-blue">Quiz Time!</h2>
+              <p className="mt-1 text-sm text-gray-300" aria-live="polite">
                 Câu {currentIndex + 1}/{questions.length}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <div className="rounded-full bg-white/80 px-5 py-2 text-sm font-semibold text-brand-blue" aria-live="polite">
+              <div className="rounded-full bg-charcoal-800/80 border border-brand-blue/30 px-5 py-2 text-sm font-semibold text-brand-blue" aria-live="polite">
                 ⏳ {formatTime(timeLeft)}
               </div>
               <button
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                className="rounded-full border border-brand-blue/40 bg-white/80 px-5 py-2 text-sm font-semibold text-brand-blue transition hover:bg-brand-blue/10"
+                className="rounded-full border border-brand-blue/40 bg-charcoal-700/80 px-5 py-2 text-sm font-semibold text-brand-blue transition hover:bg-brand-blue/10"
               >
                 Thoát
               </button>
             </div>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-white/40">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-charcoal-700/40">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-brand-blue via-purple-500 to-pink-500 transition-all"
+              className="h-full rounded-full bg-gradient-to-r from-brand-blue via-brand-blue/80 to-brand-blue/60 transition-all shadow-lg shadow-brand-blue/50"
               style={{ width: `${progressPercent}%` }}
               aria-hidden
             />
@@ -237,8 +237,8 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
         <section className="relative z-10 grid gap-8 px-8 pb-10 pt-6 lg:grid-cols-[minmax(0,1.5fr),minmax(0,1fr)]">
           <div className="space-y-5">
-            <div className="rounded-3xl bg-white/80 p-6 shadow-[0_15px_40px_-30px_rgba(90,70,140,0.5)]">
-              <h3 className="text-xl font-semibold text-brand-text leading-relaxed">{currentQuestion.prompt}</h3>
+            <div className="rounded-3xl bg-charcoal-800/80 border border-brand-blue/20 p-6 shadow-[0_15px_40px_-30px_rgba(255,215,0,0.1)]">
+              <h3 className="text-xl font-semibold text-brand-blue leading-relaxed">{currentQuestion.prompt}</h3>
             </div>
             <div className="grid gap-4">
               {currentQuestion.options.map((option, index) => {
@@ -251,10 +251,10 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                   'relative flex items-center gap-4 rounded-3xl border-2 px-5 py-4 text-left text-base font-medium shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-blue disabled:cursor-not-allowed';
                 const statusClass =
                   status === 'correct'
-                    ? 'border-green-500/60 bg-gradient-to-r from-green-100 via-white to-green-50 text-green-700'
+                    ? 'border-emerald-500/60 bg-gradient-to-r from-emerald-900/40 via-charcoal-800 to-emerald-900/30 text-emerald-300'
                     : status === 'incorrect'
-                    ? 'border-rose-500/60 bg-gradient-to-r from-rose-100 via-white to-rose-50 text-rose-700'
-                    : 'border-transparent bg-white/85 text-brand-text hover:-translate-y-0.5 hover:border-brand-blue/40';
+                    ? 'border-rose-500/60 bg-gradient-to-r from-rose-900/40 via-charcoal-800 to-rose-900/30 text-rose-300'
+                    : 'border-brand-blue/30 bg-charcoal-700/60 text-gray-200 hover:-translate-y-0.5 hover:border-brand-blue/60 hover:bg-charcoal-700/80';
                 return (
                   <button
                     key={index}
@@ -268,17 +268,17 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                     <span
                       className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl text-sm font-bold uppercase shadow-inner ${
                         status === 'correct'
-                          ? 'bg-green-600 text-white'
+                          ? 'bg-emerald-600 text-white'
                           : status === 'incorrect'
                           ? 'bg-rose-600 text-white'
-                          : 'bg-brand-blue/10 text-brand-blue'
+                          : 'bg-brand-blue/20 text-brand-blue'
                       }`}
                     >
                       {letter}
                     </span>
                     <span className="flex-1 text-sm leading-relaxed">{option}</span>
                     {status === 'correct' && (
-                      <span className="text-sm font-semibold text-green-600" aria-hidden>
+                      <span className="text-sm font-semibold text-emerald-400" aria-hidden>
                         ✓
                       </span>
                     )}
@@ -287,13 +287,13 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
               })}
             </div>
             {revealed && (
-              <div className="rounded-3xl border border-amber-500/40 bg-amber-100/70 p-5 text-sm text-amber-800" aria-live="polite">
+              <div className="rounded-3xl border border-brand-blue/40 bg-brand-blue/10 p-5 text-sm text-brand-blue shadow-lg shadow-brand-blue/20" aria-live="polite">
                 <p className="font-semibold uppercase tracking-widest">Đáp án đúng</p>
-                <p className="mt-1 text-base text-brand-text">
+                <p className="mt-1 text-base text-gray-100">
                   {currentQuestion.options[currentQuestion.answerIndex]}
                 </p>
                 {currentQuestion.explanation && (
-                  <p className="mt-3 leading-relaxed text-brand-text/80">{currentQuestion.explanation}</p>
+                  <p className="mt-3 leading-relaxed text-gray-300">{currentQuestion.explanation}</p>
                 )}
                 <button
                   type="button"
@@ -309,7 +309,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
           <aside className="space-y-4">
             {currentQuestion.media ? (
-              <div className="overflow-hidden rounded-3xl border border-white/50 bg-white/70 shadow-[0_20px_40px_-30px_rgba(90,70,140,0.6)]">
+              <div className="overflow-hidden rounded-3xl border border-brand-blue/30 bg-charcoal-800/80 shadow-[0_20px_40px_-30px_rgba(255,215,0,0.15)]">
                 {currentQuestion.media.type === 'image' ? (
                   <figure className="flex flex-col">
                     <img
@@ -318,7 +318,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                       className="h-56 w-full object-cover"
                     />
                     {(currentQuestion.media.caption || currentQuestion.media.credit) && (
-                      <figcaption className="space-y-1 px-4 py-3 text-xs text-brand-text/70">
+                      <figcaption className="space-y-1 px-4 py-3 text-xs text-gray-300">
                         {currentQuestion.media.caption && <p>{currentQuestion.media.caption}</p>}
                         {currentQuestion.media.credit && (
                           <p className="text-[11px] uppercase tracking-[0.25em] text-brand-blue/70">
@@ -348,7 +348,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                   </video>
                 )}
                 {(currentQuestion.media?.type === 'video' && currentQuestion.media.caption) && (
-                  <div className="border-t border-white/40 px-4 py-3 text-xs text-brand-text/70">
+                  <div className="border-t border-brand-blue/20 px-4 py-3 text-xs text-gray-300">
                     <p>{currentQuestion.media.caption}</p>
                     {currentQuestion.media.credit && (
                       <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-brand-blue/70">

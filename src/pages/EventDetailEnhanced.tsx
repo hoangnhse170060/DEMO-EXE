@@ -60,7 +60,7 @@ const EventDetailEnhanced = () => {
     {
       icon: '📚',
       text: 'Thị đỏ vào trường trung học ở Mỹ Tho với số điểm cao nhất và được cấp học bổng',
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-yellow-500 to-orange-500',
     },
     {
       icon: '🏫',

@@ -98,12 +98,12 @@ export default function Sidebar() {
       id: 'modern',
       label: '5. Thời Kỳ Hiện Đại (1858 – nay)',
       subPeriods: [
-  { label: 'Pháp Thuộc (1858 – 1945)', path: '/history?era=modern&phase=french' },
-        { label: 'Việt Nam Dân chủ Cộng hòa (1945 – 1976)', path: '/history?era=modern&phase=drvn' },
-        { label: 'Việt Nam Cộng hòa (1955 – 1975) – phía Nam', path: '/history?era=modern&phase=rvn' },
-        { label: 'Nước CHXHCN Việt Nam (1976 – nay)', path: '/history?era=modern&phase=socialist' },
-        { label: '• Thời bao cấp (1976 – 1986)', path: '/history?era=modern&phase=subsidized' },
-        { label: '• Thời kỳ Đổi Mới (1986 – nay)', path: '/history?era=modern&phase=renovation' },
+  { label: 'Thời kỳ Pháp thuộc (1858 – 1945)', path: '/history?history?era=french&phase=antiFrench' },
+        { label: 'Việt Nam Dân chủ Cộng hòa – miền Bắc (1945 – 1976)', path: '/history?era=modern&phase=drvn' },
+        { label: 'Quốc gia Việt Nam – miền Nam (1949 – 1955)', path: '/history?era=modern&phase=rvn' },
+        { label: 'Việt Nam Cộng hòa – miền Nam (1955 – 1975)', path: '/history?era=modern&phase=socialist' },
+       { label: 'Nước CHXHCN Việt Nam (1976 – nay)', path: '/history?era=modern&phase=socialist' },
+
       ]
     }
   ];
@@ -117,7 +117,7 @@ export default function Sidebar() {
     { id: 'home', label: 'TRANG CHỦ', path: '/' },
     { id: 'history', label: 'LỊCH SỬ', path: '/history' },
     { id: 'culture', label: 'VĂN HÓA', path: '/culture' },
-    { id: 'forum', label: 'DIỄN ĐÀN', path: '/forum' },
+    
     { id: 'services', label: 'DỊCH VỤ', path: '/services' },
     { id: 'contact', label: 'LIÊN HỆ', path: '/contact' },
   ];
@@ -305,7 +305,7 @@ export default function Sidebar() {
       case 'admin':
         return 'from-amber-500 via-amber-400 to-yellow-400';
       default:
-        return 'from-blue-500 via-sky-500 to-cyan-500';
+        return 'from-yellow-500 via-yellow-400 to-amber-500';
     }
   };
 
@@ -447,15 +447,18 @@ export default function Sidebar() {
               className="cursor-pointer pt-12"
               onClick={() => handleNavigation('/')}
             >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center">
-                <Clock className="text-amber-400" size={32} />
-              </div>
+             <img
+                src="/logo.png"
+                alt="Echoes of Việt Nam Logo"
+                className="h-24 w-24 object-contain drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]"
+              />
               <h1 className="text-xl font-display uppercase leading-snug tracking-wider text-amber-400">
-                DÒNG SỬ
+                ECHOES OF
                 <br />
                 VIỆT NAM
               </h1>
             </div>
+            
 
             <nav className="mt-12 flex-1 space-y-4 overflow-y-auto">
               {navItems.map((item) => (

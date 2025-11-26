@@ -101,7 +101,7 @@ export const adminWorkflows: Record<WorkflowKey, WorkflowDefinition> = {
       { label: 'Tạo biên bản bất thường' },
     ],
     icon: CreditCard,
-    accent: 'from-teal-400 via-cyan-500 to-sky-500',
+    accent: 'from-yellow-400 via-amber-400 to-orange-500',
   },
   content: {
     key: 'content',

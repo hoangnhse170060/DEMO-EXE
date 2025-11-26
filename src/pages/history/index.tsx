@@ -15,8 +15,6 @@ import {
   getHistoryProgress,
   recordQuizAttempt,
   updateHistoryProgress,
-  setLockForEvent,
-  setPendingDigitalPurchase,
   type HistoryProgress,
 } from '../../lib/storage';
 import { fetchQuizByEvent, historyData, type Era, type HistoryEvent } from '../../data/history';
@@ -194,35 +192,19 @@ export default function HistoryPage() {
       questionIds: summary.answers.map((record) => record.questionId),
     };
     let updatedProgress = recordQuizAttempt(user.id, activeEvent.id, attemptRecord);
-    // failed/passed handling: track failedAttempts, lock when exceeding allowed
-    const baseAllowed = 2;
-    const extra = updatedProgress.extraAttempts ?? 0;
-    const totalAllowed = baseAllowed + extra;
-    const passedByScore = grade.score >= PASSING_SCORE;
 
-    if (!passedByScore) {
-      const failed = (updatedProgress.failedAttempts ?? 0) + 1;
-      if (failed >= totalAllowed) {
-        // lock for 12 hours and reset counters
-        const until = new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString();
-        updatedProgress = setLockForEvent(user.id, activeEvent.id, until);
-      } else {
-        updatedProgress = updateHistoryProgress(user.id, activeEvent.id, { failedAttempts: failed });
-      }
-    } else {
-      // passed: reset failedAttempts, clear lock, stamp completion
-      updatedProgress = updateHistoryProgress(user.id, activeEvent.id, {
-        failedAttempts: 0,
-        lockedUntil: null,
-        completedAt: new Date().toISOString(),
-      });
-    }
+    // Always mark as completed regardless of score
+    updatedProgress = updateHistoryProgress(user.id, activeEvent.id, {
+      failedAttempts: 0,
+      lockedUntil: null,
+      completedAt: new Date().toISOString(),
+    });
 
     setProgressMap((prev) => ({ ...prev, [activeEvent.id]: updatedProgress }));
     setReviewAnswers(summary.answers);
     const currentIndex = eventIndexMap[activeEvent.id];
     const nextEvent = typeof currentIndex === 'number' ? sortedEvents[currentIndex + 1] : undefined;
-  const autoAdvanceTo = passedByScore ? nextEvent?.id ?? null : undefined;
+    const autoAdvanceTo = nextEvent?.id ?? null;
     setQuizOutcome({
       score: grade.score,
       stars: grade.stars,
@@ -232,23 +214,6 @@ export default function HistoryPage() {
       autoAdvanceTo,
     });
     setShowQuiz(false);
-  };
-
-  const handlePurchase = (eventId: string) => {
-    if (!user) {
-      navigate('/login', { state: { redirectTo: '/history?eventId=' + eventId } });
-      return;
-    }
-    const targetEvent = events.find((event) => event.id === eventId);
-    setPendingDigitalPurchase({
-      planId: 'attempt-pack-10',
-      eventId,
-      eventTitle: targetEvent?.headline || targetEvent?.title || 'Sự kiện lịch sử',
-      quantity: 10,
-      createdAt: new Date().toISOString(),
-    });
-    const checkoutUrl = `/checkout?productId=attempt-pack-10&eventId=${eventId}`;
-    window.location.assign(checkoutUrl);
   };
 
   const canLaunchQuiz = !!user && !!activeEvent && (progressMap[activeEvent.id]?.readRatio ?? 0) >= 0.8;
@@ -322,7 +287,10 @@ export default function HistoryPage() {
         <EraKnowledgeHighlights era={heroEra} events={events} />
 
         {!isAuthenticated() && (
-          <p className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/10 px-4 py-3 text-sm text-brand-blue">
+          <p
+            className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/10 px-4 py-3 text-sm text-brand-blue"
+            data-testid="history-guest-cta"
+          >
             Đăng nhập để mở khóa dòng thời gian chi tiết, tư liệu đa phương tiện và hệ thống quiz.
           </p>
         )}
@@ -337,7 +305,7 @@ export default function HistoryPage() {
 
         {!user && !loading && (
           <>
-            <section className="mt-8">
+            <section className="mt-8" data-testid="history-timeline-preview">
               <Timeline
                 events={sortedEvents}
                 activeEventId={null}
@@ -354,7 +322,10 @@ export default function HistoryPage() {
         )}
 
         {user && !loading && (
-          <section className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)]">
+          <section
+            className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)]"
+            data-testid="history-timeline-auth"
+          >
             <div className="space-y-6">
               <div className="rounded-2xl border border-brand-blue/15 bg-white/90 p-4 shadow-sm">
                 <p className="text-sm text-brand-text">Chọn mốc trong dòng thời gian để xem chi tiết và mở quiz.</p>
@@ -393,57 +364,35 @@ export default function HistoryPage() {
                   quizLauncher={
                   activeEvent ? (
                     <div className="space-y-4">
-                      {(() => {
-                        const progress = progressMap[activeEvent.id];
-                        const locked = progress?.lockedUntil ? new Date(progress.lockedUntil).getTime() : null;
-                        if (locked && locked > Date.now()) {
-                          return (
-                            <div className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
-                              <div className="font-semibold">Quiz tạm thời bị khóa</div>
-                              <div className="mt-2">Quiz đã bị khóa đến {new Date(progress!.lockedUntil!).toLocaleString()} do dùng hết lượt thử. Bạn có thể mua thêm lượt để mở lại.</div>
-                              <div className="mt-3">
-                                <button className="btn-primary mr-3" onClick={() => handlePurchase(activeEvent.id)}>
-                                  Mua +10 lượt
-                                </button>
-                              </div>
-                            </div>
-                          );
-                        }
-                        return (
-                          <>
-                            <QuizLauncher
-                              canLaunch={canLaunchQuiz}
-                              onLaunch={() => activeEvent && openQuiz(activeEvent.id)}
-                              attempts={progress?.attempts.length ?? 0}
-                              purchasedAttempts={progress?.extraAttempts ?? 0}
-                              bestScore={progress?.bestScore}
-                              bestStars={progress?.bestStars}
-                            />
-                            {reviewAnswers && (
-                              <div className="rounded-xl border border-brand-blue/20 bg-brand-blue/5 p-4 text-sm text-brand-text">
-                                <h4 className="text-base font-semibold text-brand-text">Giải thích câu hỏi gần nhất</h4>
-                                <ul className="mt-3 space-y-2">
-                                  {reviewAnswers.map((answer) => {
-                                    const question = quizQuestions.find((q) => q.id === answer.questionId);
-                                    if (!question) return null;
-                                    const selected =
-                                      typeof answer.selectedIndex === 'number' ? question.options[answer.selectedIndex] : 'Chưa trả lời';
-                                    const correct = question.options[answer.correctIndex];
-                                    return (
-                                      <li key={answer.questionId} className="rounded-lg bg-white/70 p-3 shadow-sm">
-                                        <p className="font-semibold text-brand-text">{question.prompt}</p>
-                                        <p className="mt-1 text-brand-muted">Bạn chọn: {selected}</p>
-                                        <p className="text-brand-blue">Đáp án đúng: {correct}</p>
-                                        <p className="mt-1 text-brand-text">{answer.explanation}</p>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
-                              </div>
-                            )}
-                          </>
-                        );
-                      })()}
+                      <QuizLauncher
+                        canLaunch={canLaunchQuiz}
+                        onLaunch={() => activeEvent && openQuiz(activeEvent.id)}
+                        attempts={progressMap[activeEvent?.id ?? '']?.attempts.length ?? 0}
+                        bestScore={progressMap[activeEvent?.id ?? '']?.bestScore}
+                        bestStars={progressMap[activeEvent?.id ?? '']?.bestStars}
+                      />
+                      {reviewAnswers && (
+                        <div className="rounded-xl border border-brand-blue/20 bg-brand-blue/5 p-4 text-sm text-brand-text">
+                          <h4 className="text-base font-semibold text-brand-text">Giải thích câu hỏi gần nhất</h4>
+                          <ul className="mt-3 space-y-2">
+                            {reviewAnswers.map((answer) => {
+                              const question = quizQuestions.find((q) => q.id === answer.questionId);
+                              if (!question) return null;
+                              const selected =
+                                typeof answer.selectedIndex === 'number' ? question.options[answer.selectedIndex] : 'Chưa trả lời';
+                              const correct = question.options[answer.correctIndex];
+                              return (
+                                <li key={answer.questionId} className="rounded-lg bg-white/70 p-3 shadow-sm">
+                                  <p className="font-semibold text-brand-text">{question.prompt}</p>
+                                  <p className="mt-1 text-brand-muted">Bạn chọn: {selected}</p>
+                                  <p className="text-brand-blue">Đáp án đúng: {correct}</p>
+                                  <p className="mt-1 text-brand-text">{answer.explanation}</p>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   ) : null
                 }

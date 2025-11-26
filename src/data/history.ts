@@ -117,6 +117,7 @@ export const eras: Era[] = [
 // ==== Seed Events ============================================================
 const INDEPENDENCE_EVENT_ID = 'independence-1945';
 const VB_EVENT_ID = 'evt-1947-vietbac';
+const DANANG_1858_EVENT_ID = 'evt-1858-danang';
 
 const vietBac1947: HistoryEvent = {
   id: VB_EVENT_ID,
@@ -742,9 +743,142 @@ const tetMauThan1968: HistoryEvent = {
   ],
 };
 
-export const events: HistoryEvent[] = [vietBac1947, tetMauThan1968];
+const danang1858: HistoryEvent = {
+  id: DANANG_1858_EVENT_ID,
+  eraId: 'french',
+  year: 1858,
+  month: 9,
+  date: '1858-09-01',
+  title: 'Pháp tấn công Đà Nẵng 1858',
+  headline: 'Mở đầu cuộc xâm lược thực dân Pháp vào Việt Nam',
+  summary:
+    'Ngày 1/9/1858, hạm đội Pháp - Tây Ban Nha do đô đốc Rigault de Genouilly chỉ huy nổ súng tấn công vào Đà Nẵng, mở đầu cuộc chiến tranh xâm lược kéo dài gần 100 năm.',
+  reliability: 5,
+  tags: ['french-invasion', 'danang', 'colonial-war', '1858'],
+  content: [
+    { type: 'h2', secId: 'intro', text: 'Bối cảnh và nguyên nhân' },
+    { 
+      type: 'p', 
+      secId: 'intro-p1', 
+      text: 'Giữa thế kỷ 19, Pháp tìm cách mở rộng ảnh hưởng ở Viễn Đông. Họ dùng cớ bảo vệ các giáo sĩ và tín đồ Công giáo để can thiệp vào Việt Nam.' 
+    },
+    { 
+      type: 'h2', 
+      secId: 'attack', 
+      text: 'Cuộc tấn công' 
+    },
+    {
+      type: 'p',
+      secId: 'attack-p1',
+      text: 'Ngày 1/9/1858, hạm đội gồm 14 tàu chiến và 2.500 lính với hỏa lực hùng mạnh tiến công Đà Nẵng. Quân triều đình Nguyễn chống trả quyết liệt nhưng thiếu vũ khí hiện đại.',
+    },
+  ],
+  featuredImage: {
+    url: '/media/1858/danang-attack.webp',
+    alt: 'Hạm đội Pháp tấn công Đà Nẵng 1858',
+    credit: 'Tranh lịch sử',
+  },
+  media: [],
+  subEvents: [
+    {
+      id: 'evt-1858-danang-01',
+      parentId: DANANG_1858_EVENT_ID,
+      order: 1,
+      date: '1858-09-01',
+      title: 'Hạm đội Pháp - Tây Ban Nha đổ bộ Đà Nẵng',
+      leader: 'Đô đốc Rigault de Genouilly',
+      opponent: 'Quân triều đình Nguyễn',
+      troopEstimates: {
+        them: '14 tàu chiến, 2.500 lính',
+        us: 'Các đồn lũy ven biển',
+        note: 'Lực lượng không cân sức',
+      },
+      guestSummary:
+        'Hạm đội Pháp - Tây Ban Nha nổ súng tấn công Đà Nẵng, mở đầu cuộc xâm lược thực dân.',
+      content: [
+        { type: 'h2', secId: 's1', text: 'Cuộc tấn công' },
+        { 
+          type: 'p', 
+          secId: 's1p1', 
+          text: 'Sáng ngày 1/9/1858, hạm đội Pháp - Tây Ban Nha nổ súng dữ dội vào các đồn lũy ven biển Đà Nẵng.' 
+        },
+        { 
+          type: 'p', 
+          secId: 's1p2', 
+          text: 'Quân triều đình Nguyễn chống trả quyết liệt nhưng không thể chống lại hỏa lực hiện đại của địch.' 
+        },
+      ],
+      media: [],
+      sources: [
+        { title: 'Lịch sử Việt Nam, NXB Giáo dục' },
+        { title: 'Kháng chiến chống Pháp 1858-1954' },
+      ],
+      quizPoolIds: [
+        'q-danang-1858-1',
+        'q-danang-1858-2',
+        'q-danang-1858-3',
+        'q-danang-1858-4',
+        'q-danang-1858-5',
+      ],
+      nextId: null,
+    },
+  ],
+};
+
+export const events: HistoryEvent[] = [danang1858, vietBac1947, tetMauThan1968];
 
 export const quizBank: QuizQuestion[] = [
+  // Quiz Đà Nẵng 1858 - Yes/No format
+  {
+    id: 'q-danang-1858-1',
+    subEventId: 'evt-1858-danang-01',
+    eventId: DANANG_1858_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Phải chăng Pháp chọn Đà Nẵng làm nơi nổ súng mở đầu vì đây là vị trí chiến lược quan trọng của Việt Nam?',
+    options: ['Đúng', 'Sai'],
+    answerIndex: 0,
+    explanation: 'Đúng. Đà Nẵng là cảng biển nước sâu, vị trí chiến lược quan trọng, gần kinh đô Huế, thuận lợi cho việc tiến quân và tiếp tế của Pháp.',
+  },
+  {
+    id: 'q-danang-1858-2',
+    subEventId: 'evt-1858-danang-01',
+    eventId: DANANG_1858_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Nhà Nguyễn có tổ chức phòng thủ và chống trả mạnh mẽ khi Pháp tấn công vào Đà Nẵng năm 1858 không?',
+    options: ['Đúng', 'Sai'],
+    answerIndex: 0,
+    explanation: 'Đúng. Nhà Nguyễn đã tổ chức phòng thủ và chống trả quyết liệt dưới sự chỉ huy của các tướng lĩnh, gây nhiều khó khăn cho quân Pháp.',
+  },
+  {
+    id: 'q-danang-1858-3',
+    subEventId: 'evt-1858-danang-01',
+    eventId: DANANG_1858_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Có đúng là quân Pháp đã nhanh chóng chiếm được toàn bộ Đà Nẵng ngay khi tấn công năm 1858 không?',
+    options: ['Đúng', 'Sai'],
+    answerIndex: 1,
+    explanation: 'Sai. Quân Pháp gặp nhiều khó khăn và không thể nhanh chóng chiếm được toàn bộ Đà Nẵng do sự kháng cự mạnh mẽ của quân triều đình và nhân dân.',
+  },
+  {
+    id: 'q-danang-1858-4',
+    subEventId: 'evt-1858-danang-01',
+    eventId: DANANG_1858_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Nhân dân địa phương có tham gia tích cực vào cuộc kháng chiến chống Pháp tại Đà Nẵng không?',
+    options: ['Đúng', 'Sai'],
+    answerIndex: 0,
+    explanation: 'Đúng. Nhân dân địa phương đã tích cực phối hợp với quân triều đình, thực hiện chiến thuật "vườn không nhà trống", gây khó khăn cho quân Pháp.',
+  },
+  {
+    id: 'q-danang-1858-5',
+    subEventId: 'evt-1858-danang-01',
+    eventId: DANANG_1858_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Cuộc kháng chiến tại Đà Nẵng năm 1858 có hoàn toàn thất bại và không để lại ý nghĩa gì không?',
+    options: ['Đúng', 'Sai'],
+    answerIndex: 1,
+    explanation: 'Sai. Cuộc kháng chiến tại Đà Nẵng đã làm thất bại kế hoạch đánh nhanh thắng nhanh của Pháp, buộc địch phải chuyển hướng tấn công vào Gia Định.',
+  },
   {
     id: 'q-ind-context-1',
     subEventId: 'independence-1945:context',
