@@ -11,6 +11,8 @@ import ArchiveDetail from './pages/ArchiveDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
 
 // Layout component to conditionally show Sidebar/Footer
 function Layout({ children }: { children: React.ReactNode }) {
@@ -44,6 +46,8 @@ function AppRoutes() {
         <Route path="/culture/archives" element={<Archives />} />
         <Route path="/culture/archives/:id" element={<ArchiveDetail />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
