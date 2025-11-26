@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -8,25 +8,51 @@ import HistoricalFigures from './pages/HistoricalFigures';
 import FigureDetail from './pages/FigureDetail';
 import Archives from './pages/Archives';
 import ArchiveDetail from './pages/ArchiveDetail';
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+// Layout component to conditionally show Sidebar/Footer
+function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
+
+  return (
+    <>
+      <Sidebar />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+}
+
+function AppRoutes() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/event/detail" element={<EventDetail />} />
+        <Route path="/culture/historical-figures" element={<HistoricalFigures />} />
+        <Route path="/culture/historical-figures/:id" element={<FigureDetail />} />
+        <Route path="/culture/archives" element={<Archives />} />
+        <Route path="/culture/archives/:id" element={<ArchiveDetail />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
+  );
+}
 
 function App() {
   return (
     <Router>
-  <div className="min-h-screen bg-gradient-dark-gold">
-        <Sidebar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/event/detail" element={<EventDetail />} />
-            <Route path="/culture/historical-figures" element={<HistoricalFigures />} />
-            <Route path="/culture/historical-figures/:id" element={<FigureDetail />} />
-            <Route path="/culture/archives" element={<Archives />} />
-            <Route path="/culture/archives/:id" element={<ArchiveDetail />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        <Footer />
+      <div className="min-h-screen bg-gradient-dark-gold">
+        <AppRoutes />
       </div>
     </Router>
   );

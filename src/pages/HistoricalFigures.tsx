@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Calendar, Award, Heart, Search, X } from 'lucide-react';
+import { getActiveUser } from '../lib/auth';
 
 interface HistoricalFigure {
   id: string;
@@ -104,6 +105,16 @@ export default function HistoricalFigures() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
+  const handleViewFigure = useCallback((figureId: string) => {
+    const user = getActiveUser();
+    if (!user) {
+      sessionStorage.setItem('afterLogin', JSON.stringify({ page: 'culture/historical-figures' }));
+      navigate('/login', { state: { from: '/culture/historical-figures' } });
+      return;
+    }
+    navigate(`/culture/historical-figures/${figureId}`);
+  }, [navigate]);
+
   // Filter figures based on search query
   const filteredFigures = historicalFigures.filter((figure) => {
     const query = searchQuery.toLowerCase();
@@ -206,7 +217,7 @@ export default function HistoricalFigures() {
               {filteredFigures.map((figure, index) => (
               <div
                 key={figure.id}
-                onClick={() => navigate(`/culture/historical-figures/${figure.id}`)}
+                onClick={() => handleViewFigure(figure.id)}
                 className="group relative bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all duration-500 cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
                 style={{
                   animationDelay: `${index * 100}ms`,
@@ -266,7 +277,7 @@ export default function HistoricalFigures() {
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/culture/historical-figures/${figure.id}`);
+                        handleViewFigure(figure.id);
                       }}
                       className="w-full flex items-center justify-center gap-2 text-brand-blue font-bold hover:text-brand-blue/80 transition-colors bg-charcoal-800 hover:bg-brand-blue/10 py-3 rounded-lg"
                     >

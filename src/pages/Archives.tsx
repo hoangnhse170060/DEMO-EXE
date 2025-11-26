@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileText, Newspaper, Hammer, BookOpen, Search, X, Grid, List } from 'lucide-react';
+import { getActiveUser } from '../lib/auth';
 
 type ArchiveCategory = 'all' | 'documents' | 'newspapers' | 'artifacts' | 'writings';
 type ViewMode = 'grid' | 'list';
@@ -71,6 +72,16 @@ export default function Archives() {
   const [selectedCategory, setSelectedCategory] = useState<ArchiveCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
+
+  const handleViewArchive = useCallback((archiveId: string) => {
+    const user = getActiveUser();
+    if (!user) {
+      sessionStorage.setItem('afterLogin', JSON.stringify({ page: 'culture/archives' }));
+      navigate('/login', { state: { from: '/culture/archives' } });
+      return;
+    }
+    navigate(`/culture/archives/${archiveId}`);
+  }, [navigate]);
 
   const filteredArchives = archives.filter(archive => {
     const matchesCategory = selectedCategory === 'all' || archive.category === selectedCategory;
@@ -178,7 +189,7 @@ export default function Archives() {
               {filteredArchives.map((archive) => (
                 <div
                   key={archive.id}
-                  onClick={() => navigate(`/culture/archives/${archive.id}`)}
+                  onClick={() => handleViewArchive(archive.id)}
                   className="group bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
                 >
                   <div className="relative h-64 overflow-hidden">
@@ -219,7 +230,7 @@ export default function Archives() {
               {filteredArchives.map((archive) => (
                 <div
                   key={archive.id}
-                  onClick={() => navigate(`/culture/archives/${archive.id}`)}
+                  onClick={() => handleViewArchive(archive.id)}
                   className="group flex gap-6 bg-gradient-to-r from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all cursor-pointer"
                 >
                   <div className="relative w-64 flex-shrink-0">

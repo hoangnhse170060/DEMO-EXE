@@ -210,6 +210,40 @@ export default function Sidebar() {
     void updateUser();
   }, [location.pathname]);
 
+  // Listen for local auth changes (localStorage)
+  useEffect(() => {
+    if (isSupabaseConfigured) return;
+
+    const handleStorageChange = async () => {
+      const currentUser = localAuth.getCurrentUser();
+      if (currentUser) {
+        const { profile } = await localAuth.getUserProfile(currentUser.id);
+        if (profile) {
+          setUser({
+            id: profile.id,
+            displayName: profile.display_name,
+            email: profile.email,
+            role: profile.role as 'user' | 'admin',
+            avatarUrl: null,
+          });
+        }
+      } else {
+        setUser(null);
+      }
+    };
+
+    // Listen for storage events from other tabs
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check periodically for same-tab changes
+    const interval = setInterval(handleStorageChange, 1000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
+
   useEffect(() => {
     if (!isSupabaseConfigured) {
       return;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { getActiveUser } from '../lib/auth';
@@ -860,6 +860,23 @@ export default function History() {
   const sequencedPhases: PhaseKey[] = ['antiFrench', 'antiAmerican', 'drvn', 'rvn', 'socialist'];
   const showModernEra = searchParams.get('era') === 'modern';
 
+  // Check login before viewing detail
+  const handleViewDetail = useCallback((event: TimelineEvent, phaseLabel: string) => {
+    const user = getActiveUser();
+    if (!user) {
+      // Save intended destination and redirect to login
+      sessionStorage.setItem('afterLogin', JSON.stringify({ page: 'history' }));
+      navigate('/login', { state: { from: '/history' } });
+      return;
+    }
+    navigate('/event/detail', {
+      state: {
+        event,
+        phase: phaseLabel,
+      },
+    });
+  }, [navigate]);
+
   useEffect(() => {
     const eraParam = searchParams.get('era');
     const phaseParam = searchParams.get('phase');
@@ -1133,12 +1150,7 @@ export default function History() {
                                 return;
                               }
 
-                              navigate('/event/detail', {
-                                state: {
-                                  event,
-                                  phase: phase.label,
-                                },
-                              });
+                              handleViewDetail(event, phase.label);
                             }}
                             className={`mt-4 inline-flex items-center gap-2 rounded-sm border px-5 py-2 text-sm font-semibold uppercase tracking-[0.18em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/30 ${locked
                               ? 'cursor-not-allowed border-dashed border-brand-blue/30 bg-white/40 text-brand-blue/40'

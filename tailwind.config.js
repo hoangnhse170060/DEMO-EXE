@@ -4,7 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-base': '#0F0F0F',
+        // New Museum Color Palette
+        'museum': {
+          'beige': '#F1EEE1',      // Light Beige Background
+          'gray': '#CCCCCC',       // Neutral Gray
+          'black': '#171717',      // Deep Black
+          'accent': '#FFC061',     // Warm Accent Yellow
+        },
+        'brand-base': '#000000ff',
         'brand-sand': '#1A1A1A',
         'brand-blue': {
           DEFAULT: '#FFD700',
@@ -39,9 +46,9 @@ export default {
         },
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'Georgia', 'serif'],
-        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        'display': ['Cormorant Garamond', 'Playfair Display', 'serif'],
+        'serif': ['Cormorant', 'Playfair Display', 'Georgia', 'serif'],
+        'sans': ['Montserrat', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        'display': ['Cormorant', 'Cormorant Garamond', 'Playfair Display', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out',
@@ -105,11 +112,12 @@ export default {
       },
       boxShadow: {
         'soft': '0 2px 15px 0 rgba(255, 215, 0, 0.1)',
-        'medium': '0 4px 25px 0 rgba(255, 215, 0, 0.15)',
+        'medium': '0 4px 25px 0 rgba(23, 23, 23, 0.1)',
         'strong': '0 10px 40px 0 rgba(255, 215, 0, 0.2)',
-        'brand': '0 4px 20px 0 rgba(255, 215, 0, 0.4)',
+        'brand': '0 4px 20px 0 rgba(255, 192, 97, 0.3)',
         'inner-soft': 'inset 0 2px 4px 0 rgba(255, 215, 0, 0.1)',
         'gold-glow': '0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3)',
+        'paper': '0 1px 3px rgba(23, 23, 23, 0.08), 0 4px 12px rgba(23, 23, 23, 0.04)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
