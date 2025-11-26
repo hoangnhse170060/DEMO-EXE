@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { CalendarDays, ChevronDown, ChevronLeft, ExternalLink, MapPin } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getDeepEventById, type DeepEvent } from '../data/deepEvents';
-import { fetchQuizByEvent, type QuizQuestion } from '../data/history';
+import { fetchQuizByEvent, events as historyEvents, type QuizQuestion } from '../data/history';
 import ResearchPanel from '../components/history/ResearchPanel';
 import QuizLauncher from '../components/history/Quiz/QuizLauncher';
 import QuizRunner, { type QuizAnswerRecord, type QuizSummary } from '../components/history/Quiz/QuizRunner';
@@ -52,6 +52,15 @@ export default function EventDetail() {
   const progressRatioRef = useRef(0);
   const [sidebarOffset, setSidebarOffset] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Calculate next event based on current event
+  const nextEvent = useMemo(() => {
+    if (!eventData?.id) return null;
+    const sortedEvents = [...historyEvents].sort((a, b) => a.year - b.year);
+    const currentIndex = sortedEvents.findIndex(e => e.id === eventData.id);
+    if (currentIndex === -1 || currentIndex >= sortedEvents.length - 1) return null;
+    return sortedEvents[currentIndex + 1];
+  }, [eventData?.id]);
 
   const applySidebarOffset = useCallback((isOpen: boolean) => {
     if (!isOpen || typeof window === 'undefined') {
@@ -202,11 +211,11 @@ export default function EventDetail() {
   if (!eventData) {
     return (
       <div className="min-h-screen bg-charcoal-900 flex items-center justify-center px-6">
-        <div className="max-w-md rounded-3xl border border-brand-blue/20 bg-charcoal-800 p-8 text-center shadow-lg">
+        <div className="max-w-md rounded-3xl border border-[#F4D03F]/20 bg-charcoal-800 p-8 text-center shadow-lg">
           <p className="text-sm text-gray-300 mb-4">Không tìm thấy hồ sơ sự kiện. Vui lòng quay lại thư viện lịch sử.</p>
           <button
             onClick={() => navigate(-1)}
-            className="px-5 py-2 rounded-full bg-brand-blue text-charcoal-900 text-sm font-semibold shadow hover:bg-brand-blue/90 transition"
+            className="px-5 py-2 rounded-full bg-[#F4D03F] text-charcoal-900 text-sm font-semibold shadow hover:bg-[#F4D03F]/90 transition"
           >
             Quay lại
           </button>
@@ -281,16 +290,16 @@ export default function EventDetail() {
   return (
     <div className="min-h-screen bg-charcoal-900 text-gray-100">
       <div
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-blue via-brand-blue/70 to-brand-blue z-50"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#F4D03F] via-[#F4D03F]/70 to-[#F4D03F] z-50"
         style={{ width: `${scrollProgress}%` }}
       />
 
       <button
         onClick={handleBackToHistory}
-        className="fixed top-8 left-3 z-40 bg-charcoal-800/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-transform duration-300 border border-brand-blue/20"
+        className="fixed top-8 left-3 z-40 bg-charcoal-800/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-transform duration-300 border border-[#F4D03F]/20"
         aria-label="Quay lại lịch sử"
       >
-        <ChevronLeft size={20} className="text-brand-blue" />
+        <ChevronLeft size={20} className="text-[#F4D03F]" />
       </button>
 
       <section className="relative min-h-[62vh] lg:min-h-[68vh] flex items-end">
@@ -302,10 +311,10 @@ export default function EventDetail() {
         />
         <div className="relative z-10 w-full">
           <div className="max-w-6xl mx-auto px-6 py-20 lg:py-28 text-white">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue/30 bg-brand-blue/10 px-4 py-1 text-[11px] uppercase tracking-[0.4em] text-brand-blue">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#F4D03F]/30 bg-[#F4D03F]/10 px-4 py-1 text-[11px] uppercase tracking-[0.4em] text-[#F4D03F]">
               {phaseLabel || 'LOADING...'}
             </div>
-            <h1 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-serif leading-snug drop-shadow-lg text-brand-blue">
+            <h1 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-serif leading-snug drop-shadow-lg text-[#F4D03F]">
               {eventData.headline}
             </h1>
             <p className="mt-6 max-w-3xl text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed">
@@ -313,16 +322,16 @@ export default function EventDetail() {
             </p>
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl border border-brand-blue/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-blue">
+              <div className="rounded-2xl border border-[#F4D03F]/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#F4D03F]">
                   <CalendarDays size={14} /> Ngày diễn ra
                 </div>
                 <p className="mt-2 text-base font-semibold text-gray-100">
                   {eventData.date || 'Đang bổ sung'}
                 </p>
               </div>
-              <div className="rounded-2xl border border-brand-blue/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-blue">
+              <div className="rounded-2xl border border-[#F4D03F]/30 bg-charcoal-800 p-4 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#F4D03F]">
                   <MapPin size={14} /> Địa điểm lịch sử
                 </div>
                 <p className="mt-2 text-base font-semibold text-gray-100">
@@ -335,7 +344,7 @@ export default function EventDetail() {
             <div className="mt-10 flex flex-wrap gap-4">
               <button
                 onClick={() => document.getElementById('reading-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-charcoal-900 shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] transition"
+                className="rounded-full bg-[#F4D03F] px-6 py-3 text-sm font-semibold text-charcoal-900 shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] transition"
               >
                 Thông tin chi tiết
               </button>
@@ -350,22 +359,22 @@ export default function EventDetail() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr),minmax(290px,1fr)]">
             <article id="reading-start" className="space-y-12">
               {eventData.media?.images?.length ? (
-                <section className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg p-6">
+                <section className="rounded-3xl border border-[#F4D03F]/20 bg-charcoal-800 shadow-lg p-6">
                   <header className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-brand-blue/70">Tư liệu hình ảnh</p>
-                      <h2 className="text-2xl font-serif text-brand-blue">Tư liệu hình ảnh</h2>
+                      <p className="text-xs uppercase tracking-widest text-[#F4D03F]/70">Tư liệu hình ảnh</p>
+                      <h2 className="text-2xl font-serif text-[#F4D03F]">Tư liệu hình ảnh</h2>
                     </div>
                     <span className="text-xs text-gray-300">{eventData.media.images.length} mục</span>
                   </header>
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-brand-blue/30 bg-charcoal-900 shadow-xl">
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-[#F4D03F]/30 bg-charcoal-900 shadow-xl">
                     <img
                       src={eventData.media.images[activeImageIndex].src}
                       alt={eventData.media.images[activeImageIndex].title || 'Tư liệu hình ảnh'}
                       className="h-80 w-full object-cover"
                     />
-                    <div className="flex flex-col gap-1 border-t border-brand-blue/20 bg-charcoal-800 px-5 py-4 text-sm text-gray-200">
-                      <p className="font-semibold text-brand-blue">
+                    <div className="flex flex-col gap-1 border-t border-[#F4D03F]/20 bg-charcoal-800 px-5 py-4 text-sm text-gray-200">
+                      <p className="font-semibold text-[#F4D03F]">
                         {eventData.media.images[activeImageIndex].title || 'Tư liệu sự kiện'}
                       </p>
                       <p className="text-xs leading-relaxed text-gray-300">
@@ -387,13 +396,13 @@ export default function EventDetail() {
                         onClick={() => setActiveImageIndex(index)}
                         className={`relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-xl border transition ${
                           activeImageIndex === index
-                            ? 'border-brand-blue shadow-lg shadow-brand-blue/50'
-                            : 'border-brand-blue/20 hover:border-brand-blue/50'
+                            ? 'border-[#F4D03F] shadow-lg shadow-[#F4D03F/20]-blue/50'
+                            : 'border-[#F4D03F]/20 hover:border-[#F4D03F]/50'
                         }`}
                       >
                         <img src={image.src} alt={image.title} className="h-full w-full object-cover" />
                         {activeImageIndex === index && (
-                          <span className="absolute inset-0 border-2 border-brand-blue/80" aria-hidden />
+                          <span className="absolute inset-0 border-2 border-[#F4D03F]/80" aria-hidden />
                         )}
                       </button>
                     ))}
@@ -402,17 +411,17 @@ export default function EventDetail() {
               ) : null}
 
               {timelineSections.length > 0 && (
-                <section className="rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
+                <section className="rounded-3xl border border-[#F4D03F]/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
                   <header className="mb-6">
-                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Dòng thời gian</p>
-                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Những nhịp chính trước và trong sự kiện</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]/70">Dòng thời gian</p>
+                    <h2 className="mt-2 text-2xl font-serif text-[#F4D03F]">Những nhịp chính trước và trong sự kiện</h2>
                   </header>
-                  <ol className="relative border-s border-brand-blue/30 pl-8 space-y-10">
+                  <ol className="relative border-s border-[#F4D03F]/30 pl-8 space-y-10">
                     {timelineSections.map((section) => (
                       <li key={section.id} className="relative">
-                        <span className="absolute -left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-brand-blue/50 bg-brand-blue/20" />
-                        <div className="rounded-2xl bg-charcoal-800/60 border border-brand-blue/10 p-5 shadow-md">
-                          <h3 className="text-lg font-serif text-brand-blue">{section.title}</h3>
+                        <span className="absolute -left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-[#F4D03F]/50 bg-[#F4D03F]/20" />
+                        <div className="rounded-2xl bg-charcoal-800/60 border border-[#F4D03F]/10 p-5 shadow-md">
+                          <h3 className="text-lg font-serif text-[#F4D03F]">{section.title}</h3>
                           <p className="mt-3 text-sm leading-relaxed text-gray-200 whitespace-pre-line">
                             {section.content}
                           </p>
@@ -420,7 +429,7 @@ export default function EventDetail() {
                             <ul className="mt-4 space-y-2 text-sm text-gray-300">
                               {section.bullets.map((item) => (
                                 <li key={item} className="flex gap-2">
-                                  <span className="text-brand-blue">•</span>
+                                  <span className="text-[#F4D03F]">•</span>
                                   <span>{item}</span>
                                 </li>
                               ))}
@@ -436,21 +445,21 @@ export default function EventDetail() {
               {sectionGroups.map((group) => (
                 <section
                   key={group.id}
-                  className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg"
+                  className="rounded-3xl border border-[#F4D03F]/20 bg-charcoal-800 shadow-lg"
                 >
-                  <header className="flex items-center justify-between gap-4 border-b border-brand-blue/10 px-6 py-5">
+                  <header className="flex items-center justify-between gap-4 border-b border-[#F4D03F]/10 px-6 py-5">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">
+                      <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]/70">
                         {group.tone === 'context' && 'Bối cảnh'}
                         {group.tone === 'analysis' && 'Phân tích'}
                         {group.tone === 'impact' && 'Kết quả'}
                         {group.tone === 'appendix' && 'Phụ lục'}
                       </p>
-                      <h2 className="text-2xl font-serif text-brand-blue">{group.title}</h2>
+                      <h2 className="text-2xl font-serif text-[#F4D03F]">{group.title}</h2>
                     </div>
                     <span className="text-xs text-gray-400">{group.sections.length} mục</span>
                   </header>
-                  <div className="divide-y divide-brand-blue/10">
+                  <div className="divide-y divide-[#F4D03F]/10">
                     {group.sections.map((section) => {
                       const isOpen = expandedSections[section.id] ?? false;
                       return (
@@ -461,10 +470,10 @@ export default function EventDetail() {
                             className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left hover:bg-charcoal-700/40 transition"
                             aria-expanded={isOpen}
                           >
-                            <span className="text-base font-semibold text-brand-blue">{section.title}</span>
+                            <span className="text-base font-semibold text-[#F4D03F]">{section.title}</span>
                             <ChevronDown
                               size={18}
-                              className={`text-brand-blue transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                              className={`text-[#F4D03F] transition-transform ${isOpen ? 'rotate-180' : ''}`}
                             />
                           </button>
                           {isOpen && (
@@ -474,7 +483,7 @@ export default function EventDetail() {
                                 <ul className="mt-4 space-y-2 text-sm text-gray-300">
                                   {section.bullets.map((item) => (
                                     <li key={item} className="flex gap-2">
-                                      <span className="text-brand-blue">—</span>
+                                      <span className="text-[#F4D03F]">—</span>
                                       <span>{item}</span>
                                     </li>
                                   ))}
@@ -490,16 +499,16 @@ export default function EventDetail() {
               ))}
 
               {eventData.people?.length ? (
-                <section className="rounded-3xl border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
+                <section className="rounded-3xl border border-[#F4D03F]/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 p-8 shadow-lg">
                   <header className="mb-6">
-                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Nhân vật chủ chốt</p>
-                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Biên chế nhân sự và dấu ấn cá nhân</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]/70">Nhân vật chủ chốt</p>
+                    <h2 className="mt-2 text-2xl font-serif text-[#F4D03F]">Biên chế nhân sự và dấu ấn cá nhân</h2>
                   </header>
                   <div className="grid gap-6 md:grid-cols-2">
                     {eventData.people.map((person) => (
                       <article
                         key={person.id}
-                        className="rounded-2xl border border-brand-blue/20 bg-charcoal-800/60 p-5 shadow-md hover:border-brand-blue/40 transition"
+                        className="rounded-2xl border border-[#F4D03F]/20 bg-charcoal-800/60 p-5 shadow-md hover:border-[#F4D03F]/40 transition"
                       >
                         <div className="flex items-start gap-4">
                           {person.portrait ? (
@@ -509,18 +518,18 @@ export default function EventDetail() {
                               className="h-20 w-20 rounded-xl object-cover"
                             />
                           ) : (
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-brand-blue/10 text-2xl font-serif text-brand-blue">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-[#F4D03F]/10 text-2xl font-serif text-[#F4D03F]">
                               {person.name.slice(0, 1)}
                             </div>
                           )}
                           <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-brand-blue">{person.name}</h3>
+                            <h3 className="text-lg font-semibold text-[#F4D03F]">{person.name}</h3>
                             <p className="text-xs uppercase tracking-widest text-gray-400">{person.role}</p>
                             <p className="mt-3 text-sm leading-relaxed text-gray-300">{person.bio}</p>
                           </div>
                         </div>
                         {person.quotes?.length ? (
-                          <div className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/10 px-4 py-3 text-sm italic text-brand-blue">
+                          <div className="mt-4 rounded-xl border border-[#F4D03F]/20 bg-[#F4D03F]/10 px-4 py-3 text-sm italic text-[#F4D03F]">
                             “{person.quotes[0]}”
                           </div>
                         ) : null}
@@ -530,11 +539,11 @@ export default function EventDetail() {
                 </section>
               ) : null}
 
-              <section className="rounded-3xl border border-brand-blue/20 bg-charcoal-800 shadow-lg p-8">
+              <section className="rounded-3xl border border-[#F4D03F]/20 bg-charcoal-800 shadow-lg p-8">
                 <header className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/70">Đánh giá nguồn</p>
-                    <h2 className="mt-2 text-2xl font-serif text-brand-blue">Chú giải tài liệu trích dẫn</h2>
+                    <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]/70">Đánh giá nguồn</p>
+                    <h2 className="mt-2 text-2xl font-serif text-[#F4D03F]">Chú giải tài liệu trích dẫn</h2>
                   </div>
                   <span className="text-xs text-gray-400">{eventData.sources.length} nguồn được kiểm chứng</span>
                 </header>
@@ -542,10 +551,10 @@ export default function EventDetail() {
                   {eventData.sources.map((source) => (
                     <article
                       key={source.id}
-                      className="rounded-2xl border border-brand-blue/20 bg-charcoal-800/50 p-5 shadow-md hover:border-brand-blue/40 transition"
+                      className="rounded-2xl border border-[#F4D03F]/20 bg-charcoal-800/50 p-5 shadow-md hover:border-[#F4D03F]/40 transition"
                     >
                       
-                      <h3 className="mt-2 text-base font-semibold text-brand-blue">{source.title}</h3>
+                      <h3 className="mt-2 text-base font-semibold text-[#F4D03F]">{source.title}</h3>
                       {source.author || source.year ? (
                         <p className="mt-1 text-xs text-gray-400">
                           {source.author ? `${source.author}` : ''}
@@ -567,7 +576,7 @@ export default function EventDetail() {
                             href={source.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-brand-blue hover:text-brand-blue/80 transition"
+                            className="inline-flex items-center gap-1 text-[#F4D03F] hover:text-[#F4D03F]/80 transition"
                           >
                             Truy cập
                             <ExternalLink size={14} />
@@ -580,13 +589,13 @@ export default function EventDetail() {
               </section>
 
               <section className="space-y-6">
-                <div className="relative overflow-hidden rounded-3xl border border-brand-blue/30 bg-charcoal-800 p-10 shadow-lg">
+                <div className="relative overflow-hidden rounded-3xl border border-[#F4D03F]/30 bg-charcoal-800 p-10 shadow-lg">
                   <div className="relative z-10 space-y-4">
-                    <h2 className="text-3xl font-serif text-brand-blue">Tự lượng giá kiến thức</h2>
+                    <h2 className="text-3xl font-serif text-[#F4D03F]">Tự lượng giá kiến thức</h2>
                     <p className="max-w-2xl text-sm md:text-base leading-relaxed text-gray-100">
                       Hoàn tất bộ câu hỏi thời gian thực để ghi nhận tiến độ nghiên cứu và mở khóa các hồ sơ chuyên sâu tiếp theo.
                     </p>
-                    <p className="text-xs uppercase tracking-[0.45em] text-brand-blue/80">ĐÃ ĐỌC {readRatioPercent}% HỒ SƠ</p>
+                    <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]/80">ĐÃ ĐỌC {readRatioPercent}% HỒ SƠ</p>
                   </div>
                 </div>
 
@@ -599,8 +608,8 @@ export default function EventDetail() {
                 />
 
                 {reviewAnswers && (
-                  <div className="rounded-xl border border-brand-blue/30 bg-brand-blue/10 p-6 text-sm text-brand-blue shadow-md">
-                    <h4 className="text-base font-semibold text-brand-blue">Giải thích câu hỏi gần nhất</h4>
+                  <div className="rounded-xl border border-[#F4D03F]/30 bg-[#F4D03F]/10 p-6 text-sm text-[#F4D03F] shadow-md">
+                    <h4 className="text-base font-semibold text-[#F4D03F]">Giải thích câu hỏi gần nhất</h4>
                     <ul className="mt-4 space-y-3">
                       {reviewAnswers.map((answer) => {
                         const question = quizQuestions.find((q) => q.id === answer.questionId);
@@ -609,9 +618,9 @@ export default function EventDetail() {
                           typeof answer.selectedIndex === 'number' ? question.options[answer.selectedIndex] : 'Chưa trả lời';
                         const correct = question.options[answer.correctIndex];
                         return (
-                          <li key={answer.questionId} className="rounded-lg bg-charcoal-800/80 border border-brand-blue/20 p-4 shadow-md">
-                            <p className="font-semibold text-brand-blue">{question.prompt}</p>
-                            <p className="mt-1 text-sm text-brand-blue/80">Bạn chọn: {selected}</p>
+                          <li key={answer.questionId} className="rounded-lg bg-charcoal-800/80 border border-[#F4D03F]/20 p-4 shadow-md">
+                            <p className="font-semibold text-[#F4D03F]">{question.prompt}</p>
+                            <p className="mt-1 text-sm text-[#F4D03F]/80">Bạn chọn: {selected}</p>
                             <p className="text-sm text-emerald-400">Đáp án đúng: {correct}</p>
                             {answer.explanation ? (
                               <p className="mt-2 text-sm text-gray-300">{answer.explanation}</p>
@@ -632,7 +641,7 @@ export default function EventDetail() {
         </div>
       </main>
 
-      <footer className="bg-charcoal-900 border-t border-brand-blue/20 py-10 text-center text-xs text-gray-400">
+      <footer className="bg-charcoal-900 border-t border-[#F4D03F]/20 py-10 text-center text-xs text-gray-400">
         Hồ sơ trình bày nhằm minh họa bố cục nghiên cứu. Cập nhật {new Date().getFullYear()}.
       </footer>
 
@@ -658,6 +667,13 @@ export default function EventDetail() {
           }}
           onReview={() => setQuizOutcome(null)}
           onClose={() => setQuizOutcome(null)}
+          nextCta={nextEvent ? () => {
+            setQuizOutcome(null);
+            navigate('/event/detail', {
+              state: { event: { id: nextEvent.id }, phase: nextEvent.eraId },
+            });
+          } : undefined}
+          nextEventTitle={nextEvent?.title}
         />
       )}
     </div>

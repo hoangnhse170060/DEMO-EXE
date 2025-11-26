@@ -115,7 +115,6 @@ export const eras: Era[] = [
 ];
 
 // ==== Seed Events ============================================================
-const INDEPENDENCE_EVENT_ID = 'independence-1945';
 const VB_EVENT_ID = 'evt-1947-vietbac';
 const DANANG_1858_EVENT_ID = 'evt-1858-danang';
 
@@ -825,7 +824,67 @@ const danang1858: HistoryEvent = {
   ],
 };
 
-export const events: HistoryEvent[] = [danang1858, vietBac1947, tetMauThan1968];
+// Phong trào Cần Vương 1885-1896
+const CANVUONG_EVENT_ID = 'evt-1885-canvuong';
+
+const canVuong1885: HistoryEvent = {
+  id: CANVUONG_EVENT_ID,
+  eraId: 'french',
+  year: 1885,
+  month: 7,
+  date: '1885-07-13',
+  title: 'Phong trào Cần Vương (1885-1896)',
+  headline: 'Phong trào yêu nước chống Pháp do các sĩ phu và văn thân lãnh đạo',
+  summary: 'Sau khi triều đình Huế thất bại trong cuộc phản công kinh thành, vua Hàm Nghi xuất bôn ra chiếu Cần Vương, kêu gọi nhân dân cả nước đứng lên chống Pháp.',
+  reliability: 5,
+  tags: ['can-vuong', 'resistance', 'patriotic-movement', '1885'],
+  content: [
+    { type: 'h2', secId: 'intro', text: 'Bối cảnh lịch sử' },
+    { 
+      type: 'p', 
+      secId: 'intro-p1', 
+      text: 'Năm 1884, triều đình Huế ký Hiệp ước Patenôtre, chính thức công nhận quyền bảo hộ của Pháp. Tuy nhiên, nhiều quan lại và sĩ phu yêu nước không chấp nhận điều này.' 
+    },
+    { type: 'h2', secId: 'chieu', text: 'Chiếu Cần Vương' },
+    {
+      type: 'p',
+      secId: 'chieu-p1',
+      text: 'Ngày 13/7/1885, vua Hàm Nghi xuất bôn ra chiếu Cần Vương, kêu gọi các quan lại, sĩ phu và nhân dân cả nước "phù vua cứu nước".',
+    },
+  ],
+  featuredImage: {
+    url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Phong trào Cần Vương',
+    credit: 'Tranh lịch sử',
+  },
+  media: [],
+  subEvents: [
+    {
+      id: 'evt-1885-canvuong-01',
+      parentId: CANVUONG_EVENT_ID,
+      order: 1,
+      date: '1885-07-13',
+      title: 'Vua Hàm Nghi xuất chiếu Cần Vương',
+      leader: 'Vua Hàm Nghi, Tôn Thất Thuyết',
+      opponent: 'Thực dân Pháp',
+      guestSummary: 'Sau cuộc tấn công bất thành vào đồn Mang Cá, Tôn Thất Thuyết đưa vua Hàm Nghi ra Tân Sở (Quảng Trị) và xuất chiếu Cần Vương.',
+      content: [
+        { type: 'h3', secId: 's1-head', text: 'Chiếu Cần Vương' },
+        { 
+          type: 'p', 
+          secId: 's1p1', 
+          text: 'Chiếu Cần Vương kêu gọi toàn dân đứng lên "phù vua cứu nước", mở đầu phong trào kháng chiến rộng lớn khắp cả nước.' 
+        },
+      ],
+      media: [],
+      sources: [{ title: 'Lịch sử Việt Nam, NXB Giáo dục' }],
+      quizPoolIds: ['q-canvuong-01-1', 'q-canvuong-01-2', 'q-canvuong-01-3', 'q-canvuong-01-4', 'q-canvuong-01-5', 'q-canvuong-01-6'],
+      nextId: null,
+    },
+  ],
+};
+
+export const events: HistoryEvent[] = [danang1858, canVuong1885, vietBac1947, tetMauThan1968];
 
 export const quizBank: QuizQuestion[] = [
   // Quiz Đà Nẵng 1858 - Yes/No format
@@ -879,98 +938,81 @@ export const quizBank: QuizQuestion[] = [
     answerIndex: 1,
     explanation: 'Sai. Cuộc kháng chiến tại Đà Nẵng đã làm thất bại kế hoạch đánh nhanh thắng nhanh của Pháp, buộc địch phải chuyển hướng tấn công vào Gia Định.',
   },
+  
+  // Quiz Phong trào Cần Vương 1885-1896
   {
-    id: 'q-ind-context-1',
-    subEventId: 'independence-1945:context',
-    eventId: INDEPENDENCE_EVENT_ID,
+    id: 'q-canvuong-01-1',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
     eraId: 'french',
-    prompt: 'Biến cố nào tạo ra khoảng trống quyền lực, mở đường cho Cách mạng Tháng Tám và lễ 2/9?',
-    options: [
-      'Pháp tái chiếm toàn bộ Đông Dương',
-      'Nhật đảo chính Pháp rồi đầu hàng Đồng minh',
-      'Mỹ đổ bộ vào Đà Nẵng',
-      'Quân đội Anh tiến vào Hà Nội',
-    ],
+    prompt: 'Chiếu Cần Vương được ban hành vào năm nào?',
+    options: ['1884', '1885', '1886', '1887'],
     answerIndex: 1,
-    explanation: 'Sau khi Nhật đảo chính Pháp (9/3/1945) rồi đầu hàng Đồng minh (15/8/1945), chính quyền thuộc địa tan rã tạo thời cơ giành chính quyền.',
+    explanation: 'Chiếu Cần Vương được vua Hàm Nghi ban hành ngày 13/7/1885.',
   },
   {
-    id: 'q-ind-ceremony-1',
-    subEventId: 'independence-1945:ceremony',
-    eventId: INDEPENDENCE_EVENT_ID,
+    id: 'q-canvuong-01-2',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
     eraId: 'french',
-    media: {
-      type: 'image',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ho_Chi_Minh_reading_declaration_of_independence_1945.jpg/800px-Ho_Chi_Minh_reading_declaration_of_independence_1945.jpg',
-      alt: 'Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập tại Quảng trường Ba Đình',
-      caption: 'Khoảnh khắc Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập ngày 2/9/1945.',
-  credit: 'Wikimedia Commons (CC BY-SA 3.0)',
-    },
-    prompt: 'Trong Tuyên ngôn Độc lập, Chủ tịch Hồ Chí Minh viện dẫn trực tiếp những bản tuyên ngôn nào?',
-    options: [
-      'Tuyên ngôn Độc lập Mỹ 1776 và Tuyên ngôn Nhân quyền & Dân quyền Pháp 1789',
-      'Hiến pháp 1946 và Hiệp định Geneva 1954',
-      'Tuyên ngôn Liên Hợp Quốc 1945 và Hiệp ước SEATO',
-      'Bản Yêu sách của nhân dân An Nam 1919 và Cương lĩnh 1945',
-    ],
-    answerIndex: 0,
-    explanation: 'Bản Tuyên ngôn nhấn mạnh giá trị phổ quát về quyền con người từ Mỹ (1776) và Pháp (1789) để khẳng định tính chính danh của nền độc lập Việt Nam.',
-  },
-  {
-    id: 'q-ind-ceremony-2',
-    subEventId: 'independence-1945:ceremony',
-    eventId: INDEPENDENCE_EVENT_ID,
-    eraId: 'french',
-    prompt: 'Câu hỏi “Tôi nói, đồng bào nghe rõ không?” diễn ra ở thời điểm nào của buổi lễ?',
-    options: [
-      'Trước khi đoàn duyệt binh bắt đầu',
-      'Ngay khi Chủ tịch Hồ Chí Minh mở đầu phần đọc Tuyên ngôn',
-      'Khi quốc kỳ được kéo lên',
-      'Trong phần tuyên thệ của Chính phủ lâm thời',
-    ],
+    prompt: 'Ai là người chủ trì đưa vua Hàm Nghi ra khỏi kinh thành và xuất chiếu Cần Vương?',
+    options: ['Phan Đình Phùng', 'Tôn Thất Thuyết', 'Nguyễn Thiện Thuật', 'Hoàng Hoa Thám'],
     answerIndex: 1,
-    explanation: 'Câu hỏi được cất lên ngay đầu phần đọc Tuyên ngôn, nhận tiếng “Rõ!” vang dội từ quần chúng.',
+    explanation: 'Tôn Thất Thuyết là người tổ chức cuộc tấn công đồn Mang Cá và đưa vua Hàm Nghi ra Tân Sở xuất chiếu Cần Vương.',
   },
   {
-    id: 'q-ind-diplomacy-1',
-    subEventId: 'independence-1945:diplomacy',
-    eventId: INDEPENDENCE_EVENT_ID,
+    id: 'q-canvuong-01-3',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
     eraId: 'french',
-    prompt: 'Ngay sau lễ 2/9, Chính phủ lâm thời gửi điện tín tới các nước nào để đề nghị công nhận độc lập?',
-    options: [
-      'Các cường quốc Đồng minh (Mỹ, Anh, Liên Xô, Trung Hoa Dân Quốc)',
-      'Các quốc gia Đông Nam Á trong khối ASEAN',
-      'Các nước thuộc địa ở Bắc Phi',
-      'Chỉ riêng Liên Xô',
-    ],
-    answerIndex: 0,
-    explanation: 'Chính phủ lâm thời gửi điện cho những cường quốc Đồng minh chủ chốt, đề nghị công nhận và thiết lập quan hệ ngoại giao.',
-  },
-  {
-    id: 'q-ind-legacy-1',
-    subEventId: 'independence-1945:legacy',
-    eventId: INDEPENDENCE_EVENT_ID,
-    eraId: 'french',
-    prompt: 'Ý nghĩa pháp lý cốt lõi của Tuyên ngôn Độc lập 2/9/1945 là gì?',
-    options: [
-      'Tuyên bố Việt Nam gia nhập Liên Hợp Quốc',
-      'Khẳng định quyền tự quyết của dân tộc và khai sinh Nhà nước Việt Nam Dân chủ Cộng hoà',
-      'Thông báo kế hoạch cải cách ruộng đất',
-      'Kêu gọi viện trợ từ Hoa Kỳ',
-    ],
+    prompt: '"Cần Vương" có nghĩa là gì?',
+    options: ['Đánh đuổi giặc Pháp', 'Phù vua, giúp vua', 'Cải cách đất nước', 'Xây dựng quân đội'],
     answerIndex: 1,
-    explanation: 'Tuyên ngôn xác lập Nhà nước Việt Nam Dân chủ Cộng hoà và quyền tự quyết của dân tộc trước cộng đồng quốc tế.',
+    explanation: '"Cần Vương" nghĩa là phù vua, giúp vua - kêu gọi nhân dân đứng lên giúp vua chống giặc cứu nước.',
   },
+  {
+    id: 'q-canvuong-01-4',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Cuộc khởi nghĩa Hương Khê (1885-1896) do ai lãnh đạo?',
+    options: ['Đinh Công Tráng', 'Nguyễn Thiện Thuật', 'Phan Đình Phùng', 'Hoàng Hoa Thám'],
+    answerIndex: 2,
+    explanation: 'Khởi nghĩa Hương Khê do Phan Đình Phùng lãnh đạo tại Hà Tĩnh, là cuộc khởi nghĩa tiêu biểu nhất trong phong trào Cần Vương.',
+  },
+  {
+    id: 'q-canvuong-01-5',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Khởi nghĩa Ba Đình (1886-1887) diễn ra ở tỉnh nào?',
+    options: ['Hà Tĩnh', 'Thanh Hóa', 'Hưng Yên', 'Bắc Giang'],
+    answerIndex: 1,
+    explanation: 'Khởi nghĩa Ba Đình do Đinh Công Tráng lãnh đạo tại Thanh Hóa.',
+  },
+  {
+    id: 'q-canvuong-01-6',
+    subEventId: 'evt-1885-canvuong-01',
+    eventId: CANVUONG_EVENT_ID,
+    eraId: 'french',
+    prompt: 'Phong trào Cần Vương kết thúc vào năm nào?',
+    options: ['1888', '1892', '1896', '1900'],
+    answerIndex: 2,
+    explanation: 'Phong trào Cần Vương kết thúc năm 1896 khi cuộc khởi nghĩa Hương Khê thất bại sau khi Phan Đình Phùng qua đời.',
+  },
+
+  // Quiz Việt Bắc 1947
   {
     id: 'q-vb-1007-1',
     subEventId: 'evt-1947-1007',
     eventId: VB_EVENT_ID,
     eraId: 'french',
-    prompt: 'Kế hoạch của Pháp mở màn mang tên gì?',
+    prompt: 'Kế hoạch của Pháp mở màn chiến dịch Việt Bắc mang tên gì?',
     options: ['Cloclo', 'Léa', 'Castor', 'Atlas'],
     answerIndex: 1,
-    explanation: 'Bước 1 mang tên Léa.',
+    explanation: 'Kế hoạch mở màn mang tên Léa.',
   },
+
   {
     id: 'q-vb-1007-2',
     subEventId: 'evt-1947-1007',

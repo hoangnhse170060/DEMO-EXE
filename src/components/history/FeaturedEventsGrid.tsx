@@ -11,7 +11,7 @@ export function FeaturedEventsGrid({ events, onSelect }: Props) {
       {events.map((event) => (
         <article
           key={event.id}
-          className="group flex h-full flex-col overflow-hidden border border-brand-blue/20 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+          className="group flex h-full flex-col overflow-hidden border border-[#F4D03F]/20 bg-[#1A1A1A] shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
         >
           <button
             type="button"
@@ -36,9 +36,9 @@ export function FeaturedEventsGrid({ events, onSelect }: Props) {
               );
             })()}
             <div className="flex flex-1 flex-col gap-2 px-4 py-5">
-              <span className="text-xs uppercase tracking-widest text-brand-blue">{event.year}</span>
-              <h3 className="text-lg font-serif text-brand-text">{event.title}</h3>
-              <p className="text-sm text-brand-muted">{event.summary.slice(0, 140)}{event.summary.length > 140 ? '…' : ''}</p>
+              <span className="text-xs uppercase tracking-widest text-[#F4D03F]">{event.year}</span>
+              <h3 className="text-lg font-serif text-[#F4D03F]">{event.title}</h3>
+              <p className="text-sm text-[#9CA3AF]">{event.summary.slice(0, 140)}{event.summary.length > 140 ? '…' : ''}</p>
             </div>
           </button>
         </article>

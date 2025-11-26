@@ -36,15 +36,15 @@ const isWorkflowKey = (value: string): value is WorkflowKey => value in adminWor
 
 const renderActionVariant = (action: WorkflowAction) => {
   if (action.variant === 'primary') {
-    return 'bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-indigo-200/60 hover:shadow-xl';
+    return 'bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-black/30 hover:shadow-xl';
   }
   if (action.variant === 'secondary') {
-    return 'border border-indigo-200 bg-indigo-50 text-indigo-600 hover:bg-indigo-100';
+    return 'border border-[#333333] bg-[#262626] text-[#F4D03F] hover:bg-[#333333]';
   }
   if (action.variant === 'danger') {
-    return 'border border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100';
+    return 'border border-rose-200 bg-[#1A1A1A] text-rose-600 hover:bg-rose-100';
   }
-  return 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-100';
+  return 'border border-[#333333] bg-[#1A1A1A] text-slate-700 hover:border-slate-300 hover:bg-[#262626]';
 };
 
 const AdminWorkflow = () => {
@@ -193,26 +193,26 @@ const AdminWorkflow = () => {
   }, [focus, currencyFormatter, numberFormatter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#eef2ff] via-white to-[#fff1f5] px-6 py-10 text-slate-900">
+    <div className="min-h-screen bg-[#0D0D0D] px-6 py-10 text-[#E5E5E5]">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-        <header className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl shadow-indigo-100/50 backdrop-blur">
+        <header className="rounded-3xl border border-[#333333] bg-[#1A1A1A] p-8 shadow-xl shadow-black/20 backdrop-blur">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => navigate('/admin-dashboard')}
-                className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white px-4 py-2 text-sm font-semibold text-indigo-500 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
+                className="inline-flex items-center gap-2 rounded-full border border-[#333333] bg-[#1A1A1A] px-4 py-2 text-sm font-semibold text-[#F4D03F] shadow-sm transition hover:-translate-y-0.5 hover:border-[#333333] hover:shadow-md"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Quay về tổng quan
               </button>
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-indigo-200/60">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-black/30">
                 <workflow.icon className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-indigo-400">Nghiệp vụ admin</p>
+                <p className="text-xs uppercase tracking-[0.4em] text-[#F4D03F]">Nghiệp vụ admin</p>
                 <h1 className="mt-2 text-3xl font-semibold">{workflow.label}</h1>
-                <p className="mt-2 max-w-2xl text-sm text-slate-500">{workflow.description}</p>
+                <p className="mt-2 max-w-2xl text-sm text-[#9CA3AF]">{workflow.description}</p>
               </div>
             </div>
             <button
@@ -229,7 +229,7 @@ const AdminWorkflow = () => {
             {workflow.highlights.map((highlight) => (
               <span
                 key={highlight}
-                className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-600"
+                className="inline-flex items-center gap-2 rounded-full bg-[#262626] px-4 py-2 text-xs font-semibold text-[#F4D03F]"
               >
                 <ArrowUpRight className="h-3.5 w-3.5" />
                 {highlight}
@@ -240,16 +240,16 @@ const AdminWorkflow = () => {
 
         {focusDetails ? (
           <section className="grid gap-6 lg:grid-cols-[1.4fr,1fr]">
-            <div className="rounded-3xl border border-indigo-50 bg-white p-7 shadow-lg shadow-indigo-100/40">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-400">Ngữ cảnh vừa chọn</p>
-              <h2 className="mt-3 text-2xl font-semibold text-slate-900">{focusDetails.heading}</h2>
+            <div className="rounded-3xl border border-[#333333] bg-[#1A1A1A] p-7 shadow-lg shadow-black/20">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#F4D03F]">Ngữ cảnh vừa chọn</p>
+              <h2 className="mt-3 text-2xl font-semibold text-[#E5E5E5]">{focusDetails.heading}</h2>
               {focusDetails.subtitle ? (
-                <p className="mt-1 text-sm font-semibold text-indigo-500">{focusDetails.subtitle}</p>
+                <p className="mt-1 text-sm font-semibold text-[#F4D03F]">{focusDetails.subtitle}</p>
               ) : null}
               {focusDetails.description ? (
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">{focusDetails.description}</p>
+                <p className="mt-4 text-sm leading-relaxed text-[#9CA3AF]">{focusDetails.description}</p>
               ) : null}
-              <ul className="mt-5 space-y-2 text-sm text-slate-600">
+              <ul className="mt-5 space-y-2 text-sm text-[#9CA3AF]">
                 {focusDetails.bullets.map((bullet, index) => (
                   <li key={`${bullet}-${index}`} className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500" />
@@ -258,11 +258,11 @@ const AdminWorkflow = () => {
                 ))}
               </ul>
             </div>
-            <aside className="flex h-full flex-col justify-between gap-4 rounded-3xl border border-emerald-50 bg-emerald-50/70 p-7 text-slate-800 shadow-inner shadow-emerald-100/60">
+            <aside className="flex h-full flex-col justify-between gap-4 rounded-3xl border border-[#333333] bg-[#1A1A1A] p-7 text-[#E5E5E5] shadow-inner shadow-black/20">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500">Nghiệp vụ kế tiếp</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#10B981]">Nghiệp vụ kế tiếp</p>
                 <h3 className="mt-3 text-lg font-semibold">Các thao tác nên ưu tiên</h3>
-                <p className="mt-2 text-sm text-emerald-700">Chọn nhanh một hành động bên dưới để tiếp tục quy trình.</p>
+                <p className="mt-2 text-sm text-[#10B981]">Chọn nhanh một hành động bên dưới để tiếp tục quy trình.</p>
               </div>
               <div className="mt-4 flex flex-wrap gap-3">
                 {focusDetails.actions.map((action, index) => (
@@ -279,19 +279,19 @@ const AdminWorkflow = () => {
             </aside>
           </section>
         ) : (
-          <section className="rounded-3xl border border-indigo-50 bg-white p-7 shadow-lg shadow-indigo-100/40">
-            <p className="text-xs font-semibold uppercase tracking-wide text-indigo-400">Gợi ý</p>
-            <h2 className="mt-3 text-2xl font-semibold text-slate-900">Chọn một card trong dashboard để xem chi tiết nghiệp vụ</h2>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600">
+          <section className="rounded-3xl border border-[#333333] bg-[#1A1A1A] p-7 shadow-lg shadow-black/20">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#F4D03F]">Gợi ý</p>
+            <h2 className="mt-3 text-2xl font-semibold text-[#E5E5E5]">Chọn một card trong dashboard để xem chi tiết nghiệp vụ</h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#9CA3AF]">
               Trang này sẽ hiển thị quy trình chi tiết tương ứng với widget bạn vừa chọn. Hãy quay lại dashboard và chọn
               thẻ bạn quan tâm để tiếp tục.
             </p>
           </section>
         )}
 
-        <section className="rounded-3xl border border-slate-100 bg-white p-7 shadow-lg shadow-indigo-100/20">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Nghiệp vụ khả dụng</p>
-          <h2 className="mt-3 text-xl font-semibold text-slate-900">Thao tác chính cho module {workflow.label.toLowerCase()}</h2>
+        <section className="rounded-3xl border border-[#333333] bg-[#1A1A1A] p-7 shadow-lg shadow-black/10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#6B7280]">Nghiệp vụ khả dụng</p>
+          <h2 className="mt-3 text-xl font-semibold text-[#E5E5E5]">Thao tác chính cho module {workflow.label.toLowerCase()}</h2>
           <div className="mt-5 flex flex-wrap gap-3">
             {workflow.operations.map((operation, index) => (
               <button

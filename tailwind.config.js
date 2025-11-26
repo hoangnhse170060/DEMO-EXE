@@ -4,32 +4,52 @@ export default {
   theme: {
     extend: {
       colors: {
-        // New Museum Color Palette
-        'museum': {
-          'beige': '#F1EEE1',      // Light Beige Background
-          'gray': '#CCCCCC',       // Neutral Gray
-          'black': '#171717',      // Deep Black
-          'accent': '#FFC061',     // Warm Accent Yellow
+        // Dark Theme Color Palette
+        'dark': {
+          'primary': '#0D0D0D',      // Nền chính - Đen sâu
+          'secondary': '#1A1A1A',    // Nền phụ/Card - Đen xám
+          'tertiary': '#262626',     // Nền hover - Xám đen
+          'border': '#333333',       // Border mặc định
+          'border-light': '#404040', // Border nhạt
         },
-        'brand-base': '#000000ff',
+        'text': {
+          'heading': '#F4D03F',      // Tiêu đề - Vàng hoàng kim
+          'subheading': '#E6BE8A',   // Tiêu đề phụ - Vàng đồng nhạt
+          'body': '#E5E5E5',         // Nội dung - Trắng xám
+          'muted': '#9CA3AF',        // Chữ phụ - Xám
+          'disabled': '#6B7280',     // Disabled - Xám tối
+        },
+        'accent': {
+          'gold': '#F4D03F',         // Vàng chính
+          'gold-soft': '#E6BE8A',    // Vàng nhạt
+          'gold-dark': '#D4AF37',    // Vàng đậm
+        },
+        // Keep old colors for backward compatibility
+        'museum': {
+          'beige': '#0D0D0D',        // Changed to dark
+          'gray': '#333333',         // Changed to dark gray
+          'black': '#E5E5E5',        // Changed to light (for contrast)
+          'accent': '#F4D03F',       // Gold accent
+        },
+        'brand-base': '#0D0D0D',
         'brand-sand': '#1A1A1A',
         'brand-blue': {
-          DEFAULT: '#FFD700',
-          50: '#FFFACD',
-          100: '#FFEF99',
-          200: '#FFE66D',
-          300: '#FFDD41',
-          400: '#FFD700',
-          500: '#FFD700',
-          600: '#FFC700',
-          700: '#FFB700',
-          800: '#FFA700',
-          900: '#FF9500',
+          DEFAULT: '#F4D03F',
+          50: '#FDF8E1',
+          100: '#FCF0C3',
+          200: '#F9E187',
+          300: '#F7D24B',
+          400: '#F4D03F',
+          500: '#F4D03F',
+          600: '#E6BE8A',
+          700: '#D4AF37',
+          800: '#C9A227',
+          900: '#B8860B',
         },
-        'brand-sky': '#FFD700',
-        'brand-text': '#FFD700',
-        'brand-muted': '#FFD700',
-        'accent-gold': '#FFD700',
+        'brand-sky': '#F4D03F',
+        'brand-text': '#F4D03F',
+        'brand-muted': '#9CA3AF',
+        'accent-gold': '#F4D03F',
         white: '#FFFFFF',
         transparent: 'transparent',
         'charcoal': {

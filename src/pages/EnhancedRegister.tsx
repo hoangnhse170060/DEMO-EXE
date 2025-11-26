@@ -192,12 +192,12 @@ export default function EnhancedRegister() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+    <div className="min-h-screen bg-[#0D0D0D] py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-[#1A1A1A] rounded-2xl shadow-2xl overflow-hidden">
           <div className="grid md:grid-cols-2">
             {/* Left Panel - Info */}
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
+            <div className="bg-gradient-to-br from-[#1A1A1A] to-[#262626] p-8 text-white">
               <button
                 onClick={() => navigate('/')}
                 className="flex items-center space-x-2 mb-8 hover:opacity-80 transition-opacity"
@@ -208,7 +208,7 @@ export default function EnhancedRegister() {
 
               <UserPlus size={48} className="mb-6" />
               <h1 className="text-3xl font-bold mb-4">Tạo tài khoản mới</h1>
-              <p className="text-blue-100 mb-6">
+              <p className="text-[#9CA3AF] mb-6">
                 Tham gia cộng đồng Echoes of Việt Nam để khám phá lịch sử, học hỏi và mua sắm.
               </p>
 
@@ -217,21 +217,21 @@ export default function EnhancedRegister() {
                   <CheckCircle className="flex-shrink-0 mt-1" size={20} />
                   <div>
                     <h3 className="font-semibold">Xác thực đầy đủ</h3>
-                    <p className="text-sm text-blue-100">Email và số điện thoại được xác minh</p>
+                    <p className="text-sm text-[#9CA3AF]">Email và số điện thoại được xác minh</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="flex-shrink-0 mt-1" size={20} />
                   <div>
                     <h3 className="font-semibold">Tích luỹ sao</h3>
-                    <p className="text-sm text-blue-100">Làm quiz và học tập để nhận sao</p>
+                    <p className="text-sm text-[#9CA3AF]">Làm quiz và học tập để nhận sao</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="flex-shrink-0 mt-1" size={20} />
                   <div>
                     <h3 className="font-semibold">Mở shop</h3>
-                    <p className="text-sm text-blue-100">Đạt 200 sao để đăng ký mở shop</p>
+                    <p className="text-sm text-[#9CA3AF]">Đạt 200 sao để đăng ký mở shop</p>
                   </div>
                 </div>
               </div>
@@ -242,14 +242,14 @@ export default function EnhancedRegister() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Display Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Tên hiển thị *
                   </label>
                   <input
                     type="text"
                     value={form.displayName}
                     onChange={handleChange('displayName')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                     placeholder="Nguyễn Văn A"
                     required
                   />
@@ -257,7 +257,7 @@ export default function EnhancedRegister() {
 
                 {/* Email with Verification */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Email * {emailVerified && <CheckCircle className="inline w-4 h-4 text-green-600" />}
                   </label>
                   <div className="flex space-x-2">
@@ -265,7 +265,7 @@ export default function EnhancedRegister() {
                       type="email"
                       value={form.email}
                       onChange={handleChange('email')}
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                       placeholder="email@example.com"
                       required
                       disabled={emailVerified}
@@ -275,7 +275,7 @@ export default function EnhancedRegister() {
                         type="button"
                         onClick={handleSendEmailCode}
                         disabled={sendingEmailCode || !form.email}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 flex items-center space-x-2"
+                        className="px-4 py-2 bg-[#F4D03F] text-[#0D0D0D] text-white rounded-lg hover:bg-[#D4B83F] disabled:bg-[#333333] disabled:text-[#6B7280] flex items-center space-x-2"
                       >
                         {sendingEmailCode ? (
                           <Loader className="w-4 h-4 animate-spin" />
@@ -293,7 +293,7 @@ export default function EnhancedRegister() {
                         type="text"
                         value={emailCode}
                         onChange={(e) => setEmailCode(e.target.value)}
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg"
+                        className="flex-1 px-4 py-2 border border-[#333333] rounded-lg"
                         placeholder="Nhập mã 6 số"
                         maxLength={6}
                       />
@@ -301,7 +301,7 @@ export default function EnhancedRegister() {
                         type="button"
                         onClick={handleVerifyEmail}
                         disabled={verifyingEmail}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400"
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-[#333333] disabled:text-[#6B7280]"
                       >
                         {verifyingEmail ? 'Đang xác thực...' : 'Xác thực'}
                       </button>
@@ -311,7 +311,7 @@ export default function EnhancedRegister() {
 
                 {/* Phone with Verification */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Số điện thoại * {phoneVerified && <CheckCircle className="inline w-4 h-4 text-green-600" />}
                   </label>
                   <div className="flex space-x-2">
@@ -319,7 +319,7 @@ export default function EnhancedRegister() {
                       type="tel"
                       value={form.phone}
                       onChange={handleChange('phone')}
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                       placeholder="0123456789"
                       required
                       disabled={phoneVerified}
@@ -329,7 +329,7 @@ export default function EnhancedRegister() {
                         type="button"
                         onClick={handleSendPhoneCode}
                         disabled={sendingPhoneCode || !form.phone}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 flex items-center space-x-2"
+                        className="px-4 py-2 bg-[#F4D03F] text-[#0D0D0D] text-white rounded-lg hover:bg-[#D4B83F] disabled:bg-[#333333] disabled:text-[#6B7280] flex items-center space-x-2"
                       >
                         {sendingPhoneCode ? (
                           <Loader className="w-4 h-4 animate-spin" />
@@ -347,7 +347,7 @@ export default function EnhancedRegister() {
                         type="text"
                         value={phoneCode}
                         onChange={(e) => setPhoneCode(e.target.value)}
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg"
+                        className="flex-1 px-4 py-2 border border-[#333333] rounded-lg"
                         placeholder="Nhập mã 6 số"
                         maxLength={6}
                       />
@@ -355,7 +355,7 @@ export default function EnhancedRegister() {
                         type="button"
                         onClick={handleVerifyPhone}
                         disabled={verifyingPhone}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400"
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-[#333333] disabled:text-[#6B7280]"
                       >
                         {verifyingPhone ? 'Đang xác thực...' : 'Xác thực'}
                       </button>
@@ -365,28 +365,28 @@ export default function EnhancedRegister() {
 
                 {/* Date of Birth */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Ngày sinh *
                   </label>
                   <input
                     type="date"
                     value={form.dateOfBirth}
                     onChange={handleChange('dateOfBirth')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                     required
                   />
                 </div>
 
                 {/* Password */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Mật khẩu *
                   </label>
                   <input
                     type="password"
                     value={form.password}
                     onChange={handleChange('password')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                     placeholder="Tối thiểu 6 ký tự"
                     required
                     minLength={6}
@@ -395,14 +395,14 @@ export default function EnhancedRegister() {
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[#E5E5E5] mb-1">
                     Xác nhận mật khẩu *
                   </label>
                   <input
                     type="password"
                     value={form.confirmPassword}
                     onChange={handleChange('confirmPassword')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-[#F4D03F] focus:border-transparent"
                     placeholder="Nhập lại mật khẩu"
                     required
                   />
@@ -410,13 +410,13 @@ export default function EnhancedRegister() {
 
                 {/* Error/Success Messages */}
                 {errorMessage && (
-                  <div className="p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm">
+                  <div className="p-3 bg-red-900/30 border border-red-600 text-red-400 rounded-lg text-sm">
                     {errorMessage}
                   </div>
                 )}
 
                 {successMessage && (
-                  <div className="p-3 bg-green-100 border border-green-300 text-green-700 rounded-lg text-sm">
+                  <div className="p-3 bg-green-900/30 border border-green-600 text-green-400 rounded-lg text-sm">
                     {successMessage}
                   </div>
                 )}
@@ -425,7 +425,7 @@ export default function EnhancedRegister() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !emailVerified || !phoneVerified}
-                  className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  className="w-full py-3 bg-[#F4D03F] text-[#0D0D0D] text-white rounded-lg font-semibold hover:bg-[#D4B83F] transition-colors disabled:bg-[#333333] disabled:text-[#6B7280] disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -444,7 +444,7 @@ export default function EnhancedRegister() {
                   <button
                     type="button"
                     onClick={() => navigate('/login')}
-                    className="text-blue-600 hover:text-blue-700 text-sm"
+                    className="text-[#F4D03F] hover:text-blue-700 text-sm"
                   >
                     Đã có tài khoản? Đăng nhập ngay
                   </button>
@@ -454,7 +454,7 @@ export default function EnhancedRegister() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p className="text-center text-sm text-[#9CA3AF] mt-6">
           📧 Mã xác thực sẽ được hiển thị trong console (chế độ phát triển)
         </p>
       </div>

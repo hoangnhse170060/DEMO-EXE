@@ -1,9 +1,9 @@
+/* Import Google Fonts - must be at the top */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   html {
@@ -13,38 +13,38 @@
   }
 
   body {
-    @apply bg-museum-beige text-museum-black font-sans;
+    @apply bg-dark-primary text-text-body font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif text-museum-black font-bold;
+    @apply font-serif text-text-heading font-bold;
     letter-spacing: -0.02em;
   }
 
   p {
-    @apply leading-relaxed text-museum-black/70;
+    @apply leading-relaxed text-text-body/80;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-museum-black text-museum-beige font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-museum-black/90 hover:shadow-medium font-semibold;
+    @apply px-8 py-4 bg-accent-gold text-dark-primary font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-accent-gold-soft hover:shadow-[0_0_20px_rgba(244,208,63,0.3)] font-semibold;
   }
 
   .btn-secondary {
-    @apply px-8 py-4 border-2 border-museum-black text-museum-black font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-museum-black hover:text-museum-beige;
+    @apply px-8 py-4 border-2 border-accent-gold text-accent-gold font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-accent-gold hover:text-dark-primary;
   }
 
   .btn-outline {
-    @apply px-6 py-3 border border-museum-black text-museum-black font-sans text-sm tracking-wide transition-all duration-300 hover:border-museum-accent hover:text-museum-accent;
+    @apply px-6 py-3 border border-dark-border text-text-body font-sans text-sm tracking-wide transition-all duration-300 hover:border-accent-gold hover:text-accent-gold;
   }
 
   .btn-accent {
-    @apply px-8 py-4 bg-museum-accent text-museum-black font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-museum-accent/90 hover:shadow-brand font-semibold;
+    @apply px-8 py-4 bg-accent-gold text-dark-primary font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-accent-gold-soft hover:shadow-[0_0_20px_rgba(244,208,63,0.3)] font-semibold;
   }
 
   .card {
-    @apply bg-white rounded-sm shadow-paper transition-all duration-300 hover:shadow-medium border border-museum-gray/20;
+    @apply bg-dark-secondary rounded-sm transition-all duration-300 hover:shadow-[0_0_30px_rgba(244,208,63,0.1)] border border-dark-border;
   }
 
   .quiz-modal {
@@ -52,16 +52,16 @@
   }
 
   .quiz-card {
-    @apply rounded-lg p-6 bg-white border border-museum-gray/30;
+    @apply rounded-lg p-6 bg-dark-secondary border border-dark-border;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-serif text-museum-black mb-6 font-bold;
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif text-text-heading mb-6 font-bold;
     letter-spacing: -0.02em;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-museum-black/60 leading-relaxed font-sans;
+    @apply text-lg md:text-xl text-text-muted leading-relaxed font-sans;
   }
 }
 
@@ -90,42 +90,42 @@
   }
 
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-museum-gray/20;
+    @apply bg-dark-secondary/80 backdrop-blur-md border border-dark-border;
   }
 
   .paper-texture {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
   }
 
   .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(23, 23, 23, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .text-shadow-md {
-    text-shadow: 0 2px 4px rgba(23, 23, 23, 0.15);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
 
   .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(23, 23, 23, 0.2);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
   .gold-text-glow {
-    @apply text-brand-text drop-shadow-[0_0_20px_rgba(255,215,0,0.8)];
+    @apply text-accent-gold drop-shadow-[0_0_20px_rgba(244,208,63,0.8)];
   }
 
   .gold-border-glow {
-    @apply border-2 border-brand-text shadow-[0_0_30px_rgba(255,215,0,0.6)];
+    @apply border-2 border-accent-gold shadow-[0_0_30px_rgba(244,208,63,0.6)];
   }
 
   .gold-accent {
-    @apply text-brand-text font-semibold;
+    @apply text-accent-gold font-semibold;
   }
 
   .sidebar-elegant {
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(12, 12, 12, 0.98) 50%, rgba(8, 8, 8, 0.98) 100%);
+    background: linear-gradient(135deg, rgba(13, 13, 13, 0.98) 0%, rgba(26, 26, 26, 0.98) 50%, rgba(13, 13, 13, 0.98) 100%);
     backdrop-filter: blur(12px);
-    box-shadow: 4px 0 40px rgba(0, 217, 255, 0.2);
-    border-right: 2px solid rgba(0, 217, 255, 0.4);
+    box-shadow: 4px 0 40px rgba(244, 208, 63, 0.1);
+    border-right: 1px solid rgba(244, 208, 63, 0.2);
   }
 
   .menu-item-elegant {
@@ -140,9 +140,9 @@
     left: 0;
     width: 0;
     height: 3px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
+    background: linear-gradient(90deg, #F4D03F, #E6BE8A);
     transition: width 0.35s ease;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 10px rgba(244, 208, 63, 0.6);
   }
 
   .menu-item-elegant:hover::after {
@@ -156,8 +156,8 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    background: linear-gradient(90deg, #F4D03F, #E6BE8A);
+    box-shadow: 0 0 15px rgba(244, 208, 63, 0.6);
   }
 
   @keyframes scroll {
@@ -175,25 +175,25 @@
 
   /* Neon Gold Effects */
   .neon-gold {
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
-                 0 0 20px rgba(255, 215, 0, 0.5),
-                 0 0 30px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 10px rgba(244, 208, 63, 0.8),
+                 0 0 20px rgba(244, 208, 63, 0.5),
+                 0 0 30px rgba(244, 208, 63, 0.3);
   }
 
   .neon-gold-border {
-    border: 2px solid #FFD700;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6),
-                inset 0 0 15px rgba(255, 215, 0, 0.1);
+    border: 2px solid #F4D03F;
+    box-shadow: 0 0 15px rgba(244, 208, 63, 0.6),
+                inset 0 0 15px rgba(244, 208, 63, 0.1);
   }
 
   .glass-effect {
-    background: rgba(15, 15, 15, 0.7);
+    background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(244, 208, 63, 0.2);
   }
 
   .gold-hover:hover {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
-                0 0 60px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(244, 208, 63, 0.6),
+                0 0 60px rgba(244, 208, 63, 0.3);
   }
 }

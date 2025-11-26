@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff, LogIn } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { localAuth } from '../lib/localAuth';
 
@@ -88,26 +88,30 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-museum-beige flex">
+    <div className="min-h-screen bg-[#0D0D0D] flex">
       {/* Left Panel - Decorative */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-museum-black">
-        {/* Paper texture overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }} />
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-[#1A1A1A]">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{
+            backgroundImage: `url("https://woodencore.com/wp-content/uploads/2022/12/ban-do-go-viet-nam-1.jpg")`,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D]/90 via-[#1A1A1A]/80 to-[#0D0D0D]/90" />
         
         {/* Decorative lines */}
-        <div className="absolute top-0 left-16 w-px h-full bg-gradient-to-b from-transparent via-museum-accent/20 to-transparent" />
-        <div className="absolute top-0 right-16 w-px h-full bg-gradient-to-b from-transparent via-museum-accent/20 to-transparent" />
+        <div className="absolute top-0 left-16 w-px h-full bg-gradient-to-b from-transparent via-[#F4D03F]/30 to-transparent" />
+        <div className="absolute top-0 right-16 w-px h-full bg-gradient-to-b from-transparent via-[#F4D03F]/30 to-transparent" />
         
         {/* Content */}
         <div className="relative z-10 flex flex-col justify-between p-16 w-full">
           <div>
-            <div className="w-12 h-1 bg-museum-accent mb-8" />
-            <h1 className="font-serif font-bold text-5xl text-museum-beige leading-tight mb-6">
+            <div className="w-16 h-1 bg-[#F4D03F] mb-8" />
+            <h1 className="font-serif font-bold text-5xl text-[#F4D03F] leading-tight mb-6">
               Echoes of<br />Việt Nam
             </h1>
-            <p className="text-museum-gray text-lg font-sans max-w-md leading-relaxed">
+            <p className="text-[#E5E5E5]/80 text-lg font-sans max-w-md leading-relaxed">
               Khám phá và lưu giữ những câu chuyện lịch sử, 
               kết nối quá khứ với hiện tại qua từng trang ký ức.
             </p>
@@ -115,26 +119,26 @@ export default function Login() {
 
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 rounded-full bg-museum-accent/20 flex items-center justify-center">
-                <span className="text-museum-accent font-serif text-lg">01</span>
+              <div className="w-10 h-10 rounded-full bg-[#F4D03F]/10 border border-[#F4D03F]/30 flex items-center justify-center">
+                <span className="text-[#F4D03F] font-serif text-lg">01</span>
               </div>
-              <span className="text-museum-gray font-sans">Thư viện tư liệu lịch sử</span>
+              <span className="text-[#E5E5E5]/70 font-sans">Thư viện tư liệu lịch sử</span>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 rounded-full bg-museum-accent/20 flex items-center justify-center">
-                <span className="text-museum-accent font-serif text-lg">02</span>
+              <div className="w-10 h-10 rounded-full bg-[#F4D03F]/10 border border-[#F4D03F]/30 flex items-center justify-center">
+                <span className="text-[#F4D03F] font-serif text-lg">02</span>
               </div>
-              <span className="text-museum-gray font-sans">Cộng đồng đam mê văn hóa</span>
+              <span className="text-[#E5E5E5]/70 font-sans">Cộng đồng đam mê văn hóa</span>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 rounded-full bg-museum-accent/20 flex items-center justify-center">
-                <span className="text-museum-accent font-serif text-lg">03</span>
+              <div className="w-10 h-10 rounded-full bg-[#F4D03F]/10 border border-[#F4D03F]/30 flex items-center justify-center">
+                <span className="text-[#F4D03F] font-serif text-lg">03</span>
               </div>
-              <span className="text-museum-gray font-sans">Trải nghiệm học tập độc đáo</span>
+              <span className="text-[#E5E5E5]/70 font-sans">Trải nghiệm học tập độc đáo</span>
             </div>
           </div>
 
-          <p className="text-museum-gray/50 font-sans text-sm">
+          <p className="text-[#9CA3AF]/50 font-sans text-sm">
             © 2025 Echoes of Việt Nam. Bảo tồn di sản văn hóa.
           </p>
         </div>
@@ -146,7 +150,7 @@ export default function Login() {
           {/* Back button */}
           <button
             onClick={() => navigate('/')}
-            className="flex items-center space-x-2 text-museum-black/60 hover:text-museum-black transition-colors mb-12 group"
+            className="flex items-center space-x-2 text-[#9CA3AF] hover:text-[#E5E5E5] transition-colors mb-12 group"
             type="button"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -155,11 +159,16 @@ export default function Login() {
 
           {/* Header */}
           <div className="mb-10">
-            <div className="w-10 h-1 bg-museum-accent mb-6" />
-            <h2 className="font-serif font-bold text-4xl text-museum-black mb-3">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-full bg-[#F4D03F]/10 border border-[#F4D03F]/30 flex items-center justify-center">
+                <LogIn size={20} className="text-[#F4D03F]" />
+              </div>
+              <div className="h-px flex-1 bg-gradient-to-r from-[#F4D03F]/30 to-transparent" />
+            </div>
+            <h2 className="font-serif font-bold text-4xl text-[#F4D03F] mb-3">
               Đăng Nhập
             </h2>
-            <p className="text-museum-black/60 font-sans">
+            <p className="text-[#9CA3AF] font-sans">
               Chào mừng bạn quay lại. Đăng nhập để tiếp tục khám phá.
             </p>
           </div>
@@ -170,7 +179,7 @@ export default function Login() {
               <div className="space-y-3 mb-8">
                 <button
                   onClick={() => handleOAuthLogin('google')}
-                  className="w-full py-3.5 bg-white border border-museum-gray/40 text-museum-black font-sans text-sm flex items-center justify-center space-x-3 hover:border-museum-black/40 hover:shadow-paper transition-all duration-300"
+                  className="w-full py-3.5 bg-[#1A1A1A] border border-[#333333] text-[#E5E5E5] font-sans text-sm flex items-center justify-center space-x-3 hover:border-[#F4D03F]/50 hover:bg-[#262626] transition-all duration-300"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -194,10 +203,10 @@ export default function Login() {
 
               <div className="relative mb-8">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-museum-gray/30"></div>
+                  <div className="w-full border-t border-[#333333]"></div>
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="px-4 bg-museum-beige text-museum-black/40 font-sans text-sm">hoặc</span>
+                  <span className="px-4 bg-[#0D0D0D] text-[#6B7280] font-sans text-sm">hoặc</span>
                 </div>
               </div>
             </>
@@ -206,21 +215,21 @@ export default function Login() {
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-museum-black font-sans text-sm mb-2">
+              <label className="block text-[#E5E5E5] font-sans text-sm mb-2">
                 Email
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="w-full px-4 py-3.5 bg-white border border-museum-gray/40 text-museum-black font-sans placeholder:text-museum-black/30 focus:border-museum-accent focus:ring-2 focus:ring-museum-accent/20 outline-none transition-all duration-300"
+                className="w-full px-4 py-3.5 bg-[#1A1A1A] border border-[#333333] text-[#E5E5E5] font-sans placeholder:text-[#6B7280] focus:border-[#F4D03F] focus:ring-2 focus:ring-[#F4D03F]/20 outline-none transition-all duration-300"
                 placeholder="email@example.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-museum-black font-sans text-sm mb-2">
+              <label className="block text-[#E5E5E5] font-sans text-sm mb-2">
                 Mật khẩu
               </label>
               <div className="relative">
@@ -228,14 +237,14 @@ export default function Login() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  className="w-full px-4 py-3.5 pr-12 bg-white border border-museum-gray/40 text-museum-black font-sans placeholder:text-museum-black/30 focus:border-museum-accent focus:ring-2 focus:ring-museum-accent/20 outline-none transition-all duration-300"
+                  className="w-full px-4 py-3.5 pr-12 bg-[#1A1A1A] border border-[#333333] text-[#E5E5E5] font-sans placeholder:text-[#6B7280] focus:border-[#F4D03F] focus:ring-2 focus:ring-[#F4D03F]/20 outline-none transition-all duration-300"
                   placeholder="••••••••"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-museum-black/40 hover:text-museum-black transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-[#E5E5E5] transition-colors"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -244,14 +253,14 @@ export default function Login() {
 
             {/* Error Message */}
             {errorMessage && (
-              <div className="p-4 bg-red-50 border-l-4 border-red-400 text-red-700 font-sans text-sm">
+              <div className="p-4 bg-red-500/10 border border-red-500/30 text-red-400 font-sans text-sm rounded">
                 {errorMessage}
               </div>
             )}
 
             {/* Success Message */}
             {successMessage && (
-              <div className="p-4 bg-museum-accent/10 border-l-4 border-museum-accent text-museum-black font-sans text-sm">
+              <div className="p-4 bg-[#F4D03F]/10 border border-[#F4D03F]/30 text-[#F4D03F] font-sans text-sm rounded">
                 {successMessage}
               </div>
             )}
@@ -260,24 +269,24 @@ export default function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-museum-black text-museum-beige font-sans text-sm tracking-wider uppercase transition-all duration-300 hover:bg-museum-black/90 hover:shadow-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 bg-[#F4D03F] text-[#0D0D0D] font-sans font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:bg-[#E6BE8A] hover:shadow-[0_0_20px_rgba(244,208,63,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
             </button>
           </form>
 
           {/* Footer Links */}
-          <div className="mt-8 pt-8 border-t border-museum-gray/20 space-y-4">
+          <div className="mt-8 pt-8 border-t border-[#333333] space-y-4">
             <div className="flex items-center justify-between">
               <button
                 onClick={() => navigate('/register', { state: { from: loginState.from || sessionStorage.getItem('lastVisitedPath') || '/' } })}
-                className="text-museum-black font-sans text-sm hover:text-museum-accent transition-colors"
+                className="text-[#E5E5E5] font-sans text-sm hover:text-[#F4D03F] transition-colors"
               >
-                Chưa có tài khoản? <span className="font-semibold">Đăng ký</span>
+                Chưa có tài khoản? <span className="font-semibold text-[#F4D03F]">Đăng ký</span>
               </button>
               <button
                 onClick={() => navigate('/forgot-password', { state: { from: loginState.from || sessionStorage.getItem('lastVisitedPath') || '/' } })}
-                className="text-museum-black/60 font-sans text-sm hover:text-museum-black transition-colors"
+                className="text-[#9CA3AF] font-sans text-sm hover:text-[#E5E5E5] transition-colors"
               >
                 Quên mật khẩu?
               </button>
@@ -285,10 +294,12 @@ export default function Login() {
 
             {/* Demo account hint */}
             {!isSupabaseConfigured && (
-              <div className="p-4 bg-museum-accent/10 border border-museum-accent/30 text-museum-black/80 font-sans text-sm">
-                <p className="font-medium mb-1">Tài khoản demo:</p>
-                <p>Email: <code className="bg-white px-1.5 py-0.5 text-museum-black">user1@echoes.vn</code></p>
-                <p>Mật khẩu: <code className="bg-white px-1.5 py-0.5 text-museum-black">user123</code></p>
+              <div className="p-4 bg-[#1A1A1A] border border-[#F4D03F]/30 rounded">
+                <p className="font-sans text-sm text-[#E6BE8A] font-medium mb-2">📌 Tài khoản demo:</p>
+                <div className="space-y-1 text-sm font-sans">
+                  <p className="text-[#9CA3AF]">Email: <code className="bg-[#262626] px-2 py-0.5 text-[#F4D03F] rounded">user1@echoes.vn</code></p>
+                  <p className="text-[#9CA3AF]">Mật khẩu: <code className="bg-[#262626] px-2 py-0.5 text-[#F4D03F] rounded">user123</code></p>
+                </div>
               </div>
             )}
           </div>

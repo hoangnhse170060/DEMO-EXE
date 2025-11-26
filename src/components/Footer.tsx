@@ -8,7 +8,7 @@ export default function Footer() {
   ];
 
   return (
-  <footer className="bg-brand-blue text-white border-t border-brand-blue/20 py-8">
+    <footer className="bg-[#0D0D0D] border-t border-[#333333] py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-6">
           <div className="flex space-x-6">
@@ -17,7 +17,7 @@ export default function Footer() {
                 key={social.label}
                 href={social.url}
                 aria-label={social.label}
-                className="text-white hover:text-brand-sand transition-colors duration-300"
+                className="text-[#9CA3AF] hover:text-[#F4D03F] transition-colors duration-300"
               >
                 <social.icon size={24} />
               </a>
@@ -25,10 +25,10 @@ export default function Footer() {
           </div>
 
           <div className="text-center">
-            <p className="text-brand-sand font-serif text-sm mb-2">
+            <p className="text-[#F4D03F] font-serif text-sm mb-2">
               Nơi quá khứ ngân vang trong từng hơi thở hiện đại
             </p>
-            <p className="text-white/70 text-xs">
+            <p className="text-[#6B7280] text-xs">
               © 2025 Try Your Best – Echoes of Việt Nam
             </p>
           </div>

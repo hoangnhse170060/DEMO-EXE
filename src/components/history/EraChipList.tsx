@@ -17,10 +17,10 @@ export function EraChipList({ eras, selectedEraId, onSelect }: Props) {
             type="button"
             role="tab"
             aria-selected={isActive}
-            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue ${
+            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D03F] ${
               isActive
-                ? 'border-brand-blue bg-brand-blue text-white'
-                : 'border-brand-blue/40 bg-white text-brand-text hover:border-brand-blue hover:text-brand-blue'
+                ? 'border-[#F4D03F] bg-[#F4D03F] text-[#E5E5E5]'
+                : 'border-[#F4D03F]/40 bg-[#1A1A1A] text-[#F4D03F] hover:border-[#F4D03F] hover:text-[#F4D03F]'
             }`}
             onClick={() => onSelect(era.id)}
           >

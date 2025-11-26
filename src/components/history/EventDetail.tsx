@@ -27,9 +27,9 @@ function renderContentBlock(block: ContentBlock) {
         <figure key={block.secId} className="space-y-2">
           <img src={block.src} alt={block.alt} loading="lazy" className="w-full rounded-xl object-cover" />
           {(block.caption || block.credit) && (
-            <figcaption className="text-sm text-brand-muted">
+            <figcaption className="text-sm text-[#9CA3AF]">
               {block.caption}
-              {block.credit && <span className="ml-2 text-xs uppercase text-brand-muted/80">Nguồn: {block.credit}</span>}
+              {block.credit && <span className="ml-2 text-xs uppercase text-[#9CA3AF]/80">Nguồn: {block.credit}</span>}
             </figcaption>
           )}
         </figure>
@@ -43,9 +43,9 @@ function renderContentBlock(block: ContentBlock) {
             Trình duyệt của bạn không hỗ trợ video.
           </video>
           {(block.caption || block.credit) && (
-            <figcaption className="text-sm text-brand-muted">
+            <figcaption className="text-sm text-[#9CA3AF]">
               {block.caption}
-              {block.credit && <span className="ml-2 text-xs uppercase text-brand-muted/80">Nguồn: {block.credit}</span>}
+              {block.credit && <span className="ml-2 text-xs uppercase text-[#9CA3AF]/80">Nguồn: {block.credit}</span>}
             </figcaption>
           )}
         </figure>
@@ -53,13 +53,13 @@ function renderContentBlock(block: ContentBlock) {
     }
     if (block.kind === 'document') {
       return (
-        <div key={block.secId} className="rounded-lg border border-brand-blue/30 bg-brand-sand/30 p-4 text-sm">
-          <p className="font-semibold text-brand-text">{block.caption ?? 'Tư liệu lưu trữ'}</p>
+        <div key={block.secId} className="rounded-lg border border-[#F4D03F]/30 bg-[#1A1A1A]/30 p-4 text-sm">
+          <p className="font-semibold text-[#F4D03F]">{block.caption ?? 'Tư liệu lưu trữ'}</p>
           <a
             href={block.src}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 inline-flex items-center text-sm font-semibold text-brand-blue hover:underline"
+            className="mt-2 inline-flex items-center text-sm font-semibold text-[#F4D03F] hover:underline"
           >
             Mở tư liệu (nguồn: {block.credit || 'đang cập nhật'})
           </a>
@@ -72,27 +72,27 @@ function renderContentBlock(block: ContentBlock) {
   switch (block.type) {
     case 'h2':
       return (
-        <h3 key={block.secId} className="text-2xl font-serif text-brand-text">
+        <h3 key={block.secId} className="text-2xl font-serif text-[#F4D03F]">
           {block.text}
         </h3>
       );
     case 'h3':
       return (
-        <h4 key={block.secId} className="text-xl font-semibold text-brand-text">
+        <h4 key={block.secId} className="text-xl font-semibold text-[#F4D03F]">
           {block.text}
         </h4>
       );
     case 'quote':
       return (
-        <figure key={block.secId} className="border-l-4 border-brand-blue/60 bg-brand-blue/5 p-4 italic text-brand-text">
+        <figure key={block.secId} className="border-l-4 border-[#F4D03F]/60 bg-[#F4D03F]/5 p-4 italic text-[#F4D03F]">
           <blockquote>“{block.text}”</blockquote>
-          {block.source && <figcaption className="mt-2 text-sm text-brand-muted">— {block.source}</figcaption>}
+          {block.source && <figcaption className="mt-2 text-sm text-[#9CA3AF]">— {block.source}</figcaption>}
         </figure>
       );
     case 'p':
     default:
       return (
-        <p key={block.secId} className="text-brand-text">
+        <p key={block.secId} className="text-[#F4D03F]">
           {block.text}
         </p>
       );
@@ -103,40 +103,40 @@ function renderSubEvent(subEvent: SubEvent) {
   const formattedDate = subEvent.date ? dateFormatter.format(new Date(subEvent.date)) : null;
   const hasMedia = (subEvent.media?.length ?? 0) > 0;
   return (
-    <article key={subEvent.id} className="rounded-2xl border border-brand-blue/15 bg-white/80 p-5 shadow-sm">
+    <article key={subEvent.id} className="rounded-2xl border border-[#F4D03F]/15 bg-[#1A1A1A]/80 p-5 shadow-sm">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          {formattedDate && <p className="text-xs uppercase tracking-widest text-brand-blue">{formattedDate}</p>}
-          <h3 className="mt-1 text-xl font-serif text-brand-text">{subEvent.title}</h3>
+          {formattedDate && <p className="text-xs uppercase tracking-widest text-[#F4D03F]">{formattedDate}</p>}
+          <h3 className="mt-1 text-xl font-serif text-[#F4D03F]">{subEvent.title}</h3>
         </div>
-        <div className="flex flex-col items-end text-xs text-brand-muted">
+        <div className="flex flex-col items-end text-xs text-[#9CA3AF]">
           {subEvent.leader && <span>Chỉ huy: {subEvent.leader}</span>}
           {subEvent.opponent && <span>Đối phương: {subEvent.opponent}</span>}
         </div>
       </header>
 
-      <p className="mt-3 text-sm text-brand-muted">{subEvent.guestSummary}</p>
+      <p className="mt-3 text-sm text-[#9CA3AF]">{subEvent.guestSummary}</p>
 
       {subEvent.troopEstimates && (
-        <div className="mt-4 grid gap-3 rounded-xl bg-brand-blue/5 p-4 text-sm text-brand-text md:grid-cols-3">
+        <div className="mt-4 grid gap-3 rounded-xl bg-[#F4D03F]/5 p-4 text-sm text-[#F4D03F] md:grid-cols-3">
           <div>
-            <p className="text-xs font-semibold uppercase text-brand-blue">Lực lượng ta</p>
+            <p className="text-xs font-semibold uppercase text-[#F4D03F]">Lực lượng ta</p>
             <p className="mt-1 leading-6">{subEvent.troopEstimates.us ?? 'Đang cập nhật'}</p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase text-brand-blue">Lực lượng địch</p>
+            <p className="text-xs font-semibold uppercase text-[#F4D03F]">Lực lượng địch</p>
             <p className="mt-1 leading-6">{subEvent.troopEstimates.them ?? 'Đang cập nhật'}</p>
           </div>
           {subEvent.troopEstimates.note && (
             <div>
-              <p className="text-xs font-semibold uppercase text-brand-blue">Ghi chú</p>
+              <p className="text-xs font-semibold uppercase text-[#F4D03F]">Ghi chú</p>
               <p className="mt-1 leading-6">{subEvent.troopEstimates.note}</p>
             </div>
           )}
         </div>
       )}
 
-      <div className="mt-4 space-y-4 text-base leading-7 text-brand-text">
+      <div className="mt-4 space-y-4 text-base leading-7 text-[#F4D03F]">
         {subEvent.content.map((block) => renderContentBlock(block))}
       </div>
 
@@ -154,9 +154,9 @@ function renderSubEvent(subEvent: SubEvent) {
                 </video>
               )}
               {(media.caption || media.credit) && (
-                <figcaption className="text-sm text-brand-muted">
+                <figcaption className="text-sm text-[#9CA3AF]">
                   {media.caption}
-                  {media.credit && <span className="ml-2 text-xs uppercase text-brand-muted/80">Nguồn: {media.credit}</span>}
+                  {media.credit && <span className="ml-2 text-xs uppercase text-[#9CA3AF]/80">Nguồn: {media.credit}</span>}
                 </figcaption>
               )}
             </figure>
@@ -165,11 +165,11 @@ function renderSubEvent(subEvent: SubEvent) {
       )}
 
       {subEvent.sources?.length ? (
-        <ul className="mt-4 space-y-1 text-sm text-brand-muted">
+        <ul className="mt-4 space-y-1 text-sm text-[#9CA3AF]">
           {subEvent.sources.map((source) => (
             <li key={source.title} className="list-disc pl-4">
               {source.link ? (
-                <a href={source.link} target="_blank" rel="noreferrer" className="text-brand-blue hover:underline">
+                <a href={source.link} target="_blank" rel="noreferrer" className="text-[#F4D03F] hover:underline">
                   {source.title}
                 </a>
               ) : (
@@ -212,7 +212,7 @@ export function EventDetail({
 
   if (!event) {
     return (
-      <section className="min-h-[60vh] rounded-2xl border border-dashed border-brand-blue/30 bg-white/70 p-8 text-center text-brand-muted">
+      <section className="min-h-[60vh] rounded-2xl border border-dashed border-[#F4D03F]/30 bg-[#1A1A1A]/70 p-8 text-center text-[#9CA3AF]">
         Chọn một mốc trong dòng thời gian để xem nội dung chi tiết.
       </section>
     );
@@ -224,18 +224,18 @@ export function EventDetail({
   return (
     <article
       ref={ref}
-      className="relative flex flex-col gap-6 rounded-2xl border border-brand-blue/20 bg-white/95 p-6 shadow-sm"
+      className="relative flex flex-col gap-6 rounded-2xl border border-[#F4D03F]/20 bg-[#1A1A1A]/95 p-6 shadow-sm"
       aria-live="polite"
     >
       <header>
-        <p className="text-xs uppercase tracking-widest text-brand-blue">{event.year}</p>
-        <h2 className="mt-2 text-3xl font-serif text-brand-text">{event.title}</h2>
-        {formattedDate && <p className="mt-1 text-sm text-brand-muted">{formattedDate}</p>}
-        <p className="mt-2 text-base text-brand-muted">{event.headline ?? event.summary}</p>
-        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue">
+        <p className="text-xs uppercase tracking-widest text-[#F4D03F]">{event.year}</p>
+        <h2 className="mt-2 text-3xl font-serif text-[#F4D03F]">{event.title}</h2>
+        {formattedDate && <p className="mt-1 text-sm text-[#9CA3AF]">{formattedDate}</p>}
+        <p className="mt-2 text-base text-[#9CA3AF]">{event.headline ?? event.summary}</p>
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#F4D03F]/10 px-3 py-1 text-xs font-semibold text-[#F4D03F]">
           <span aria-live="polite" aria-atomic="true">{statusLabel}</span>
           {typeof bestScore === 'number' && (
-            <span className="text-brand-text/80">• Kết quả cao nhất: {bestScore}%</span>
+            <span className="text-[#F4D03F]/80">• Kết quả cao nhất: {bestScore}%</span>
           )}
           {typeof bestStars === 'number' && bestStars > 0 && <span className="text-amber-600">★ {bestStars}</span>}
         </div>
@@ -250,26 +250,26 @@ export function EventDetail({
             className="w-full rounded-2xl object-cover"
           />
           {event.featuredImage.credit && (
-            <figcaption className="mt-2 text-xs uppercase text-brand-muted">
+            <figcaption className="mt-2 text-xs uppercase text-[#9CA3AF]">
               Nguồn: {event.featuredImage.credit}
             </figcaption>
           )}
         </figure>
       )}
 
-      <section className="space-y-5 text-base leading-7 text-brand-text">
+      <section className="space-y-5 text-base leading-7 text-[#F4D03F]">
         {event.content.map((block) => renderContentBlock(block))}
       </section>
 
       <section className="space-y-5" aria-label="Các chặng diễn biến">
-        <h3 className="text-2xl font-serif text-brand-text">Diễn biến chính</h3>
+        <h3 className="text-2xl font-serif text-[#F4D03F]">Diễn biến chính</h3>
         <div className="space-y-4">
           {subEventOrder.map((item) => renderSubEvent(item))}
         </div>
       </section>
 
       {quizLauncher && (
-        <footer className="mt-6 border-t border-dashed border-brand-blue/30 pt-4">
+        <footer className="mt-6 border-t border-dashed border-[#F4D03F]/30 pt-4">
           {quizLauncher}
         </footer>
       )}

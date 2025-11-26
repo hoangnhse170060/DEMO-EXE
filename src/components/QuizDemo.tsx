@@ -137,7 +137,7 @@ export default function QuizDemo({ quizId = 'demo-1', onClose }: { quizId?: stri
     <div className="quiz-modal fixed inset-0 z-50 flex items-center justify-center">
       <div className="quiz-backdrop absolute inset-0 bg-black/50" onClick={onClose} />
 
-      <div className="quiz-card relative bg-white rounded-lg shadow-2xl w-full max-w-2xl p-6 mx-4">
+      <div className="quiz-card relative bg-[#1A1A1A] rounded-lg shadow-2xl w-full max-w-2xl p-6 mx-4">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-semibold">Quiz Demo — Câu {idx + 1} / {SAMPLE_QUESTIONS.length}</h3>
           <div className="text-sm text-gray-600">{attemptsLeft !== null ? `Lượt còn: ${attemptsLeft}` : ''}</div>

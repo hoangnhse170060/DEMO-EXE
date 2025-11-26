@@ -289,8 +289,8 @@ export default function FigureDetail() {
     return (
       <div className="min-h-screen bg-charcoal-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl text-brand-blue mb-4">Không tìm thấy nhân vật</h1>
-          <button onClick={() => navigate('/culture/historical-figures')} className="text-gray-400 hover:text-brand-blue transition-colors">
+          <h1 className="text-4xl text-[#F4D03F] mb-4">Không tìm thấy nhân vật</h1>
+          <button onClick={() => navigate('/culture/historical-figures')} className="text-gray-400 hover:text-[#F4D03F] transition-colors">
             ← Quay lại
           </button>
         </div>
@@ -303,7 +303,7 @@ export default function FigureDetail() {
       {/* Back Button */}
       <button
         onClick={() => navigate('/culture/historical-figures')}
-        className="fixed top-24 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-charcoal-800/90 backdrop-blur-sm border border-brand-blue/30 rounded-full text-brand-blue hover:bg-charcoal-800 hover:border-brand-blue transition-all"
+        className="fixed top-24 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-charcoal-800/90 backdrop-blur-sm border border-[#F4D03F]/30 rounded-full text-[#F4D03F] hover:bg-charcoal-800 hover:border-[#F4D03F] transition-all"
       >
         <ArrowLeft size={20} />
         <span className="text-sm font-semibold">Quay lại</span>
@@ -325,11 +325,11 @@ export default function FigureDetail() {
             >
               <div className={`w-3 h-3 rounded-full border-2 transition-all ${
                 activeStage === index 
-                  ? 'bg-brand-blue border-brand-blue shadow-lg shadow-brand-blue/50' 
+                  ? 'bg-[#F4D03F] border-[#F4D03F] shadow-lg shadow-[#F4D03F]/50' 
                   : 'bg-transparent border-gray-600'
               }`} />
-              <div className="absolute right-6 bg-charcoal-800 px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-brand-blue/20">
-                <span className="text-xs text-brand-blue font-semibold">{stage.period}</span>
+              <div className="absolute right-6 bg-charcoal-800 px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-[#F4D03F]/20">
+                <span className="text-xs text-[#F4D03F] font-semibold">{stage.period}</span>
                 <div className="text-[10px] text-gray-400">{stage.years}</div>
               </div>
             </button>
@@ -351,12 +351,12 @@ export default function FigureDetail() {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-6 py-2 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-8 border border-brand-blue/30">
-            <Star className="text-brand-blue fill-brand-blue" size={20} />
-            <span className="text-brand-blue text-sm font-bold uppercase tracking-wider">{figure.title}</span>
+          <div className="inline-flex items-center gap-2 px-6 py-2 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-8 border border-[#F4D03F]/30">
+            <Star className="text-[#F4D03F] fill-[#F4D03F]" size={20} />
+            <span className="text-[#F4D03F] text-sm font-bold uppercase tracking-wider">{figure.title}</span>
           </div>
 
-          <h1 className="text-7xl md:text-8xl font-display uppercase text-brand-blue mb-6 tracking-wider drop-shadow-2xl">
+          <h1 className="text-7xl md:text-8xl font-display uppercase text-[#F4D03F] mb-6 tracking-wider drop-shadow-2xl">
             {figure.name}
           </h1>
 
@@ -366,20 +366,20 @@ export default function FigureDetail() {
 
           <div className="flex items-center justify-center gap-8 text-lg text-gray-300 mb-12">
             <div className="flex items-center gap-2">
-              <Calendar size={20} className="text-brand-blue" />
+              <Calendar size={20} className="text-[#F4D03F]" />
               <span>{figure.birth} - {figure.death}</span>
             </div>
             <div className="h-6 w-px bg-gray-600"></div>
             <div className="flex items-center gap-2">
-              <MapPin size={20} className="text-brand-blue" />
+              <MapPin size={20} className="text-[#F4D03F]" />
               <span>{figure.birthPlace}</span>
             </div>
           </div>
 
           {/* Scroll Indicator */}
           <div className="flex flex-col items-center gap-2 animate-bounce">
-            <span className="text-brand-blue text-sm uppercase tracking-wider">Khám phá cuộc đời</span>
-            <ChevronDown className="text-brand-blue" size={32} />
+            <span className="text-[#F4D03F] text-sm uppercase tracking-wider">Khám phá cuộc đời</span>
+            <ChevronDown className="text-[#F4D03F]" size={32} />
           </div>
         </div>
       </section>
@@ -387,7 +387,7 @@ export default function FigureDetail() {
       {/* Summary Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-[#0a0a0a] to-[#181818]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-display text-center text-brand-blue mb-12 uppercase tracking-wider">
+          <h2 className="text-4xl font-display text-center text-[#F4D03F] mb-12 uppercase tracking-wider">
             Tổng Quan Cuộc Đời
           </h2>
           <div className="space-y-6">
@@ -407,7 +407,7 @@ export default function FigureDetail() {
 
         <div className="max-w-5xl mx-auto px-6">
           <div className="relative mb-16 flex justify-center">
-            <h2 className="text-4xl font-display text-center text-brand-blue uppercase tracking-wider bg-charcoal-900 px-8 py-2 relative z-10">
+            <h2 className="text-4xl font-display text-center text-[#F4D03F] uppercase tracking-wider bg-charcoal-900 px-8 py-2 relative z-10">
               Hành Trình Cuộc Đời
             </h2>
           </div>
@@ -425,20 +425,20 @@ export default function FigureDetail() {
                 {/* Compact Stage Card */}
                 <div 
                   onClick={() => setExpandedStage(index)}
-                  className={`bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-brand-blue/30 rounded-xl overflow-hidden hover:border-brand-blue hover:shadow-xl hover:shadow-amber-400/20 transition-all duration-300 cursor-pointer group ${
-                    activeStage === index ? 'border-brand-blue/60 shadow-lg' : ''
+                  className={`bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-[#F4D03F]/30 rounded-xl overflow-hidden hover:border-[#F4D03F] hover:shadow-xl hover:shadow-amber-400/20 transition-all duration-300 cursor-pointer group ${
+                    activeStage === index ? 'border-[#F4D03F]/60 shadow-lg' : ''
                   }`}
                 >
                   <div className="flex items-center gap-4 p-4">
                     {/* Thumbnail */}
-                    <div className="relative w-24 h-24 rounded-lg overflow-hidden border-2 border-brand-blue/30 flex-shrink-0">
+                    <div className="relative w-24 h-24 rounded-lg overflow-hidden border-2 border-[#F4D03F]/30 flex-shrink-0">
                       <img
                         src={stage.image}
                         alt={stage.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-charcoal-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Maximize2 className="text-brand-blue" size={24} />
+                        <Maximize2 className="text-[#F4D03F]" size={24} />
                       </div>
                     </div>
 
@@ -450,12 +450,12 @@ export default function FigureDetail() {
                         </span>
                         <span className="text-yellow-400 text-sm font-bold">{stage.years}</span>
                       </div>
-                      <h3 className="text-xl font-display text-white mb-1 line-clamp-1 group-hover:text-brand-blue transition-colors">{stage.title}</h3>
+                      <h3 className="text-xl font-display text-white mb-1 line-clamp-1 group-hover:text-[#F4D03F] transition-colors">{stage.title}</h3>
                       <p className="text-gray-400 text-sm line-clamp-2">{stage.description[0]}</p>
                     </div>
 
                     {/* Icon */}
-                    <ChevronDown className="text-brand-blue flex-shrink-0 group-hover:translate-y-1 transition-transform" size={24} />
+                    <ChevronDown className="text-[#F4D03F] flex-shrink-0 group-hover:translate-y-1 transition-transform" size={24} />
                   </div>
                 </div>
               </div>
@@ -478,13 +478,13 @@ export default function FigureDetail() {
               </button>
 
               {/* Modal Content */}
-              <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border-2 border-brand-blue/50 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border-2 border-[#F4D03F]/50 rounded-2xl overflow-hidden shadow-2xl">
                 {(() => {
                   const stage = figure.lifeStages[expandedStage];
                   return (
                     <>
                       {/* Header */}
-                      <div className="bg-gradient-to-r from-charcoal-700 to-charcoal-800 p-8 border-b-2 border-brand-blue/30">
+                      <div className="bg-gradient-to-r from-charcoal-700 to-charcoal-800 p-8 border-b-2 border-[#F4D03F]/30">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="px-4 py-1 bg-amber-400 text-[#0a0a0a] font-bold rounded-full">
                             {stage.period}
@@ -501,7 +501,7 @@ export default function FigureDetail() {
                           {/* Left Column - Images */}
                           <div className="space-y-6">
                             {/* Main Image */}
-                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-2 border-brand-blue/40 shadow-2xl">
+                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border-2 border-[#F4D03F]/40 shadow-2xl">
                               <img
                                 src={stage.image}
                                 alt={stage.title}
@@ -512,19 +512,19 @@ export default function FigureDetail() {
                             {/* Photo Gallery */}
                             <div>
                               <div className="flex items-center gap-2 mb-4">
-                                <ImageIcon className="text-brand-blue" size={20} />
-                                <h4 className="text-lg font-bold text-brand-blue">Thư Viện Ảnh</h4>
+                                <ImageIcon className="text-[#F4D03F]" size={20} />
+                                <h4 className="text-lg font-bold text-[#F4D03F]">Thư Viện Ảnh</h4>
                               </div>
                               <div className="grid grid-cols-2 gap-3">
                                 {stage.photos.map((photo, photoIdx) => (
                                   <div
                                     key={photoIdx}
                                     onClick={() => setSelectedImage(photo.url)}
-                                    className="relative aspect-video rounded-lg overflow-hidden border border-brand-blue/30 cursor-pointer hover:border-brand-blue transition-all group"
+                                    className="relative aspect-video rounded-lg overflow-hidden border border-[#F4D03F]/30 cursor-pointer hover:border-[#F4D03F] transition-all group"
                                   >
                                     <img src={photo.url} alt={photo.caption} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                                     <div className="absolute inset-0 bg-charcoal-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                      <ImageIcon className="text-brand-blue" size={24} />
+                                      <ImageIcon className="text-[#F4D03F]" size={24} />
                                     </div>
                                   </div>
                                 ))}
@@ -535,17 +535,17 @@ export default function FigureDetail() {
                             {stage.documents && stage.documents.length > 0 && (
                               <div>
                                 <div className="flex items-center gap-2 mb-4">
-                                  <FileText className="text-brand-blue" size={20} />
-                                  <h4 className="text-lg font-bold text-brand-blue">Tư Liệu Lịch Sử</h4>
+                                  <FileText className="text-[#F4D03F]" size={20} />
+                                  <h4 className="text-lg font-bold text-[#F4D03F]">Tư Liệu Lịch Sử</h4>
                                 </div>
                                 <div className="grid grid-cols-2 gap-3">
                                   {stage.documents.map((doc, docIdx) => (
-                                    <div key={docIdx} className="bg-charcoal-900/50 border border-brand-blue/20 rounded-lg p-3 hover:border-brand-blue/60 transition-all cursor-pointer group">
+                                    <div key={docIdx} className="bg-charcoal-900/50 border border-[#F4D03F]/20 rounded-lg p-3 hover:border-[#F4D03F]/60 transition-all cursor-pointer group">
                                       <div className="aspect-[3/4] rounded overflow-hidden mb-2">
                                         <img src={doc.thumbnail} alt={doc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                                       </div>
                                       <p className="text-white text-sm font-semibold mb-1 line-clamp-2">{doc.title}</p>
-                                      <span className="text-brand-blue text-xs">{doc.year}</span>
+                                      <span className="text-[#F4D03F] text-xs">{doc.year}</span>
                                     </div>
                                   ))}
                                 </div>
@@ -558,8 +558,8 @@ export default function FigureDetail() {
                             {/* Description */}
                             <div>
                               <div className="flex items-center gap-2 mb-4">
-                                <BookOpen className="text-brand-blue" size={24} />
-                                <h4 className="text-xl font-bold text-brand-blue">Diễn Biến</h4>
+                                <BookOpen className="text-[#F4D03F]" size={24} />
+                                <h4 className="text-xl font-bold text-[#F4D03F]">Diễn Biến</h4>
                               </div>
                               <div className="space-y-4">
                                 {stage.description.map((paragraph, pIdx) => (
@@ -573,13 +573,13 @@ export default function FigureDetail() {
                             {/* Key Events */}
                             <div>
                               <div className="flex items-center gap-2 mb-4">
-                                <Clock className="text-brand-blue" size={24} />
-                                <h4 className="text-xl font-bold text-brand-blue">Sự Kiện Quan Trọng</h4>
+                                <Clock className="text-[#F4D03F]" size={24} />
+                                <h4 className="text-xl font-bold text-[#F4D03F]">Sự Kiện Quan Trọng</h4>
                               </div>
                               <div className="space-y-3">
                                 {stage.keyEvents.map((event, eventIdx) => (
-                                  <div key={eventIdx} className="flex items-start gap-3 bg-charcoal-900/50 p-4 rounded-lg border border-brand-blue/10 hover:border-brand-blue/30 transition-all">
-                                    <span className="px-3 py-1 bg-amber-400/20 text-brand-blue text-sm font-bold rounded whitespace-nowrap">{event.year}</span>
+                                  <div key={eventIdx} className="flex items-start gap-3 bg-charcoal-900/50 p-4 rounded-lg border border-[#F4D03F]/10 hover:border-[#F4D03F]/30 transition-all">
+                                    <span className="px-3 py-1 bg-amber-400/20 text-[#F4D03F] text-sm font-bold rounded whitespace-nowrap">{event.year}</span>
                                     <div className="flex-1">
                                       <h5 className="text-white font-semibold mb-1 text-lg">{event.title}</h5>
                                       <p className="text-gray-400">{event.description}</p>
@@ -591,8 +591,8 @@ export default function FigureDetail() {
 
                             {/* Quotes */}
                             {stage.quotes && stage.quotes.length > 0 && (
-                              <div className="bg-gradient-to-r from-charcoal-700/20 to-transparent border-l-4 border-brand-blue p-6 rounded-r-lg">
-                                <Quote className="text-brand-blue mb-3" size={36} />
+                              <div className="bg-gradient-to-r from-charcoal-700/20 to-transparent border-l-4 border-[#F4D03F] p-6 rounded-r-lg">
+                                <Quote className="text-[#F4D03F] mb-3" size={36} />
                                 {stage.quotes.map((quote, qIdx) => (
                                   <div key={qIdx} className="mb-4 last:mb-0">
                                     <p className="text-amber-100 italic text-xl mb-2">"{quote.text}"</p>
@@ -618,37 +618,37 @@ export default function FigureDetail() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <Heart className="inline-block text-red-500 mb-4" size={48} />
-            <h2 className="text-5xl font-display text-brand-blue uppercase tracking-wider mb-4">
+            <h2 className="text-5xl font-display text-[#F4D03F] uppercase tracking-wider mb-4">
               {figure.legacy.title}
             </h2>
             <div className="h-1 w-32 bg-amber-400 mx-auto"></div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-brand-blue/20 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-brand-blue mb-6 flex items-center gap-3">
+            <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-[#F4D03F]/20 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-[#F4D03F] mb-6 flex items-center gap-3">
                 <Award size={28} />
                 Thành Tựu
               </h3>
               <ul className="space-y-4">
                 {figure.legacy.achievements.map((achievement, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="text-brand-blue mt-1">•</span>
+                    <span className="text-[#F4D03F] mt-1">•</span>
                     <span className="text-gray-300 leading-relaxed">{achievement}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-brand-blue/20 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-brand-blue mb-6 flex items-center gap-3">
+            <div className="bg-gradient-to-br from-[#181818] to-[#0a0a0a] border border-[#F4D03F]/20 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-[#F4D03F] mb-6 flex items-center gap-3">
                 <Star size={28} />
                 Ảnh Hưởng
               </h3>
               <ul className="space-y-4">
                 {figure.legacy.impact.map((impact, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="text-brand-blue mt-1">•</span>
+                    <span className="text-[#F4D03F] mt-1">•</span>
                     <span className="text-gray-300 leading-relaxed">{impact}</span>
                   </li>
                 ))}
@@ -663,14 +663,14 @@ export default function FigureDetail() {
         <section className="py-20 px-6 bg-charcoal-900">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <VideoIcon className="inline-block text-brand-blue mb-4" size={48} />
-              <h2 className="text-4xl font-display text-brand-blue uppercase tracking-wider">
+              <VideoIcon className="inline-block text-[#F4D03F] mb-4" size={48} />
+              <h2 className="text-4xl font-display text-[#F4D03F] uppercase tracking-wider">
                 Video Lịch Sử
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               {figure.videos.map((video, idx) => (
-                <div key={idx} className="bg-charcoal-800 border border-brand-blue/20 rounded-lg overflow-hidden hover:border-brand-blue/60 transition-all group">
+                <div key={idx} className="bg-charcoal-800 border border-[#F4D03F]/20 rounded-lg overflow-hidden hover:border-[#F4D03F]/60 transition-all group">
                   <div className="relative aspect-video">
                     <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-charcoal-900/60 flex items-center justify-center group-hover:bg-charcoal-900/40 transition-all">
@@ -680,7 +680,7 @@ export default function FigureDetail() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <span className="inline-block px-3 py-1 bg-amber-400/20 text-brand-blue text-xs rounded mb-3">{video.year}</span>
+                    <span className="inline-block px-3 py-1 bg-amber-400/20 text-[#F4D03F] text-xs rounded mb-3">{video.year}</span>
                     <h3 className="text-xl font-bold text-white mb-2">{video.title}</h3>
                     <p className="text-gray-400">{video.description}</p>
                   </div>

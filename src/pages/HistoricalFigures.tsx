@@ -135,12 +135,12 @@ export default function HistoricalFigures() {
         
         <div className="relative max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="h-1 w-12 bg-brand-blue"></div>
-            <User className="text-brand-blue" size={32} />
-            <div className="h-1 w-12 bg-brand-blue"></div>
+            <div className="h-1 w-12 bg-[#F4D03F]"></div>
+            <User className="text-[#F4D03F]" size={32} />
+            <div className="h-1 w-12 bg-[#F4D03F]"></div>
           </div>
           
-          <h1 className="text-6xl md:text-7xl font-display uppercase text-brand-blue mb-6 tracking-wider">
+          <h1 className="text-6xl md:text-7xl font-display uppercase text-[#F4D03F] mb-6 tracking-wider">
             Nhân Vật Lịch Sử
           </h1>
           
@@ -150,7 +150,7 @@ export default function HistoricalFigures() {
 
           <div className="mt-8 flex items-center justify-center gap-6 text-sm text-gray-300">
             <div className="flex items-center gap-2">
-              <Award className="text-brand-blue" size={20} />
+              <Award className="text-[#F4D03F]" size={20} />
               <span>Anh Hùng Dân Tộc</span>
             </div>
           </div>
@@ -158,9 +158,9 @@ export default function HistoricalFigures() {
       </section>
 
       {/* Quote Section */}
-      <section className="py-12 px-6 bg-gradient-to-r from-charcoal-800 via-charcoal-900 to-charcoal-800 border-y border-brand-blue/20">
+      <section className="py-12 px-6 bg-gradient-to-r from-charcoal-800 via-charcoal-900 to-charcoal-800 border-y border-[#F4D03F]/20">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-2xl font-light text-brand-blue italic">
+          <p className="text-2xl font-light text-[#F4D03F] italic">
             "Không có gì quý hơn độc lập tự do"
           </p>
           <p className="mt-4 text-gray-300">— Chủ tịch Hồ Chí Minh —</p>
@@ -172,18 +172,18 @@ export default function HistoricalFigures() {
         <div className="max-w-7xl mx-auto">
           <div className="relative max-w-2xl mx-auto">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-blue" size={24} />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#F4D03F]" size={24} />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm kiếm nhân vật theo tên, chức vụ, thành tựu..."
-                className="w-full pl-14 pr-14 py-4 bg-charcoal-800 border-2 border-brand-blue/30 rounded-full text-gray-100 placeholder-gray-400 focus:outline-none focus:border-brand-blue transition-all"
+                className="w-full pl-14 pr-14 py-4 bg-charcoal-800 border-2 border-[#F4D03F]/30 rounded-full text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#F4D03F] transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-brand-blue transition-colors"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#F4D03F] transition-colors"
                 >
                   <X size={24} />
                 </button>
@@ -194,7 +194,7 @@ export default function HistoricalFigures() {
             {searchQuery && (
               <div className="mt-4 text-center">
                 <p className="text-gray-300">
-                  Tìm thấy <span className="text-brand-blue font-bold">{filteredFigures.length}</span> kết quả
+                  Tìm thấy <span className="text-[#F4D03F] font-bold">{filteredFigures.length}</span> kết quả
                   {filteredFigures.length === 0 && ' - Hãy thử từ khóa khác'}
                 </p>
               </div>
@@ -218,7 +218,7 @@ export default function HistoricalFigures() {
               <div
                 key={figure.id}
                 onClick={() => handleViewFigure(figure.id)}
-                className="group relative bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all duration-500 cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
+                className="group relative bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-[#F4D03F]/30 hover:border-[#F4D03F] transition-all duration-500 cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#F4D03F]/20"
                 style={{
                   animationDelay: `${index * 100}ms`,
                   animationFillMode: 'both',
@@ -236,50 +236,50 @@ export default function HistoricalFigures() {
                   
                   {/* Name Overlay on Image */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal-900 to-transparent">
-                    <h3 className="text-3xl font-display text-brand-blue mb-2 drop-shadow-lg">
+                    <h3 className="text-3xl font-display text-[#F4D03F] mb-2 drop-shadow-lg">
                       {figure.name}
                     </h3>
-                    <p className="text-sm text-brand-blue/80 font-semibold uppercase tracking-wider">
+                    <p className="text-sm text-[#F4D03F]/80 font-semibold uppercase tracking-wider">
                       {figure.title}
                     </p>
                   </div>
 
                   {/* Date Badge */}
-                  <div className="absolute top-4 right-4 bg-charcoal-900/90 backdrop-blur-md border border-brand-blue/50 rounded-full px-4 py-2 flex items-center gap-2 shadow-lg">
-                    <Calendar className="text-brand-blue" size={16} />
-                    <span className="text-xs text-brand-blue font-semibold">{figure.birth} {figure.death && `- ${figure.death}`}</span>
+                  <div className="absolute top-4 right-4 bg-charcoal-900/90 backdrop-blur-md border border-[#F4D03F]/50 rounded-full px-4 py-2 flex items-center gap-2 shadow-lg">
+                    <Calendar className="text-[#F4D03F]" size={16} />
+                    <span className="text-xs text-[#F4D03F] font-semibold">{figure.birth} {figure.death && `- ${figure.death}`}</span>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6 bg-gradient-to-b from-charcoal-900 to-charcoal-800">
                   {/* Description */}
-                  <p className="text-gray-200 leading-relaxed mb-6 text-center italic border-l-4 border-brand-blue pl-4 py-2 bg-charcoal-800/50 rounded-r">
+                  <p className="text-gray-200 leading-relaxed mb-6 text-center italic border-l-4 border-[#F4D03F] pl-4 py-2 bg-charcoal-800/50 rounded-r">
                     {figure.description}
                   </p>
 
                   {/* Achievements */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <Award className="text-brand-blue" size={18} />
-                      <span className="text-brand-blue text-sm font-bold uppercase">Thành Tựu Nổi Bật</span>
+                      <Award className="text-[#F4D03F]" size={18} />
+                      <span className="text-[#F4D03F] text-sm font-bold uppercase">Thành Tựu Nổi Bật</span>
                     </div>
                     {figure.achievements.map((achievement, i) => (
-                      <div key={i} className="flex items-start gap-3 bg-charcoal-800/50 p-3 rounded-lg border border-brand-blue/10">
-                        <span className="text-brand-blue text-lg leading-none">✦</span>
+                      <div key={i} className="flex items-start gap-3 bg-charcoal-800/50 p-3 rounded-lg border border-[#F4D03F]/10">
+                        <span className="text-[#F4D03F] text-lg leading-none">✦</span>
                         <span className="text-sm text-gray-200 leading-relaxed">{achievement}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* View Details Button */}
-                  <div className="pt-4 border-t border-brand-blue/20">
+                  <div className="pt-4 border-t border-[#F4D03F]/20">
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
                         handleViewFigure(figure.id);
                       }}
-                      className="w-full flex items-center justify-center gap-2 text-brand-blue font-bold hover:text-brand-blue/80 transition-colors bg-charcoal-800 hover:bg-brand-blue/10 py-3 rounded-lg"
+                      className="w-full flex items-center justify-center gap-2 text-[#F4D03F] font-bold hover:text-[#F4D03F]/80 transition-colors bg-charcoal-800 hover:bg-[#F4D03F]/10 py-3 rounded-lg"
                     >
                       <span>Khám Phá Cuộc Đời</span>
                       <span className="transform group-hover:translate-x-2 transition-transform text-lg">→</span>
@@ -294,13 +294,13 @@ export default function HistoricalFigures() {
       </section>
 
       {/* Memorial Section */}
-      <section className="py-16 px-6 bg-gradient-to-b from-charcoal-900 to-charcoal-800 border-t border-brand-blue/20">
+      <section className="py-16 px-6 bg-gradient-to-b from-charcoal-900 to-charcoal-800 border-t border-[#F4D03F]/20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-3 mb-6">
             <Heart className="text-red-500" size={32} />
           </div>
           
-          <h2 className="text-3xl font-display text-brand-blue mb-6">
+          <h2 className="text-3xl font-display text-[#F4D03F] mb-6">
             Cùng Hàng Triệu Anh Hùng, Liệt Sĩ
           </h2>
           
@@ -310,9 +310,9 @@ export default function HistoricalFigures() {
           </p>
 
           <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-24 bg-brand-blue/30"></div>
-            <span className="text-brand-blue text-2xl">🕊️</span>
-            <div className="h-px w-24 bg-brand-blue/30"></div>
+            <div className="h-px w-24 bg-[#F4D03F]/30"></div>
+            <span className="text-[#F4D03F] text-2xl">🕊️</span>
+            <div className="h-px w-24 bg-[#F4D03F]/30"></div>
           </div>
         </div>
       </section>

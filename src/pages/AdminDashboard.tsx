@@ -90,7 +90,7 @@ const quickActions: QuickAction[] = [
     label: 'Duyệt đơn mở shop',
     description: '3 đơn đang chờ xác thực thanh toán',
     icon: CheckCircle2,
-    accent: 'bg-indigo-50 text-indigo-600',
+    accent: 'bg-[#1A1A1A] text-[#F4D03F]',
     operations: [
       { label: 'Mở hàng đợi hôm nay', variant: 'primary' },
       { label: 'Đính kèm biên bản bổ sung', variant: 'secondary' },
@@ -195,7 +195,7 @@ const paymentStatusStyles: Record<string, string> = {
   verified: 'bg-emerald-50 text-emerald-600',
   missing: 'bg-rose-50 text-rose-600',
   escalated: 'bg-purple-50 text-purple-600',
-  completed: 'bg-slate-100 text-slate-600',
+  completed: 'bg-[#262626] text-[#9CA3AF]',
 };
 
 const paymentStatusLabels: Record<string, string> = {
@@ -309,7 +309,7 @@ const systemActivity: SystemActivityItem[] = [
 
 const activityStyles: Record<string, string> = {
   approve: 'bg-emerald-100 text-emerald-700',
-  note: 'bg-slate-100 text-slate-600',
+  note: 'bg-[#262626] text-[#9CA3AF]',
   warning: 'bg-amber-100 text-amber-700',
   info: 'bg-sky-100 text-sky-700',
 };
@@ -378,16 +378,16 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#eef2ff] via-white to-[#fff1f5] px-6 py-8 text-slate-900">
+    <div className="min-h-screen bg-[#0D0D0D] px-6 py-8 text-[#E5E5E5]">
       <div className="flex w-full gap-6">
-        <aside className="flex w-72 flex-col rounded-3xl bg-white p-6 shadow-xl shadow-indigo-100/50">
+        <aside className="flex w-72 flex-col rounded-3xl bg-[#1A1A1A] p-6 shadow-xl shadow-black/20">
           <div className="mb-8 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-400 text-white">
               <Package className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-semibold text-slate-900">Echoes Admin</p>
-              <span className="text-xs text-slate-400">Control Center</span>
+              <p className="text-lg font-semibold text-[#E5E5E5]">Echoes Admin</p>
+              <span className="text-xs text-[#6B7280]">Control Center</span>
             </div>
           </div>
           <nav className="space-y-1">
@@ -397,29 +397,29 @@ const AdminDashboard = () => {
                 type="button"
                 className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                   isActive
-                    ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-indigo-200/60'
-                    : 'text-slate-500 hover:bg-slate-100'
+                    ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-black/30'
+                    : 'text-[#9CA3AF] hover:bg-[#262626]'
                 }`}
                 onClick={() => openWorkflow(workflow.key)}
               >
-                <workflow.icon className={`h-4 w-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                <workflow.icon className={`h-4 w-4 ${isActive ? 'text-white' : 'text-[#6B7280]'}`} />
                 {workflow.label}
               </button>
             ))}
           </nav>
-          <div className="mt-auto rounded-2xl bg-gradient-to-br from-purple-500/10 via-white to-indigo-500/10 p-4 text-xs text-slate-500">
-            <p className="font-semibold text-slate-700">Bảng điều khiển admin</p>
+          <div className="mt-auto rounded-2xl bg-gradient-to-br from-purple-500/10 via-white to-indigo-500/10 p-4 text-xs text-[#9CA3AF]">
+            <p className="font-semibold text-[#E5E5E5]">Bảng điều khiển admin</p>
             <p className="mt-1">Quản lý user, shop, thanh toán và hệ thống hỗ trợ trong một nơi.</p>
-            <button className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-indigo-500 shadow-sm shadow-indigo-100 transition hover:shadow-md">
+            <button className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] px-4 py-2 text-xs font-semibold text-[#F4D03F] shadow-sm shadow-black/20 transition hover:shadow-md">
               <LifeBuoy className="h-4 w-4" />
               Trung tâm hỗ trợ
             </button>
           </div>
         </aside>
 
-        <main className="relative flex-1 overflow-hidden rounded-[2.5rem] border border-indigo-50 bg-white/95 shadow-xl shadow-indigo-100/50 backdrop-blur">
+        <main className="relative flex-1 overflow-hidden rounded-[2.5rem] border border-[#333333] bg-[#1A1A1A] shadow-xl shadow-black/20 backdrop-blur">
           <div className="relative flex h-full flex-col p-8">
-            <header className="overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 p-8 text-white shadow-lg shadow-indigo-200/60">
+            <header className="overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 p-8 text-white shadow-lg shadow-black/30">
               <div className="relative flex flex-wrap items-start justify-between gap-6">
                 <div>
                   <p className="text-xs uppercase tracking-[0.4em] text-white/70">Bảng điều khiển</p>
@@ -427,7 +427,7 @@ const AdminDashboard = () => {
                   <p className="mt-2 text-sm text-white/80">Hôm nay là {formattedDate}. Chúc bạn một {timeGreeting} hiệu quả!</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur">
+                  <div className="flex items-center gap-2 rounded-full bg-[#1A1A1A]/10 px-4 py-2 text-sm text-white/90 backdrop-blur">
                     <Search className="h-4 w-4 text-white/70" />
                     <input
                       aria-label="Search admin"
@@ -435,31 +435,31 @@ const AdminDashboard = () => {
                       className="w-56 border-none bg-transparent text-sm text-white placeholder:text-white/70 focus:outline-none"
                     />
                   </div>
-                  <button className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+                  <button className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1A1A1A]/10 text-white transition hover:bg-[#1A1A1A]/20">
                     <Bell className="h-5 w-5" />
                     <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-rose-300" />
                   </button>
                 </div>
-                <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/20 blur-3xl" />
-                <div className="pointer-events-none absolute -left-16 bottom-0 h-32 w-32 rounded-full bg-white/10 blur-3xl" />
+                <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#1A1A1A]/20 blur-3xl" />
+                <div className="pointer-events-none absolute -left-16 bottom-0 h-32 w-32 rounded-full bg-[#1A1A1A]/10 blur-3xl" />
               </div>
               <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-2xl bg-white/10 p-4 text-white">
+                <div className="rounded-2xl bg-[#1A1A1A]/10 p-4 text-white">
                   <p className="text-xs uppercase tracking-wider text-white/70">Hôm nay</p>
                   <p className="mt-2 text-xl font-semibold">37 công việc ưu tiên</p>
                   <p className="mt-1 text-xs text-white/70">Bao gồm 3 đơn mở shop và 4 thanh toán</p>
                 </div>
-                <div className="rounded-2xl bg-white/10 p-4 text-white">
+                <div className="rounded-2xl bg-[#1A1A1A]/10 p-4 text-white">
                   <p className="text-xs uppercase tracking-wider text-white/70">Truy cập</p>
                   <p className="mt-2 text-xl font-semibold">+126%</p>
                   <p className="mt-1 text-xs text-white/70">Diễn đàn lịch sử tăng mạnh sau sự kiện tối qua</p>
                 </div>
-                <div className="rounded-2xl bg-white/10 p-4 text-white">
+                <div className="rounded-2xl bg-[#1A1A1A]/10 p-4 text-white">
                   <p className="text-xs uppercase tracking-wider text-white/70">Hỗ trợ khách</p>
                   <p className="mt-2 text-xl font-semibold">12 ticket đang xử lý</p>
                   <p className="mt-1 text-xs text-white/70">Đừng quên đánh dấu hoàn thành sau khi phản hồi</p>
                 </div>
-                <div className="rounded-2xl bg-white/10 p-4 text-white">
+                <div className="rounded-2xl bg-[#1A1A1A]/10 p-4 text-white">
                   <p className="text-xs uppercase tracking-wider text-white/70">Sự kiện</p>
                   <p className="mt-2 text-xl font-semibold">Lịch review 14:30</p>
                   <p className="mt-1 text-xs text-white/70">Đánh giá 2 shop PRO và cập nhật chính sách phí</p>
@@ -473,16 +473,16 @@ const AdminDashboard = () => {
                   type="button"
                   key={card.title}
                   onClick={() => openWorkflow(card.targetWorkflow, { type: 'stat', data: card })}
-                  className="relative overflow-hidden rounded-3xl border border-indigo-100 bg-white p-5 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="relative overflow-hidden rounded-3xl border border-[#333333] bg-[#1A1A1A] p-5 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                 >
                   <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${card.gradient} opacity-20`} />
                   <div className="relative flex items-center justify-between">
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-slate-400">{card.title}</p>
-                      <p className="mt-3 text-3xl font-semibold text-slate-900">{card.value}</p>
+                      <p className="text-xs uppercase tracking-wider text-[#6B7280]">{card.title}</p>
+                      <p className="mt-3 text-3xl font-semibold text-[#E5E5E5]">{card.value}</p>
                       <p className="mt-2 text-xs font-medium text-emerald-600">{card.change}</p>
                     </div>
-                    <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${card.gradient} text-white shadow-lg shadow-indigo-200/60`}>
+                    <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${card.gradient} text-white shadow-lg shadow-black/30`}>
                       <card.icon className="h-5 w-5" />
                     </div>
                   </div>
@@ -496,30 +496,30 @@ const AdminDashboard = () => {
                   key={action.label}
                   type="button"
                   onClick={() => openWorkflow(action.targetWorkflow, { type: 'quickAction', data: action })}
-                  className={`flex items-start gap-4 rounded-3xl border border-slate-100 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${action.accent}`}
+                  className={`flex items-start gap-4 rounded-3xl border border-[#333333] bg-[#1A1A1A] p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${action.accent}`}
                 >
-                  <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white text-current">
+                  <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-[#1A1A1A] text-current">
                     <action.icon className="h-5 w-5" />
                   </span>
                   <span>
-                    <p className="text-sm font-semibold text-slate-800">{action.label}</p>
-                    <p className="mt-1 text-xs text-slate-500">{action.description}</p>
+                    <p className="text-sm font-semibold text-[#E5E5E5]">{action.label}</p>
+                    <p className="mt-1 text-xs text-[#9CA3AF]">{action.description}</p>
                   </span>
                 </button>
               ))}
             </section>
 
             <div className="mt-6 grid gap-6 xl:grid-cols-[2fr,1fr]">
-              <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <section className="overflow-hidden rounded-3xl border border-[#333333] bg-[#1A1A1A] shadow-sm">
+                <div className="flex items-center justify-between border-b border-[#333333] px-6 py-4">
                   <div>
-                    <h2 className="text-lg font-semibold text-slate-900">Đơn mở shop cần xử lý</h2>
-                    <p className="text-xs text-slate-500">Theo dõi tiến độ, trạng thái thanh toán và số sao của ứng viên</p>
+                    <h2 className="text-lg font-semibold text-[#E5E5E5]">Đơn mở shop cần xử lý</h2>
+                    <p className="text-xs text-[#9CA3AF]">Theo dõi tiến độ, trạng thái thanh toán và số sao của ứng viên</p>
                   </div>
-                  <button className="text-sm font-semibold text-indigo-500 hover:text-indigo-600">Xem tất cả</button>
+                  <button className="text-sm font-semibold text-[#F4D03F] hover:text-[#F4D03F]">Xem tất cả</button>
                 </div>
-                <table className="min-w-full table-fixed divide-y divide-slate-100 text-sm">
-                  <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-400">
+                <table className="min-w-full table-fixed divide-y divide-[#333333] text-sm">
+                  <thead className="bg-[#262626] text-xs uppercase tracking-wide text-[#6B7280]">
                     <tr>
                       <th className="px-6 py-3 text-left font-semibold">Shop</th>
                       <th className="px-3 py-3 text-left font-semibold">Gói</th>
@@ -530,11 +530,11 @@ const AdminDashboard = () => {
                       <th className="px-6 py-3 text-right font-semibold">Thao tác</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#333333]">
                     {shopRequests.map((request) => (
                       <tr
                         key={request.id}
-                        className="cursor-pointer transition hover:bg-indigo-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="cursor-pointer transition hover:bg-[#333333]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                         onClick={() => openWorkflow('shops', { type: 'shopRequest', data: request })}
                         onKeyDown={(event) => {
                           if (event.key === 'Enter' || event.key === ' ') {
@@ -547,13 +547,13 @@ const AdminDashboard = () => {
                       >
                         <td className="px-6 py-4">
                           <div className="flex flex-col">
-                            <span className="font-semibold text-slate-800">{request.shopName}</span>
-                            <span className="text-xs text-slate-500">{request.owner}</span>
-                            <span className="text-xs text-slate-400">{request.email} · {request.phone}</span>
+                            <span className="font-semibold text-[#E5E5E5]">{request.shopName}</span>
+                            <span className="text-xs text-[#9CA3AF]">{request.owner}</span>
+                            <span className="text-xs text-[#6B7280]">{request.email} · {request.phone}</span>
                           </div>
                         </td>
-                        <td className="px-3 py-4 text-xs font-semibold text-slate-600">{request.packageType}</td>
-                        <td className="px-3 py-4 text-xs text-slate-500">{request.stars}</td>
+                        <td className="px-3 py-4 text-xs font-semibold text-[#9CA3AF]">{request.packageType}</td>
+                        <td className="px-3 py-4 text-xs text-[#9CA3AF]">{request.stars}</td>
                         <td className="px-3 py-4">
                           <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${paymentStatusStyles[request.paymentStatus]}`}>
                             {paymentStatusLabels[request.paymentStatus] ?? request.paymentStatus}
@@ -564,9 +564,9 @@ const AdminDashboard = () => {
                             {requestStatusLabels[request.status] ?? request.status}
                           </span>
                         </td>
-                        <td className="px-3 py-4 text-xs text-slate-500">{request.submittedAt}</td>
+                        <td className="px-3 py-4 text-xs text-[#9CA3AF]">{request.submittedAt}</td>
                         <td className="px-6 py-4 text-right">
-                          <button className="text-xs font-semibold text-indigo-500 hover:text-indigo-600">Xem hồ sơ</button>
+                          <button className="text-xs font-semibold text-[#F4D03F] hover:text-[#F4D03F]">Xem hồ sơ</button>
                         </td>
                       </tr>
                     ))}
@@ -574,9 +574,9 @@ const AdminDashboard = () => {
                 </table>
               </section>
 
-              <section className="flex h-full flex-col rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
+              <section className="flex h-full flex-col rounded-3xl border border-[#333333] bg-[#1A1A1A] p-6 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-slate-900">Cảnh báo & tài khoản cần chú ý</h2>
+                  <h2 className="text-lg font-semibold text-[#E5E5E5]">Cảnh báo & tài khoản cần chú ý</h2>
                   <span className="rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-600">{userAlerts.length} cảnh báo</span>
                 </div>
                 <div className="mt-4 space-y-4">
@@ -596,19 +596,19 @@ const AdminDashboard = () => {
                     >
                       <div className="flex items-start justify-between">
                         <div>
-                          <p className="text-sm font-semibold text-slate-800">{alert.name}</p>
-                          <p className="mt-1 text-xs text-slate-500">{alert.issue}</p>
-                          <p className="mt-2 text-[11px] text-slate-400">Cập nhật: {alert.lastAction}</p>
+                          <p className="text-sm font-semibold text-[#E5E5E5]">{alert.name}</p>
+                          <p className="mt-1 text-xs text-[#9CA3AF]">{alert.issue}</p>
+                          <p className="mt-2 text-[11px] text-[#6B7280]">Cập nhật: {alert.lastAction}</p>
                         </div>
-                        <span className="rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 shadow-sm">
+                        <span className="rounded-full bg-[#1A1A1A] px-3 py-1 text-[11px] font-semibold text-[#9CA3AF] shadow-sm">
                           {alert.stars} sao
                         </span>
                       </div>
                       <div className="mt-3 flex gap-2 text-xs">
-                        <button className="inline-flex items-center justify-center rounded-full bg-white px-3 py-2 font-semibold text-indigo-500 shadow-sm shadow-indigo-100 transition hover:bg-indigo-50">
+                        <button className="inline-flex items-center justify-center rounded-full bg-[#1A1A1A] px-3 py-2 font-semibold text-[#F4D03F] shadow-sm shadow-black/20 transition hover:bg-[#333333]">
                           Ghi chú xử lý
                         </button>
-                        <button className="inline-flex items-center justify-center rounded-full border border-white/60 px-3 py-2 font-semibold text-slate-600 transition hover:border-slate-200 hover:text-slate-800">
+                        <button className="inline-flex items-center justify-center rounded-full border border-white/60 px-3 py-2 font-semibold text-[#9CA3AF] transition hover:border-[#333333] hover:text-[#E5E5E5]">
                           Xem lịch sử
                         </button>
                       </div>
@@ -619,16 +619,16 @@ const AdminDashboard = () => {
             </div>
 
             <div className="mt-6 grid gap-6 xl:grid-cols-[1.5fr,1fr]">
-              <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <section className="overflow-hidden rounded-3xl border border-[#333333] bg-[#1A1A1A] shadow-sm">
+                <div className="flex items-center justify-between border-b border-[#333333] px-6 py-4">
                   <div>
-                    <h2 className="text-lg font-semibold text-slate-900">Hàng đợi đối soát thanh toán</h2>
-                    <p className="text-xs text-slate-500">Theo dõi các khoản đặt cọc và chuyển khoản cần xác thực</p>
+                    <h2 className="text-lg font-semibold text-[#E5E5E5]">Hàng đợi đối soát thanh toán</h2>
+                    <p className="text-xs text-[#9CA3AF]">Theo dõi các khoản đặt cọc và chuyển khoản cần xác thực</p>
                   </div>
-                  <button className="text-sm font-semibold text-indigo-500 hover:text-indigo-600">Xuất báo cáo</button>
+                  <button className="text-sm font-semibold text-[#F4D03F] hover:text-[#F4D03F]">Xuất báo cáo</button>
                 </div>
-                <table className="min-w-full table-fixed divide-y divide-slate-100 text-sm">
-                  <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-400">
+                <table className="min-w-full table-fixed divide-y divide-[#333333] text-sm">
+                  <thead className="bg-[#262626] text-xs uppercase tracking-wide text-[#6B7280]">
                     <tr>
                       <th className="px-6 py-3 text-left font-semibold">Thanh toán</th>
                       <th className="px-3 py-3 text-left font-semibold">Số tiền</th>
@@ -638,11 +638,11 @@ const AdminDashboard = () => {
                       <th className="px-6 py-3 text-right font-semibold">Thao tác</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#333333]">
                     {paymentQueue.map((payment) => (
                       <tr
                         key={payment.id}
-                        className="cursor-pointer transition hover:bg-indigo-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        className="cursor-pointer transition hover:bg-[#333333]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                         onClick={() => openWorkflow('payments', { type: 'payment', data: payment })}
                         onKeyDown={(event) => {
                           if (event.key === 'Enter' || event.key === ' ') {
@@ -655,23 +655,23 @@ const AdminDashboard = () => {
                       >
                         <td className="px-6 py-4">
                           <div className="flex flex-col">
-                            <span className="font-semibold text-slate-800">{payment.shopName}</span>
-                            <span className="text-xs text-slate-500">{payment.owner}</span>
-                            <span className="text-[11px] text-slate-400">Mã thanh toán: {payment.id}</span>
+                            <span className="font-semibold text-[#E5E5E5]">{payment.shopName}</span>
+                            <span className="text-xs text-[#9CA3AF]">{payment.owner}</span>
+                            <span className="text-[11px] text-[#6B7280]">Mã thanh toán: {payment.id}</span>
                           </div>
                         </td>
-                        <td className="px-3 py-4 text-xs font-semibold text-slate-600">
+                        <td className="px-3 py-4 text-xs font-semibold text-[#9CA3AF]">
                           {currencyFormatter.format(payment.amount)}
                         </td>
-                        <td className="px-3 py-4 text-xs text-slate-500">{payment.method}</td>
+                        <td className="px-3 py-4 text-xs text-[#9CA3AF]">{payment.method}</td>
                         <td className="px-3 py-4">
                           <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${paymentStatusStyles[payment.status]}`}>
                             {paymentStatusLabels[payment.status] ?? payment.status}
                           </span>
                         </td>
-                        <td className="px-3 py-4 text-xs text-slate-500">{payment.submittedAt}</td>
+                        <td className="px-3 py-4 text-xs text-[#9CA3AF]">{payment.submittedAt}</td>
                         <td className="px-6 py-4 text-right">
-                          <button className="text-xs font-semibold text-indigo-500 hover:text-indigo-600">Xem chứng từ</button>
+                          <button className="text-xs font-semibold text-[#F4D03F] hover:text-[#F4D03F]">Xem chứng từ</button>
                         </td>
                       </tr>
                     ))}
@@ -679,19 +679,19 @@ const AdminDashboard = () => {
                 </table>
               </section>
 
-              <section className="flex h-full flex-col rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-slate-900">Nhật ký hệ thống</h2>
+              <section className="flex h-full flex-col rounded-3xl border border-[#333333] bg-[#1A1A1A] p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#E5E5E5]">Nhật ký hệ thống</h2>
                 <div className="mt-4 space-y-4">
                   {systemActivity.map((activity, index) => (
                     <button
                       key={`${activity.time}-${index}`}
                       type="button"
                       onClick={() => openWorkflow('overview', { type: 'systemActivity', data: activity })}
-                      className="group relative w-full rounded-2xl border border-slate-100 bg-white/60 p-4 pl-6 text-left transition hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                      className="group relative w-full rounded-2xl border border-[#333333] bg-[#1A1A1A]/60 p-4 pl-6 text-left transition hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-[#1A1A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                     >
                       <span className="absolute left-2 top-5 h-2.5 w-2.5 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500" />
-                      <p className="text-xs font-semibold text-slate-400">{activity.time}</p>
-                      <p className="mt-1 text-sm font-semibold text-slate-800">{activity.actor}</p>
+                      <p className="text-xs font-semibold text-[#6B7280]">{activity.time}</p>
+                      <p className="mt-1 text-sm font-semibold text-[#E5E5E5]">{activity.actor}</p>
                       <span className={`mt-1 inline-flex rounded-full px-3 py-1 text-[11px] font-medium ${activityStyles[activity.type]}`}>
                         {activity.action}
                       </span>
@@ -701,13 +701,13 @@ const AdminDashboard = () => {
               </section>
             </div>
 
-            <section className="mt-6 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
+            <section className="mt-6 rounded-3xl border border-[#333333] bg-[#1A1A1A] p-6 shadow-sm">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900">Hiệu suất các shop nổi bật</h2>
-                  <p className="text-xs text-slate-500">Theo dõi doanh thu, giới hạn gói và số đơn đã xử lý</p>
+                  <h2 className="text-lg font-semibold text-[#E5E5E5]">Hiệu suất các shop nổi bật</h2>
+                  <p className="text-xs text-[#9CA3AF]">Theo dõi doanh thu, giới hạn gói và số đơn đã xử lý</p>
                 </div>
-                <button className="text-sm font-semibold text-indigo-500 hover:text-indigo-600">Quản lý tất cả shop</button>
+                <button className="text-sm font-semibold text-[#F4D03F] hover:text-[#F4D03F]">Quản lý tất cả shop</button>
               </div>
               <div className="mt-5 space-y-4">
                 {shopPerformance.map((shop) => {
@@ -718,24 +718,24 @@ const AdminDashboard = () => {
                       type="button"
                       key={shop.id}
                       onClick={() => openWorkflow('analytics', { type: 'shopPerformance', data: shop })}
-                      className="w-full rounded-3xl border border-slate-100 bg-slate-50/60 p-5 text-left transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                      className="w-full rounded-3xl border border-[#333333] bg-[#262626]/60 p-5 text-left transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                     >
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         <div>
-                          <p className="text-sm font-semibold text-slate-800">{shop.name}</p>
-                          <p className="text-xs text-slate-500">Gói {shop.packageType} · {numberFormatter.format(shop.orders)} đơn</p>
+                          <p className="text-sm font-semibold text-[#E5E5E5]">{shop.name}</p>
+                          <p className="text-xs text-[#9CA3AF]">Gói {shop.packageType} · {numberFormatter.format(shop.orders)} đơn</p>
                         </div>
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600 shadow-sm">
+                        <span className="rounded-full bg-[#1A1A1A] px-3 py-1 text-xs font-semibold text-[#9CA3AF] shadow-sm">
                           {currencyFormatter.format(shop.revenue)} / {currencyFormatter.format(shop.revenueLimit)}
                         </span>
                       </div>
-                      <div className="mt-3 h-2 rounded-full bg-white">
+                      <div className="mt-3 h-2 rounded-full bg-[#1A1A1A]">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
-                      <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
+                      <div className="mt-3 flex items-center justify-between text-xs text-[#9CA3AF]">
                         <span>Đã dùng {percentage}% hạn mức doanh thu</span>
                         <span>{shop.supportUsed} lần hỗ trợ vận chuyển</span>
                       </div>

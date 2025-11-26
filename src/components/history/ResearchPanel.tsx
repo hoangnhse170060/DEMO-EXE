@@ -61,7 +61,7 @@ export default function ResearchPanel({ event }: Props) {
       </section>
 
       {leadVideo && (
-        <section className="rounded-3xl border border-amber-900/20 bg-white shadow-sm">
+        <section className="rounded-3xl border border-amber-900/20 bg-[#1A1A1A] shadow-sm">
           <div className="border-b border-amber-900/15 px-5 py-4">
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-800">
               <Video size={16} /> Phim tư liệu
@@ -98,7 +98,7 @@ export default function ResearchPanel({ event }: Props) {
       )}
 
       {supportingImages.length > 0 && (
-        <section className="rounded-3xl border border-amber-900/15 bg-white p-5 shadow-sm">
+        <section className="rounded-3xl border border-amber-900/15 bg-[#1A1A1A] p-5 shadow-sm">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-900">
             <Camera size={16} /> Tư liệu hình ảnh
           </p>
@@ -118,7 +118,7 @@ export default function ResearchPanel({ event }: Props) {
       )}
 
       {primary.length > 0 && (
-        <section className="rounded-3xl border border-amber-900/15 bg-white p-5 shadow-sm">
+        <section className="rounded-3xl border border-amber-900/15 bg-[#1A1A1A] p-5 shadow-sm">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-900">Nguồn sơ cấp</h3>
           <ul className="space-y-3 text-xs text-amber-800">
             {primary.map((src) => (
@@ -143,7 +143,7 @@ export default function ResearchPanel({ event }: Props) {
       )}
 
       {secondary.length > 0 && (
-        <section className="rounded-3xl border border-amber-900/15 bg-white p-5 shadow-sm">
+        <section className="rounded-3xl border border-amber-900/15 bg-[#1A1A1A] p-5 shadow-sm">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-900">Nguồn thứ cấp</h3>
           <ul className="space-y-3 text-xs text-amber-800">
             {secondary.map((src) => (

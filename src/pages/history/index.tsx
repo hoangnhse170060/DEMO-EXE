@@ -67,12 +67,13 @@ export default function HistoryPage() {
       setProgressMap({});
       return;
     }
+    // Load progress on mount and whenever events change or navigate back
     const map: Record<string, HistoryProgress> = {};
     events.forEach((event) => {
       map[event.id] = getHistoryProgress(user.id, event.id);
     });
     setProgressMap(map);
-  }, [events, user?.id]);
+  }, [events, user?.id, location.key]); // location.key changes on every navigation
 
   useEffect(() => {
     const search = new URLSearchParams();
@@ -154,7 +155,8 @@ export default function HistoryPage() {
       const required = sortedEvents[targetIndex - 1];
       const prerequisiteMet = passedMap[required.id];
       if (!prerequisiteMet) {
-        window.alert(`Bạn phải hoàn thành sự kiện "${required.title}" (điểm quiz từ ${PASSING_SCORE}% trở lên) trước khi mở "${sortedEvents[targetIndex].title}".`);
+        // Silently prevent navigation if prerequisite not met
+        console.log(`Cannot advance to "${sortedEvents[targetIndex]?.title}". Need to pass "${required.title}" first.`);
         return;
       }
     }
@@ -191,20 +193,14 @@ export default function HistoryPage() {
       attemptedAt: new Date().toISOString(),
       questionIds: summary.answers.map((record) => record.questionId),
     };
-    let updatedProgress = recordQuizAttempt(user.id, activeEvent.id, attemptRecord);
-
-    // Always mark as completed regardless of score
-    updatedProgress = updateHistoryProgress(user.id, activeEvent.id, {
-      failedAttempts: 0,
-      lockedUntil: null,
-      completedAt: new Date().toISOString(),
-    });
+    // recordQuizAttempt updates bestScore automatically
+    const updatedProgress = recordQuizAttempt(user.id, activeEvent.id, attemptRecord);
 
     setProgressMap((prev) => ({ ...prev, [activeEvent.id]: updatedProgress }));
     setReviewAnswers(summary.answers);
     const currentIndex = eventIndexMap[activeEvent.id];
     const nextEvent = typeof currentIndex === 'number' ? sortedEvents[currentIndex + 1] : undefined;
-    const autoAdvanceTo = nextEvent?.id ?? null;
+    const autoAdvanceTo = grade.score >= PASSING_SCORE && nextEvent?.id ? nextEvent.id : null;
     setQuizOutcome({
       score: grade.score,
       stars: grade.stars,
@@ -237,13 +233,13 @@ export default function HistoryPage() {
   }, [quizOutcome?.autoAdvanceTo, ensureUnlockedAndSelect]);
 
   return (
-    <div className="min-h-screen bg-brand-base pb-16">
+    <div className="min-h-screen bg-[#0D0D0D] pb-16">
       <header
         className="relative h-72 w-full bg-cover bg-center"
         style={{ backgroundImage: `linear-gradient(rgba(15,23,42,0.65), rgba(15,23,42,0.75)), url(${heroEra.heroImage.url})` }}
       >
         <div className="flex h-full flex-col items-center justify-center px-4 text-center text-white">
-          <p className="text-sm uppercase tracking-[0.5em] text-brand-sand">Ký ức kháng chiến</p>
+          <p className="text-sm uppercase tracking-[0.5em] text-[#E6BE8A]">Ký ức kháng chiến</p>
           <h1 className="mt-3 text-4xl font-serif md:text-6xl">{heroEra.name}</h1>
           <p className="mt-3 max-w-3xl text-base md:text-lg">{heroEra.description}</p>
           <div className="mt-4">
@@ -257,7 +253,7 @@ export default function HistoryPage() {
                   setFeaturedModalEvent(events[0]);
                 }
               }}
-              className="mt-2 inline-flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-brand-text shadow hover:opacity-95"
+              className="mt-2 inline-flex items-center rounded-full bg-[#1A1A1A]/90 px-4 py-2 text-sm font-semibold text-[#F4D03F] shadow hover:opacity-95"
             >
               Mở chi tiết (Demo)
             </button>
@@ -288,7 +284,7 @@ export default function HistoryPage() {
 
         {!isAuthenticated() && (
           <p
-            className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/10 px-4 py-3 text-sm text-brand-blue"
+            className="mt-4 rounded-xl border border-[#F4D03F]/20 bg-[#F4D03F]/10 px-4 py-3 text-sm text-[#F4D03F]"
             data-testid="history-guest-cta"
           >
             Đăng nhập để mở khóa dòng thời gian chi tiết, tư liệu đa phương tiện và hệ thống quiz.
@@ -298,8 +294,8 @@ export default function HistoryPage() {
         {error && <p className="mt-6 rounded bg-rose-100 p-4 text-sm text-rose-700">{error}</p>}
 
         {loading ? (
-          <div className="mt-10 text-center text-brand-blue">
-            <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-brand-blue border-t-transparent" />
+          <div className="mt-10 text-center text-[#F4D03F]">
+            <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-[#F4D03F] border-t-transparent" />
           </div>
         ) : null}
 
@@ -327,8 +323,8 @@ export default function HistoryPage() {
             data-testid="history-timeline-auth"
           >
             <div className="space-y-6">
-              <div className="rounded-2xl border border-brand-blue/15 bg-white/90 p-4 shadow-sm">
-                <p className="text-sm text-brand-text">Chọn mốc trong dòng thời gian để xem chi tiết và mở quiz.</p>
+              <div className="rounded-2xl border border-[#F4D03F]/15 bg-[#1A1A1A]/90 p-4 shadow-sm">
+                <p className="text-sm text-[#F4D03F]">Chọn mốc trong dòng thời gian để xem chi tiết và mở quiz.</p>
               </div>
               {sortedEvents.length > 0 ? (
                 <Timeline
@@ -339,12 +335,12 @@ export default function HistoryPage() {
                   onSelect={ensureUnlockedAndSelect}
                 />
               ) : (
-                <div className="text-center text-brand-muted">Chưa có sự kiện nào</div>
+                <div className="text-center text-[#9CA3AF]">Chưa có sự kiện nào</div>
               )}
               {availableTags.length ? (
-                <div className="rounded-2xl border border-brand-blue/15 bg-white/70 p-4 text-sm text-brand-muted">
-                  <p className="font-semibold text-brand-text">Chủ đề nổi bật</p>
-                  <p className="mt-2 text-brand-text">{availableTags.map((tag) => `#${tag}`).join(' · ')}</p>
+                <div className="rounded-2xl border border-[#F4D03F]/15 bg-[#1A1A1A]/70 p-4 text-sm text-[#9CA3AF]">
+                  <p className="font-semibold text-[#F4D03F]">Chủ đề nổi bật</p>
+                  <p className="mt-2 text-[#F4D03F]">{availableTags.map((tag) => `#${tag}`).join(' · ')}</p>
                 </div>
               ) : null}
             </div>
@@ -372,8 +368,8 @@ export default function HistoryPage() {
                         bestStars={progressMap[activeEvent?.id ?? '']?.bestStars}
                       />
                       {reviewAnswers && (
-                        <div className="rounded-xl border border-brand-blue/20 bg-brand-blue/5 p-4 text-sm text-brand-text">
-                          <h4 className="text-base font-semibold text-brand-text">Giải thích câu hỏi gần nhất</h4>
+                        <div className="rounded-xl border border-[#F4D03F]/20 bg-[#F4D03F]/5 p-4 text-sm text-[#F4D03F]">
+                          <h4 className="text-base font-semibold text-[#F4D03F]">Giải thích câu hỏi gần nhất</h4>
                           <ul className="mt-3 space-y-2">
                             {reviewAnswers.map((answer) => {
                               const question = quizQuestions.find((q) => q.id === answer.questionId);
@@ -382,11 +378,11 @@ export default function HistoryPage() {
                                 typeof answer.selectedIndex === 'number' ? question.options[answer.selectedIndex] : 'Chưa trả lời';
                               const correct = question.options[answer.correctIndex];
                               return (
-                                <li key={answer.questionId} className="rounded-lg bg-white/70 p-3 shadow-sm">
-                                  <p className="font-semibold text-brand-text">{question.prompt}</p>
-                                  <p className="mt-1 text-brand-muted">Bạn chọn: {selected}</p>
-                                  <p className="text-brand-blue">Đáp án đúng: {correct}</p>
-                                  <p className="mt-1 text-brand-text">{answer.explanation}</p>
+                                <li key={answer.questionId} className="rounded-lg bg-[#1A1A1A]/70 p-3 shadow-sm">
+                                  <p className="font-semibold text-[#F4D03F]">{question.prompt}</p>
+                                  <p className="mt-1 text-[#9CA3AF]">Bạn chọn: {selected}</p>
+                                  <p className="text-[#F4D03F]">Đáp án đúng: {correct}</p>
+                                  <p className="mt-1 text-[#F4D03F]">{answer.explanation}</p>
                                 </li>
                               );
                             })}
@@ -398,7 +394,7 @@ export default function HistoryPage() {
                 }
                 />
               ) : (
-                    <div className="rounded-2xl border border-dashed border-brand-blue/30 bg-white/70 p-8 text-center text-brand-muted">
+                    <div className="rounded-2xl border border-dashed border-[#F4D03F]/30 bg-[#1A1A1A]/70 p-8 text-center text-[#9CA3AF]">
                   Chọn một mốc trong dòng thời gian để xem chi tiết.
                 </div>
               )}
@@ -439,6 +435,7 @@ export default function HistoryPage() {
                 }
               : undefined
           }
+          nextEventTitle={nextEventId ? sortedEvents.find(e => e.id === nextEventId)?.title : undefined}
         />
       )}
     </div>

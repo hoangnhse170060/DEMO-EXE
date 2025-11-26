@@ -985,7 +985,7 @@ export default function History() {
   }, [activeUser, eventsState, hasLockedEvents, isSequencedPhase, nextLockedState]);
 
   return (
-    <div className="min-h-screen bg-brand-base pt-0">
+    <div className="min-h-screen bg-[#0D0D0D] pt-0">
       <div
         className="relative h-96 bg-cover bg-center"
         style={{
@@ -995,7 +995,7 @@ export default function History() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center animate-fade-in-up px-4">
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-3">{phase.label.toUpperCase()}</h1>
-            <p className="text-lg md:text-xl text-brand-sand font-serif italic">{phase.period} · Dòng chảy lịch sử dân tộc</p>
+            <p className="text-lg md:text-xl text-[#E6BE8A] font-serif italic">{phase.period} · Dòng chảy lịch sử dân tộc</p>
           </div>
         </div>
       </div>
@@ -1012,29 +1012,29 @@ export default function History() {
                 onClick={() => handleSelectPhase(key)}
                 className={`px-6 md:px-8 py-3 md:py-4 rounded-sm border transition-all duration-300 font-serif text-lg ${
                   isActive
-                    ? 'bg-brand-blue text-white border-brand-blue shadow-brand'
-                    : 'bg-white text-brand-blue border-brand-blue/40 hover:border-brand-blue hover:bg-brand-sand'
+                    ? 'bg-[#F4D03F] text-white border-[#F4D03F] shadow-brand'
+                    : 'bg-[#1A1A1A] text-[#F4D03F] border-[#F4D03F]/40 hover:border-[#F4D03F] hover:bg-[#E6BE8A]'
                 }`}
               >
                 <div>{item.label}</div>
-                <div className="text-xs md:text-sm font-sans tracking-[0.35em] uppercase text-brand-sand mt-1">{item.period}</div>
+                <div className="text-xs md:text-sm font-sans tracking-[0.35em] uppercase text-[#E6BE8A] mt-1">{item.period}</div>
               </button>
             );
           })}
         </div>
 
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <p className="text-brand-muted leading-relaxed">{phase.summary}</p>
+          <p className="text-[#9CA3AF] leading-relaxed">{phase.summary}</p>
         </div>
 
         {phaseLockMessage && (
-          <div className="max-w-4xl mx-auto mb-10 border border-brand-blue/20 bg-brand-sand/40 text-brand-blue rounded-sm px-4 py-3 text-sm">
+          <div className="max-w-4xl mx-auto mb-10 border border-[#F4D03F]/20 bg-[#E6BE8A]/40 text-[#F4D03F] rounded-sm px-4 py-3 text-sm">
             {phaseLockMessage}
           </div>
         )}
 
         {phase.featureVideo && phase.featureVideo.type === 'video' && (
-          <div className="max-w-4xl mx-auto mb-16 shadow-[0_0_20px_rgba(255,215,0,0.2)] border border-brand-blue/40 bg-charcoal-800">
+          <div className="max-w-4xl mx-auto mb-16 shadow-[0_0_20px_rgba(255,215,0,0.2)] border border-[#F4D03F]/40 bg-charcoal-800">
             <div className="aspect-video">
               <iframe
                 title={phase.featureVideo.title}
@@ -1053,7 +1053,7 @@ export default function History() {
         )}
 
         <div className="relative max-w-5xl mx-auto">
-          <span className="absolute left-4 md:left-6 top-0 bottom-0 border-l border-brand-blue/20" />
+          <span className="absolute left-4 md:left-6 top-0 bottom-0 border-l border-[#F4D03F]/20" />
           <div className="space-y-12">
             {eventsState.map(({ event, index, locked, hasQuiz, bestScore, correctCount, questionTotal }) => {
               const previousEventTitle = index > 0 ? phase.events[index - 1]?.headline : undefined;
@@ -1071,19 +1071,19 @@ export default function History() {
 
               return (
                 <div key={event.date + event.headline} className="relative pl-12 md:pl-16 scroll-animate">
-                  <span className="absolute left-[0.9rem] md:left-[1.35rem] top-4 w-4 h-4 rounded-full bg-brand-blue shadow-brand" />
-                  <div className="bg-charcoal-800 border border-brand-blue/40 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[0_0_30px_rgba(255,215,0,0.3)] transition-shadow duration-300 p-6 md:p-8">
+                  <span className="absolute left-[0.9rem] md:left-[1.35rem] top-4 w-4 h-4 rounded-full bg-[#F4D03F] shadow-brand" />
+                  <div className="bg-charcoal-800 border border-[#F4D03F]/40 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[0_0_30px_rgba(255,215,0,0.3)] transition-shadow duration-300 p-6 md:p-8">
                     <div className="flex flex-col gap-4 md:gap-6">
-                      <div className="flex flex-wrap items-center gap-3 text-brand-blue uppercase tracking-[0.35em] text-xs">
+                      <div className="flex flex-wrap items-center gap-3 text-[#F4D03F] uppercase tracking-[0.35em] text-xs">
                         <span>{event.date}</span>
-                        {event.location && <span className="hidden md:inline-block w-8 border-t border-brand-blue/30" />}
+                        {event.location && <span className="hidden md:inline-block w-8 border-t border-[#F4D03F]/30" />}
                         {event.location && <span className="tracking-[0.2em]">{event.location}</span>}
                       </div>
                       <div className="flex flex-wrap items-center gap-3">
-                        <h2 className="text-2xl font-serif text-brand-blue leading-tight">{event.headline}</h2>
+                        <h2 className="text-2xl font-serif text-[#F4D03F] leading-tight">{event.headline}</h2>
                         {completed && (
                           <span
-                            className="inline-flex items-center gap-3 rounded-full bg-brand-blue px-5 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.35em] text-charcoal-900 shadow-[0_0_20px_rgba(255,215,0,0.6)]"
+                            className="inline-flex items-center gap-3 rounded-full bg-[#F4D03F] px-5 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.35em] text-charcoal-900 shadow-[0_0_20px_rgba(255,215,0,0.6)]"
                             title={`Bạn đã hoàn thành ${correctCount}/${questionTotal} câu trong quiz này`}
                           >
                             <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-charcoal-900/30 text-charcoal-900 shadow-inner">
@@ -1113,12 +1113,12 @@ export default function History() {
                       {event.artworks && (
                         <div className="grid md:grid-cols-2 gap-4">
                           {event.artworks.map((art) => (
-                            <div key={art.src} className="bg-charcoal-700 border border-brand-blue/30 p-3">
+                            <div key={art.src} className="bg-charcoal-700 border border-[#F4D03F]/30 p-3">
                               <div className="h-48 overflow-hidden">
                                 <img src={art.src} alt={art.title} className="w-full h-full object-cover" />
                               </div>
                               <div className="mt-3">
-                                <div className="text-sm font-serif text-brand-blue">{art.title}</div>
+                                <div className="text-sm font-serif text-[#F4D03F]">{art.title}</div>
                                 <p className="text-xs text-gray-300 mt-1">{art.caption}</p>
                                 <p className="text-xs text-gray-400 italic mt-1">{art.credit}</p>
                               </div>
@@ -1127,15 +1127,15 @@ export default function History() {
                         </div>
                       )}
                       {event.sources && (
-                        <div className="border-l-2 border-brand-blue/40 pl-4 text-xs text-gray-300">
-                          <div className="uppercase tracking-[0.4em] text-brand-blue mb-1">Nguồn</div>
+                        <div className="border-l-2 border-[#F4D03F]/40 pl-4 text-xs text-gray-300">
+                          <div className="uppercase tracking-[0.4em] text-[#F4D03F] mb-1">Nguồn</div>
                           <ul className="list-disc pl-4 space-y-1">
                             {event.sources.map((source) => (
                               <li key={source}>{source}</li>
                             ))}
                           </ul>
                           {showUnlockHint && (
-                            <div className="mt-3 text-brand-blue text-xs">
+                            <div className="mt-3 text-[#F4D03F] text-xs">
                               {unlockHintMessage}
                             </div>
                           )}
@@ -1152,9 +1152,9 @@ export default function History() {
 
                               handleViewDetail(event, phase.label);
                             }}
-                            className={`mt-4 inline-flex items-center gap-2 rounded-sm border px-5 py-2 text-sm font-semibold uppercase tracking-[0.18em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/30 ${locked
-                              ? 'cursor-not-allowed border-dashed border-brand-blue/30 bg-white/40 text-brand-blue/40'
-                              : 'border-brand-blue bg-white text-brand-blue hover:bg-brand-blue hover:text-white'}`}
+                            className={`mt-4 inline-flex items-center gap-2 rounded-sm border px-5 py-2 text-sm font-semibold uppercase tracking-[0.18em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D03F]/30 ${locked
+                              ? 'cursor-not-allowed border-dashed border-[#F4D03F]/30 bg-[#1A1A1A]/40 text-[#F4D03F]/40'
+                              : 'border-[#F4D03F] bg-[#1A1A1A] text-[#F4D03F] hover:bg-[#F4D03F] hover:text-white'}`}
                             title={locked ? lockTooltip ?? phaseLockMessage ?? undefined : undefined}
                           >
                             {locked ? (
@@ -1197,17 +1197,17 @@ export default function History() {
 
         {phase.gallery && (
           <div className="mt-16">
-            <h3 className="text-center text-xl md:text-2xl font-serif text-brand-text mb-6">Tư liệu khác</h3>
+            <h3 className="text-center text-xl md:text-2xl font-serif text-[#F4D03F] mb-6">Tư liệu khác</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {phase.gallery.map((item) => (
-                <div key={item.src} className="bg-charcoal-800 border border-brand-blue/40 shadow-[0_0_20px_rgba(255,215,0,0.2)] p-4">
+                <div key={item.src} className="bg-charcoal-800 border border-[#F4D03F]/40 shadow-[0_0_20px_rgba(255,215,0,0.2)] p-4">
                   <div className="h-56 overflow-hidden">
                     <img src={item.src} alt={item.title} className="w-full h-full object-cover" />
                   </div>
                   <div className="mt-4">
-                    <div className="font-serif text-brand-text text-lg">{item.title}</div>
-                    <p className="text-brand-muted text-sm mt-1">{item.caption}</p>
-                    <p className="text-brand-muted text-xs italic mt-1">{item.credit}</p>
+                    <div className="font-serif text-[#F4D03F] text-lg">{item.title}</div>
+                    <p className="text-[#9CA3AF] text-sm mt-1">{item.caption}</p>
+                    <p className="text-[#9CA3AF] text-xs italic mt-1">{item.credit}</p>
                   </div>
                 </div>
               ))}
@@ -1215,8 +1215,8 @@ export default function History() {
           </div>
         )}
 
-        <div className="mt-16 bg-brand-blue/10 border border-brand-blue/20 p-6 md:p-8">
-          <h3 className="text-center text-sm md:text-base text-brand-muted uppercase tracking-[0.35em]">{phase.reference}</h3>
+        <div className="mt-16 bg-[#F4D03F]/10 border border-[#F4D03F]/20 p-6 md:p-8">
+          <h3 className="text-center text-sm md:text-base text-[#9CA3AF] uppercase tracking-[0.35em]">{phase.reference}</h3>
         </div>
       </div>
     </div>

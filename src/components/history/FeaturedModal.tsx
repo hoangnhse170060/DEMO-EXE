@@ -54,8 +54,8 @@ export function FeaturedModal({ event, onClose }: Props) {
   const coverAlt = event.featuredImage?.alt ?? event.media?.[0]?.alt ?? fallbackSubEventMedia?.alt ?? event.title;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-text/60 px-4" role="dialog" aria-modal="true" aria-labelledby="featured-modal-title">
-      <div ref={dialogRef} className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border-2 border-brand-blue bg-white shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D0D0D]/60 px-4" role="dialog" aria-modal="true" aria-labelledby="featured-modal-title">
+      <div ref={dialogRef} className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border-2 border-[#F4D03F] bg-[#1A1A1A] shadow-2xl">
         <div className="relative">
           <img
             src={coverUrl}
@@ -67,7 +67,7 @@ export function FeaturedModal({ event, onClose }: Props) {
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 rounded-full bg-white/90 px-4 py-1 text-sm font-semibold text-brand-text shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+            className="absolute right-4 top-4 rounded-full bg-[#1A1A1A]/90 px-4 py-1 text-sm font-semibold text-[#F4D03F] shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D03F]"
             aria-label="Đóng tóm tắt sự kiện"
           >
             Đóng
@@ -75,20 +75,20 @@ export function FeaturedModal({ event, onClose }: Props) {
         </div>
         <div className="space-y-4 px-6 py-6">
           <div>
-            <p className="text-xs uppercase tracking-widest text-brand-blue">{event.year}</p>
-            <h2 id="featured-modal-title" className="mt-1 text-2xl font-serif text-brand-text">
+            <p className="text-xs uppercase tracking-widest text-[#F4D03F]">{event.year}</p>
+            <h2 id="featured-modal-title" className="mt-1 text-2xl font-serif text-[#F4D03F]">
               {event.title}
             </h2>
-            <p className="mt-2 text-sm text-brand-muted">{event.headline ?? event.summary}</p>
+            <p className="mt-2 text-sm text-[#9CA3AF]">{event.headline ?? event.summary}</p>
           </div>
-          <p className="text-base leading-7 text-brand-text">{event.summary}</p>
-          <div className="rounded-lg bg-brand-sand/40 p-4 text-sm text-brand-muted">
+          <p className="text-base leading-7 text-[#F4D03F]">{event.summary}</p>
+          <div className="rounded-lg bg-[#1A1A1A]/40 p-4 text-sm text-[#9CA3AF]">
             Đăng nhập để xem toàn bộ dòng thời gian, tư liệu chi tiết và làm quiz cho mốc {event.title}.
           </div>
           <div className="flex justify-end gap-3">
             <a
               href={`/login?redirect=/history?era=${event.eraId}&eventId=${event.id}`}
-              className="inline-flex items-center rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white transition hover:bg-brand-blue/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+              className="inline-flex items-center rounded-full bg-[#F4D03F] px-5 py-2 text-sm font-semibold text-[#E5E5E5] transition hover:bg-[#F4D03F]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D03F]"
             >
               Đăng nhập để tiếp tục
             </a>

@@ -168,13 +168,13 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
   if (!questions.length) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-text/60 px-4" role="dialog" aria-modal="true">
-        <div className="w-full max-w-lg rounded-2xl border border-brand-blue bg-white p-6 text-center shadow-xl">
-          <p className="text-lg font-semibold text-brand-text">Chưa có ngân hàng câu hỏi cho mốc này.</p>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D0D0D]/60 px-4" role="dialog" aria-modal="true">
+        <div className="w-full max-w-lg rounded-2xl border border-[#F4D03F] bg-[#1A1A1A] p-6 text-center shadow-xl">
+          <p className="text-lg font-semibold text-[#F4D03F]">Chưa có ngân hàng câu hỏi cho mốc này.</p>
           <button
             type="button"
             onClick={onClose}
-            className="mt-4 rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white"
+            className="mt-4 rounded-full bg-[#F4D03F] px-5 py-2 text-sm font-semibold text-white"
           >
             Đóng
           </button>
@@ -185,7 +185,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-brand-text/70 backdrop-blur-sm px-4 py-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D0D0D]/70 backdrop-blur-sm px-4 py-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="quiz-dialog-title"
@@ -195,32 +195,32 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
       </div>
       <div
         ref={dialogRef}
-        className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-brand-blue/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 shadow-[0_30px_60px_-25px_rgba(255,215,0,0.2)]"
+        className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-[#F4D03F]/20 bg-gradient-to-br from-charcoal-800 via-charcoal-900 to-charcoal-800 shadow-[0_30px_60px_-25px_rgba(255,215,0,0.2)]"
       >
-        <div className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-brand-blue/20 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-[#F4D03F]/20 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-[#F4D03F]/10 blur-3xl" aria-hidden />
 
-        <header className="relative z-10 flex flex-col gap-4 border-b border-brand-blue/20 px-8 pt-8 pb-6">
+        <header className="relative z-10 flex flex-col gap-4 border-b border-[#F4D03F]/20 px-8 pt-8 pb-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.45em] text-brand-blue">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.45em] text-[#F4D03F]">
                 Quiz lần {attemptNumber}
                 <span aria-hidden>⚡</span>
               </p>
-              <h2 id="quiz-dialog-title" className="mt-2 text-3xl font-serif text-brand-blue">Quiz Time!</h2>
+              <h2 id="quiz-dialog-title" className="mt-2 text-3xl font-serif text-[#F4D03F]">Quiz Time!</h2>
               <p className="mt-1 text-sm text-gray-300" aria-live="polite">
                 Câu {currentIndex + 1}/{questions.length}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <div className="rounded-full bg-charcoal-800/80 border border-brand-blue/30 px-5 py-2 text-sm font-semibold text-brand-blue" aria-live="polite">
+              <div className="rounded-full bg-charcoal-800/80 border border-[#F4D03F]/30 px-5 py-2 text-sm font-semibold text-[#F4D03F]" aria-live="polite">
                 ⏳ {formatTime(timeLeft)}
               </div>
               <button
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                className="rounded-full border border-brand-blue/40 bg-charcoal-700/80 px-5 py-2 text-sm font-semibold text-brand-blue transition hover:bg-brand-blue/10"
+                className="rounded-full border border-[#F4D03F]/40 bg-charcoal-700/80 px-5 py-2 text-sm font-semibold text-[#F4D03F] transition hover:bg-[#F4D03F]/10"
               >
                 Thoát
               </button>
@@ -228,7 +228,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-charcoal-700/40">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-brand-blue via-brand-blue/80 to-brand-blue/60 transition-all shadow-lg shadow-brand-blue/50"
+              className="h-full rounded-full bg-gradient-to-r from-[#F4D03F] via-[#F4D03F]/80 to-[#F4D03F]/60 transition-all shadow-lg shadow-[#F4D03F]/50"
               style={{ width: `${progressPercent}%` }}
               aria-hidden
             />
@@ -237,8 +237,8 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
         <section className="relative z-10 grid gap-8 px-8 pb-10 pt-6 lg:grid-cols-[minmax(0,1.5fr),minmax(0,1fr)]">
           <div className="space-y-5">
-            <div className="rounded-3xl bg-charcoal-800/80 border border-brand-blue/20 p-6 shadow-[0_15px_40px_-30px_rgba(255,215,0,0.1)]">
-              <h3 className="text-xl font-semibold text-brand-blue leading-relaxed">{currentQuestion.prompt}</h3>
+            <div className="rounded-3xl bg-charcoal-800/80 border border-[#F4D03F]/20 p-6 shadow-[0_15px_40px_-30px_rgba(255,215,0,0.1)]">
+              <h3 className="text-xl font-semibold text-[#F4D03F] leading-relaxed">{currentQuestion.prompt}</h3>
             </div>
             <div className="grid gap-4">
               {currentQuestion.options.map((option, index) => {
@@ -248,13 +248,13 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                 const status = record.selectedIndex !== null ? (correct ? 'correct' : selected ? 'incorrect' : 'idle') : 'idle';
                 const letter = answerLetters[index] ?? '?';
                 const baseClass =
-                  'relative flex items-center gap-4 rounded-3xl border-2 px-5 py-4 text-left text-base font-medium shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-blue disabled:cursor-not-allowed';
+                  'relative flex items-center gap-4 rounded-3xl border-2 px-5 py-4 text-left text-base font-medium shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#F4D03F] disabled:cursor-not-allowed';
                 const statusClass =
                   status === 'correct'
                     ? 'border-emerald-500/60 bg-gradient-to-r from-emerald-900/40 via-charcoal-800 to-emerald-900/30 text-emerald-300'
                     : status === 'incorrect'
                     ? 'border-rose-500/60 bg-gradient-to-r from-rose-900/40 via-charcoal-800 to-rose-900/30 text-rose-300'
-                    : 'border-brand-blue/30 bg-charcoal-700/60 text-gray-200 hover:-translate-y-0.5 hover:border-brand-blue/60 hover:bg-charcoal-700/80';
+                    : 'border-[#F4D03F]/30 bg-charcoal-700/60 text-gray-200 hover:-translate-y-0.5 hover:border-[#F4D03F]/60 hover:bg-charcoal-700/80';
                 return (
                   <button
                     key={index}
@@ -271,7 +271,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                           ? 'bg-emerald-600 text-white'
                           : status === 'incorrect'
                           ? 'bg-rose-600 text-white'
-                          : 'bg-brand-blue/20 text-brand-blue'
+                          : 'bg-[#F4D03F]/20 text-[#F4D03F]'
                       }`}
                     >
                       {letter}
@@ -287,7 +287,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
               })}
             </div>
             {revealed && (
-              <div className="rounded-3xl border border-brand-blue/40 bg-brand-blue/10 p-5 text-sm text-brand-blue shadow-lg shadow-brand-blue/20" aria-live="polite">
+              <div className="rounded-3xl border border-[#F4D03F]/40 bg-[#F4D03F]/10 p-5 text-sm text-[#F4D03F] shadow-lg shadow-[#F4D03F]/20" aria-live="polite">
                 <p className="font-semibold uppercase tracking-widest">Đáp án đúng</p>
                 <p className="mt-1 text-base text-gray-100">
                   {currentQuestion.options[currentQuestion.answerIndex]}
@@ -298,7 +298,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                 <button
                   type="button"
                   onClick={() => moveToNext()}
-                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-blue/90"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#F4D03F] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#F4D03F]/90"
                 >
                   Tiếp tục
                   <span aria-hidden>→</span>
@@ -309,7 +309,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
 
           <aside className="space-y-4">
             {currentQuestion.media ? (
-              <div className="overflow-hidden rounded-3xl border border-brand-blue/30 bg-charcoal-800/80 shadow-[0_20px_40px_-30px_rgba(255,215,0,0.15)]">
+              <div className="overflow-hidden rounded-3xl border border-[#F4D03F]/30 bg-charcoal-800/80 shadow-[0_20px_40px_-30px_rgba(255,215,0,0.15)]">
                 {currentQuestion.media.type === 'image' ? (
                   <figure className="flex flex-col">
                     <img
@@ -321,7 +321,7 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                       <figcaption className="space-y-1 px-4 py-3 text-xs text-gray-300">
                         {currentQuestion.media.caption && <p>{currentQuestion.media.caption}</p>}
                         {currentQuestion.media.credit && (
-                          <p className="text-[11px] uppercase tracking-[0.25em] text-brand-blue/70">
+                          <p className="text-[11px] uppercase tracking-[0.25em] text-[#F4D03F]/70">
                             {currentQuestion.media.credit}
                           </p>
                         )}
@@ -348,10 +348,10 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                   </video>
                 )}
                 {(currentQuestion.media?.type === 'video' && currentQuestion.media.caption) && (
-                  <div className="border-t border-brand-blue/20 px-4 py-3 text-xs text-gray-300">
+                  <div className="border-t border-[#F4D03F]/20 px-4 py-3 text-xs text-gray-300">
                     <p>{currentQuestion.media.caption}</p>
                     {currentQuestion.media.credit && (
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-brand-blue/70">
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-[#F4D03F]/70">
                         {currentQuestion.media.credit}
                       </p>
                     )}
@@ -359,14 +359,14 @@ export function QuizRunner({ questions, attemptNumber, onClose, onComplete }: Pr
                 )}
               </div>
             ) : (
-              <div className="flex h-full flex-col justify-between rounded-3xl border border-white/40 bg-white/70 p-6 text-sm text-brand-text/70 shadow-inner">
+              <div className="flex h-full flex-col justify-between rounded-3xl border border-white/40 bg-[#1A1A1A]/70 p-6 text-sm text-[#F4D03F]/70 shadow-inner">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.45em] text-brand-blue">Gợi ý</p>
+                  <p className="text-xs uppercase tracking-[0.45em] text-[#F4D03F]">Gợi ý</p>
                   <p className="mt-3 leading-relaxed">
                     Một số câu hỏi đi kèm hình ảnh, bản đồ hoặc video tư liệu. Hãy chú ý chi tiết thị giác trước khi chọn đáp án.
                   </p>
                 </div>
-                <p className="mt-6 text-xs uppercase tracking-[0.3em] text-brand-blue/80">Thời gian đang đếm...</p>
+                <p className="mt-6 text-xs uppercase tracking-[0.3em] text-[#F4D03F]/80">Thời gian đang đếm...</p>
               </div>
             )}
           </aside>

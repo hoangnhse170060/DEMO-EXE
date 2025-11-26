@@ -50,7 +50,7 @@ export type DeepEvent = {
 };
 
 const independence1945: DeepEvent = {
-  id: 'independence-1945',
+  id: 'evt-1858-danang',
   headline: 'Pháp xâm lược',
   date: '01/09/1858',
   location: 'Đà Nẵng, Việt Nam',
@@ -518,7 +518,7 @@ const franceInvasion1858: DeepEvent = {
 };
 
 const canVuong1885: DeepEvent = {
-  id: 'can-vuong-1885',
+  id: 'evt-1885-canvuong',
   headline: 'Phong trào Cần Vương',
   date: '07/07/1885',
   location: 'Bắc Trung Bộ',
@@ -891,12 +891,14 @@ const nguyenAiQuoc1911: DeepEvent = {
 export function getDeepEventById(id?: string): DeepEvent {
   if (!id) return independence1945;
   switch (id) {
+    case 'evt-1858-danang':
     case 'independence-1945':
       return independence1945;
     case 'resistance-1946':
       return resistance1946;
     case 'france-invasion-1858':
       return franceInvasion1858;
+    case 'evt-1885-canvuong':
     case 'can-vuong-1885':
       return canVuong1885;
     case 'dong-du-1905':

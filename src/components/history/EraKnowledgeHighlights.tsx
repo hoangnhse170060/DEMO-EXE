@@ -21,28 +21,28 @@ export function EraKnowledgeHighlights({ era, events }: Props) {
   return (
     <section
       aria-label="Tổng quan kiến thức giai đoạn"
-      className="mt-6 rounded-3xl border border-brand-blue/20 bg-white/80 p-6 shadow-sm"
+      className="mt-6 rounded-3xl border border-[#F4D03F]/20 bg-[#1A1A1A]/80 p-6 shadow-sm"
     >
       <div className="grid gap-4 md:grid-cols-4">
-        <div className="rounded-2xl bg-brand-blue/10 p-4 text-brand-text">
-          <p className="text-xs uppercase tracking-widest text-brand-blue">Số mốc tiêu biểu</p>
+        <div className="rounded-2xl bg-[#F4D03F]/10 p-4 text-[#F4D03F]">
+          <p className="text-xs uppercase tracking-widest text-[#F4D03F]">Số mốc tiêu biểu</p>
           <p className="mt-2 text-3xl font-serif">{events.length}</p>
-          <p className="mt-1 text-sm text-brand-muted">Từ {minYear} đến {maxYear}</p>
+          <p className="mt-1 text-sm text-[#9CA3AF]">Từ {minYear} đến {maxYear}</p>
         </div>
-        <div className="rounded-2xl bg-brand-blue/5 p-4 text-brand-text">
-          <p className="text-xs uppercase tracking-widest text-brand-blue">Chủ đề nổi bật</p>
-          <p className="mt-2 text-sm text-brand-text">
+        <div className="rounded-2xl bg-[#F4D03F]/5 p-4 text-[#F4D03F]">
+          <p className="text-xs uppercase tracking-widest text-[#F4D03F]">Chủ đề nổi bật</p>
+          <p className="mt-2 text-sm text-[#F4D03F]">
             {uniqueTags.length ? uniqueTags.map((tag) => `#${tag}`).join(' • ') : 'Đang cập nhật'}
           </p>
         </div>
-        <div className="rounded-2xl bg-brand-blue/10 p-4 text-brand-text">
-          <p className="text-xs uppercase tracking-widest text-brand-blue">Tư liệu minh hoạ</p>
+        <div className="rounded-2xl bg-[#F4D03F]/10 p-4 text-[#F4D03F]">
+          <p className="text-xs uppercase tracking-widest text-[#F4D03F]">Tư liệu minh hoạ</p>
           <p className="mt-2 text-3xl font-serif">{mediaCount}</p>
-          <p className="mt-1 text-sm text-brand-muted">Ảnh, video, tài liệu sưu tầm</p>
+          <p className="mt-1 text-sm text-[#9CA3AF]">Ảnh, video, tài liệu sưu tầm</p>
         </div>
-        <div className="rounded-2xl bg-brand-blue/5 p-4 text-brand-text">
-          <p className="text-xs uppercase tracking-widest text-brand-blue">Mô tả giai đoạn</p>
-          <p className="mt-2 text-sm leading-6 text-brand-text">{era.description}</p>
+        <div className="rounded-2xl bg-[#F4D03F]/5 p-4 text-[#F4D03F]">
+          <p className="text-xs uppercase tracking-widest text-[#F4D03F]">Mô tả giai đoạn</p>
+          <p className="mt-2 text-sm leading-6 text-[#F4D03F]">{era.description}</p>
         </div>
       </div>
     </section>

@@ -173,8 +173,8 @@ export default function ArchiveDetail() {
     return (
       <div className="min-h-screen bg-charcoal-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl text-brand-blue mb-4">Không tìm thấy tư liệu</h1>
-          <button onClick={() => navigate('/culture/archives')} className="text-gray-400 hover:text-brand-blue transition-colors">
+          <h1 className="text-4xl text-[#F4D03F] mb-4">Không tìm thấy tư liệu</h1>
+          <button onClick={() => navigate('/culture/archives')} className="text-gray-400 hover:text-[#F4D03F] transition-colors">
             ← Quay lại
           </button>
         </div>
@@ -187,7 +187,7 @@ export default function ArchiveDetail() {
       {/* Back Button */}
       <button
         onClick={() => navigate('/culture/archives')}
-        className="fixed top-24 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-charcoal-800/90 backdrop-blur-sm border border-brand-blue/30 rounded-full text-brand-blue hover:bg-charcoal-800 hover:border-brand-blue transition-all"
+        className="fixed top-24 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-charcoal-800/90 backdrop-blur-sm border border-[#F4D03F]/30 rounded-full text-[#F4D03F] hover:bg-charcoal-800 hover:border-[#F4D03F] transition-all"
       >
         <ArrowLeft size={20} />
         <span className="text-sm font-semibold">Quay lại</span>
@@ -201,12 +201,12 @@ export default function ArchiveDetail() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-6 py-2 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-8 border border-brand-blue/30">
-            <FileText className="text-brand-blue" size={20} />
-            <span className="text-brand-blue text-sm font-bold uppercase tracking-wider">{archive.category}</span>
+          <div className="inline-flex items-center gap-2 px-6 py-2 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-8 border border-[#F4D03F]/30">
+            <FileText className="text-[#F4D03F]" size={20} />
+            <span className="text-[#F4D03F] text-sm font-bold uppercase tracking-wider">{archive.category}</span>
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-display text-brand-blue mb-6 tracking-wider drop-shadow-2xl">
+          <h1 className="text-6xl md:text-7xl font-display text-[#F4D03F] mb-6 tracking-wider drop-shadow-2xl">
             {archive.title}
           </h1>
 
@@ -216,12 +216,12 @@ export default function ArchiveDetail() {
 
           <div className="flex items-center justify-center gap-8 text-lg text-gray-300 mb-12">
             <div className="flex items-center gap-2">
-              <Calendar size={20} className="text-brand-blue" />
+              <Calendar size={20} className="text-[#F4D03F]" />
               <span>{archive.date}</span>
             </div>
             <div className="h-6 w-px bg-gray-600"></div>
             <div className="flex items-center gap-2">
-              <MapPin size={20} className="text-brand-blue" />
+              <MapPin size={20} className="text-[#F4D03F]" />
               <span>{archive.location}</span>
             </div>
           </div>
@@ -233,8 +233,8 @@ export default function ArchiveDetail() {
         <div className="max-w-4xl mx-auto">
           {/* Introduction */}
           <div className="mb-16">
-            <h2 className="text-4xl font-display text-brand-blue mb-8 uppercase tracking-wider flex items-center gap-3">
-              <div className="w-1 h-10 bg-brand-blue rounded-full"></div>
+            <h2 className="text-4xl font-display text-[#F4D03F] mb-8 uppercase tracking-wider flex items-center gap-3">
+              <div className="w-1 h-10 bg-[#F4D03F] rounded-full"></div>
               Tổng Quan
             </h2>
             <div className="space-y-6">
@@ -247,9 +247,9 @@ export default function ArchiveDetail() {
           </div>
 
           {/* Context */}
-          <div className="mb-16 bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-brand-blue/30 rounded-2xl p-8">
-            <h2 className="text-3xl font-display text-brand-blue mb-6 flex items-center gap-3">
-              <BookOpen className="text-brand-blue" size={32} />
+          <div className="mb-16 bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-[#F4D03F]/30 rounded-2xl p-8">
+            <h2 className="text-3xl font-display text-[#F4D03F] mb-6 flex items-center gap-3">
+              <BookOpen className="text-[#F4D03F]" size={32} />
               {archive.context.title}
             </h2>
             <div className="space-y-4">
@@ -264,13 +264,13 @@ export default function ArchiveDetail() {
           {/* Gallery */}
           {archive.gallery && archive.gallery.length > 0 && (
             <div className="mb-16">
-              <h2 className="text-4xl font-display text-brand-blue mb-8 uppercase tracking-wider flex items-center gap-3">
-                <div className="w-1 h-10 bg-brand-blue rounded-full"></div>
+              <h2 className="text-4xl font-display text-[#F4D03F] mb-8 uppercase tracking-wider flex items-center gap-3">
+                <div className="w-1 h-10 bg-[#F4D03F] rounded-full"></div>
                 Thư Viện Ảnh
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {archive.gallery.map((img, idx) => (
-                  <div key={idx} className="relative aspect-[4/3] rounded-xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all group">
+                  <div key={idx} className="relative aspect-[4/3] rounded-xl overflow-hidden border-2 border-[#F4D03F]/30 hover:border-[#F4D03F] transition-all group">
                     <img src={img} alt={`Tư liệu ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>
                 ))}
@@ -281,11 +281,11 @@ export default function ArchiveDetail() {
           {/* Full Text */}
           {archive.fullText && (
             <div className="mb-16">
-              <h2 className="text-4xl font-display text-brand-blue mb-8 uppercase tracking-wider flex items-center gap-3">
-                <div className="w-1 h-10 bg-brand-blue rounded-full"></div>
+              <h2 className="text-4xl font-display text-[#F4D03F] mb-8 uppercase tracking-wider flex items-center gap-3">
+                <div className="w-1 h-10 bg-[#F4D03F] rounded-full"></div>
                 Nội Dung Văn Bản
               </h2>
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-brand-blue/30 rounded-2xl p-10">
+              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-[#F4D03F]/30 rounded-2xl p-10">
                 <pre className="whitespace-pre-wrap font-serif text-gray-200 text-lg leading-relaxed">
                   {archive.fullText}
                 </pre>
@@ -295,21 +295,21 @@ export default function ArchiveDetail() {
 
           {/* Significance */}
           <div className="mb-16">
-            <h2 className="text-4xl font-display text-brand-blue mb-8 uppercase tracking-wider flex items-center gap-3">
-              <div className="w-1 h-10 bg-brand-blue rounded-full"></div>
+            <h2 className="text-4xl font-display text-[#F4D03F] mb-8 uppercase tracking-wider flex items-center gap-3">
+              <div className="w-1 h-10 bg-[#F4D03F] rounded-full"></div>
               Ý Nghĩa & Giá Trị
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-brand-blue/30 p-8 rounded-xl">
-                <h4 className="text-xl font-semibold text-brand-blue mb-4 flex items-center gap-2">
-                  <Heart className="text-brand-blue" size={24} />
+              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-[#F4D03F]/30 p-8 rounded-xl">
+                <h4 className="text-xl font-semibold text-[#F4D03F] mb-4 flex items-center gap-2">
+                  <Heart className="text-[#F4D03F]" size={24} />
                   Giá Trị Lịch Sử
                 </h4>
                 <p className="text-gray-200 leading-relaxed">{archive.significance.historical}</p>
               </div>
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-brand-blue/30 p-8 rounded-xl">
-                <h4 className="text-xl font-semibold text-brand-blue mb-4 flex items-center gap-2">
-                  <BookOpen className="text-brand-blue" size={24} />
+              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-[#F4D03F]/30 p-8 rounded-xl">
+                <h4 className="text-xl font-semibold text-[#F4D03F] mb-4 flex items-center gap-2">
+                  <BookOpen className="text-[#F4D03F]" size={24} />
                   Ý Nghĩa Giáo Dục
                 </h4>
                 <p className="text-gray-200 leading-relaxed">{archive.significance.educational}</p>
@@ -319,10 +319,10 @@ export default function ArchiveDetail() {
 
           {/* Tags */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-brand-blue mb-6">Từ Khóa Liên Quan</h3>
+            <h3 className="text-2xl font-bold text-[#F4D03F] mb-6">Từ Khóa Liên Quan</h3>
             <div className="flex flex-wrap gap-3">
               {archive.tags.map((tag, i) => (
-                <span key={i} className="px-5 py-2 bg-brand-blue/20 border border-brand-blue/40 rounded-full text-brand-blue font-semibold hover:bg-brand-blue/30 transition-all">
+                <span key={i} className="px-5 py-2 bg-[#F4D03F]/20 border border-[#F4D03F]/40 rounded-full text-[#F4D03F] font-semibold hover:bg-[#F4D03F]/30 transition-all">
                   {tag}
                 </span>
               ))}
@@ -330,15 +330,15 @@ export default function ArchiveDetail() {
           </div>
 
           {/* References */}
-          <div className="mb-16 bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-brand-blue/30 rounded-2xl p-8">
-            <h2 className="text-3xl font-display text-brand-blue mb-6 flex items-center gap-3">
-              <FileText className="text-brand-blue" size={32} />
+          <div className="mb-16 bg-gradient-to-br from-charcoal-800 to-charcoal-900 border-2 border-[#F4D03F]/30 rounded-2xl p-8">
+            <h2 className="text-3xl font-display text-[#F4D03F] mb-6 flex items-center gap-3">
+              <FileText className="text-[#F4D03F]" size={32} />
               Tài Liệu Tham Khảo
             </h2>
             <ul className="space-y-4">
               {archive.references.map((ref, idx) => (
                 <li key={idx} className="flex items-start gap-3 text-gray-200">
-                  <span className="text-brand-blue mt-1">•</span>
+                  <span className="text-[#F4D03F] mt-1">•</span>
                   <div>
                     <p className="font-semibold">{ref.title}</p>
                     {(ref.author || ref.year) && (
@@ -355,23 +355,23 @@ export default function ArchiveDetail() {
           </div>
 
           {/* Stats & Info */}
-          <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-brand-blue/20">
+          <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-[#F4D03F]/20">
             <div className="flex items-center gap-2 text-gray-400">
-              <Eye size={20} className="text-brand-blue" />
-              <span><span className="text-brand-blue font-bold">{archive.views.toLocaleString()}</span> lượt xem</span>
+              <Eye size={20} className="text-[#F4D03F]" />
+              <span><span className="text-[#F4D03F] font-bold">{archive.views.toLocaleString()}</span> lượt xem</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
-              <Calendar size={20} className="text-brand-blue" />
+              <Calendar size={20} className="text-[#F4D03F]" />
               <span>{archive.date}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
-              <MapPin size={20} className="text-brand-blue" />
+              <MapPin size={20} className="text-[#F4D03F]" />
               <span>{archive.location}</span>
             </div>
           </div>
 
           {/* Reference Note */}
-          <div className="mt-12 p-6 bg-brand-blue/10 border border-brand-blue/30 rounded-xl">
+          <div className="mt-12 p-6 bg-[#F4D03F]/10 border border-[#F4D03F]/30 rounded-xl">
             <p className="text-gray-200 text-sm leading-relaxed text-center italic">
               💡 Tư liệu này được số hóa và lưu trữ nhằm mục đích nghiên cứu, học tập và giáo dục. Xin vui lòng trích dẫn nguồn khi sử dụng.
             </p>

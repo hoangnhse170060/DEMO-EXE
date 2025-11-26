@@ -95,14 +95,14 @@ export default function Archives() {
   return (
     <div className="min-h-screen bg-charcoal-900 pt-20">
       {/* Hero Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-charcoal-800 to-charcoal-900 border-b border-brand-blue/20">
+      <section className="relative py-20 px-6 bg-gradient-to-b from-charcoal-800 to-charcoal-900 border-b border-[#F4D03F]/20">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-6 border border-brand-blue/30">
-            <FileText className="text-brand-blue" size={24} />
-            <span className="text-brand-blue font-bold uppercase tracking-wider">Kho Tư Liệu Lịch Sử</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-charcoal-700/90 backdrop-blur-sm rounded-full mb-6 border border-[#F4D03F]/30">
+            <FileText className="text-[#F4D03F]" size={24} />
+            <span className="text-[#F4D03F] font-bold uppercase tracking-wider">Kho Tư Liệu Lịch Sử</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-display text-brand-blue mb-6 uppercase tracking-wider">
+          <h1 className="text-5xl md:text-7xl font-display text-[#F4D03F] mb-6 uppercase tracking-wider">
             Tư Liệu Lịch Sử
           </h1>
           
@@ -110,41 +110,41 @@ export default function Archives() {
             Khám phá kho tàng tư liệu quý giá về lịch sử dân tộc
           </p>
 
-          <div className="h-1 w-32 bg-brand-blue mx-auto"></div>
+          <div className="h-1 w-32 bg-[#F4D03F] mx-auto"></div>
         </div>
       </section>
 
       {/* Search Bar */}
-      <section className="sticky top-0 z-30 bg-charcoal-900/95 backdrop-blur-md border-b border-brand-blue/20 py-6 px-6">
+      <section className="sticky top-0 z-30 bg-charcoal-900/95 backdrop-blur-md border-b border-[#F4D03F]/20 py-6 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1 max-w-xl w-full">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-blue" size={20} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#F4D03F]" size={20} />
               <input
                 type="text"
                 placeholder="Tìm kiếm tư liệu..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-12 py-3 bg-charcoal-800 border border-brand-blue/30 rounded-full text-white placeholder-gray-400 focus:border-brand-blue focus:outline-none transition-all"
+                className="w-full pl-12 pr-12 py-3 bg-charcoal-800 border border-[#F4D03F]/30 rounded-full text-white placeholder-gray-400 focus:border-[#F4D03F] focus:outline-none transition-all"
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-blue">
+                <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#F4D03F]">
                   <X size={20} />
                 </button>
               )}
             </div>
 
-            <div className="flex items-center gap-2 bg-charcoal-800 border border-brand-blue/30 rounded-full p-1">
-              <button onClick={() => setViewMode('grid')} className={`p-2 rounded-full transition-all ${viewMode === 'grid' ? 'bg-brand-blue text-charcoal-900' : 'text-gray-400'}`}>
+            <div className="flex items-center gap-2 bg-charcoal-800 border border-[#F4D03F]/30 rounded-full p-1">
+              <button onClick={() => setViewMode('grid')} className={`p-2 rounded-full transition-all ${viewMode === 'grid' ? 'bg-[#F4D03F] text-charcoal-900' : 'text-gray-400'}`}>
                 <Grid size={20} />
               </button>
-              <button onClick={() => setViewMode('list')} className={`p-2 rounded-full transition-all ${viewMode === 'list' ? 'bg-brand-blue text-charcoal-900' : 'text-gray-400'}`}>
+              <button onClick={() => setViewMode('list')} className={`p-2 rounded-full transition-all ${viewMode === 'list' ? 'bg-[#F4D03F] text-charcoal-900' : 'text-gray-400'}`}>
                 <List size={20} />
               </button>
             </div>
           </div>
           <div className="mt-4 text-center text-gray-400">
-            Tìm thấy <span className="text-brand-blue font-bold">{filteredArchives.length}</span> tư liệu
+            Tìm thấy <span className="text-[#F4D03F] font-bold">{filteredArchives.length}</span> tư liệu
           </div>
         </div>
       </section>
@@ -161,12 +161,12 @@ export default function Archives() {
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`flex items-center gap-3 px-6 py-3 rounded-full border-2 transition-all ${
-                    isActive ? 'bg-brand-blue border-brand-blue text-charcoal-900 shadow-lg' : 'bg-charcoal-800 border-brand-blue/30 text-gray-300 hover:border-brand-blue'
+                    isActive ? 'bg-[#F4D03F] border-[#F4D03F] text-charcoal-900 shadow-lg' : 'bg-charcoal-800 border-[#F4D03F]/30 text-gray-300 hover:border-[#F4D03F]'
                   }`}
                 >
                   <Icon size={20} />
                   <span className="font-semibold">{category.label}</span>
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${isActive ? 'bg-charcoal-900 text-brand-blue' : 'bg-brand-blue/20 text-brand-blue'}`}>
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${isActive ? 'bg-charcoal-900 text-[#F4D03F]' : 'bg-[#F4D03F]/20 text-[#F4D03F]'}`}>
                     {category.count}
                   </span>
                 </button>
@@ -190,7 +190,7 @@ export default function Archives() {
                 <div
                   key={archive.id}
                   onClick={() => handleViewArchive(archive.id)}
-                  className="group bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
+                  className="group bg-gradient-to-br from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-[#F4D03F]/30 hover:border-[#F4D03F] transition-all cursor-pointer hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#F4D03F/20]-blue/20"
                 >
                   <div className="relative h-64 overflow-hidden">
                     <img src={archive.image} alt={archive.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -201,7 +201,7 @@ export default function Archives() {
                         if (!category) return null;
                         const Icon = category.icon;
                         return (
-                          <div className="flex items-center gap-2 px-3 py-1.5 bg-brand-blue rounded-full">
+                          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#F4D03F] rounded-full">
                             <Icon size={14} className="text-charcoal-900" />
                             <span className="text-xs font-bold text-charcoal-900 uppercase">{category.label}</span>
                           </div>
@@ -210,16 +210,16 @@ export default function Archives() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-display text-brand-blue mb-3 line-clamp-2">{archive.title}</h3>
+                    <h3 className="text-xl font-display text-[#F4D03F] mb-3 line-clamp-2">{archive.title}</h3>
                     <p className="text-gray-200 text-sm mb-4 line-clamp-3">{archive.description}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {archive.tags.slice(0, 2).map((tag, i) => (
-                        <span key={i} className="px-2 py-1 bg-brand-blue/10 border border-brand-blue/20 rounded text-xs text-brand-blue">{tag}</span>
+                        <span key={i} className="px-2 py-1 bg-[#F4D03F]/10 border border-[#F4D03F]/20 rounded text-xs text-[#F4D03F]">{tag}</span>
                       ))}
                     </div>
-                    <div className="flex items-center justify-between pt-4 border-t border-brand-blue/20">
+                    <div className="flex items-center justify-between pt-4 border-t border-[#F4D03F]/20">
                       <span className="text-gray-400 text-sm">{archive.date}</span>
-                      <span className="px-3 py-1 bg-brand-blue/20 text-brand-blue text-xs font-semibold rounded-full">{archive.period}</span>
+                      <span className="px-3 py-1 bg-[#F4D03F]/20 text-[#F4D03F] text-xs font-semibold rounded-full">{archive.period}</span>
                     </div>
                   </div>
                 </div>
@@ -231,17 +231,17 @@ export default function Archives() {
                 <div
                   key={archive.id}
                   onClick={() => handleViewArchive(archive.id)}
-                  className="group flex gap-6 bg-gradient-to-r from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-brand-blue/30 hover:border-brand-blue transition-all cursor-pointer"
+                  className="group flex gap-6 bg-gradient-to-r from-charcoal-800 to-charcoal-900 rounded-2xl overflow-hidden border-2 border-[#F4D03F]/30 hover:border-[#F4D03F] transition-all cursor-pointer"
                 >
                   <div className="relative w-64 flex-shrink-0">
                     <img src={archive.image} alt={archive.title} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 p-6">
-                    <h3 className="text-2xl font-display text-brand-blue mb-3">{archive.title}</h3>
+                    <h3 className="text-2xl font-display text-[#F4D03F] mb-3">{archive.title}</h3>
                     <p className="text-gray-200 mb-4">{archive.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {archive.tags.map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 rounded-full text-xs text-brand-blue">{tag}</span>
+                        <span key={i} className="px-3 py-1 bg-[#F4D03F]/10 border border-[#F4D03F]/20 rounded-full text-xs text-[#F4D03F]">{tag}</span>
                       ))}
                     </div>
                   </div>

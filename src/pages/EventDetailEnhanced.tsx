@@ -240,16 +240,16 @@ const EventDetailEnhanced = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-base overflow-hidden">
+    <div className="min-h-screen bg-[#0D0D0D] overflow-hidden">
       {/* Progress Bar */}
-      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-blue via-purple-500 to-pink-500 z-50" style={{ width: `${scrollProgress}%` }} />
+      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#F4D03F] via-purple-500 to-pink-500 z-50" style={{ width: `${scrollProgress}%` }} />
 
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="fixed top-4 left-4 z-40 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+        className="fixed top-4 left-4 z-40 bg-[#1A1A1A]/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
       >
-        <ChevronLeft size={24} className="text-brand-blue" />
+        <ChevronLeft size={24} className="text-[#F4D03F]" />
       </button>
 
       {/* Hero Section with Parallax */}
@@ -264,21 +264,21 @@ const EventDetailEnhanced = () => {
         />
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="mb-6 inline-block px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-            <span className="text-white/80 text-sm font-semibold tracking-widest">{heroData.badge}</span>
+          <div className="mb-6 inline-block px-4 py-2 bg-[#1A1A1A]/10 backdrop-blur-md rounded-full border border-white/20">
+            <span className="text-[#E5E5E5]/80 text-sm font-semibold tracking-widest">{heroData.badge}</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-4 drop-shadow-lg animate-fade-in">{heroData.title}</h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow-md animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <h1 className="text-5xl md:text-7xl font-serif text-[#E5E5E5] mb-4 drop-shadow-lg animate-fade-in">{heroData.title}</h1>
+          <p className="text-xl md:text-2xl text-[#E5E5E5]/90 mb-8 drop-shadow-md animate-fade-in" style={{ animationDelay: '0.2s' }}>
             {heroData.subtitle}
           </p>
 
           {/* Hero CTA */}
           <div className="flex gap-4 justify-center flex-wrap animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <button className="px-8 py-3 bg-white text-brand-text font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 hover:scale-105 shadow-lg">
+            <button className="px-8 py-3 bg-[#1A1A1A] text-[#F4D03F] font-semibold rounded-lg hover:bg-[#1A1A1A]/90 transition-all duration-200 hover:scale-105 shadow-lg">
               🎬 Xem Video
             </button>
-            <button className="px-8 py-3 bg-white/20 text-white border border-white/40 font-semibold rounded-lg hover:bg-white/30 transition-all duration-200 backdrop-blur-sm">
+            <button className="px-8 py-3 bg-[#1A1A1A]/20 text-[#E5E5E5] border border-white/40 font-semibold rounded-lg hover:bg-[#1A1A1A]/30 transition-all duration-200 backdrop-blur-sm">
               📖 Đọc Chi Tiết
             </button>
           </div>
@@ -286,21 +286,21 @@ const EventDetailEnhanced = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-          <ChevronDown size={32} className="text-white/60" />
+          <ChevronDown size={32} className="text-[#E5E5E5]/60" />
         </div>
       </section>
 
       {/* Highlights Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-brand-base to-brand-base/50">
+      <section className="py-20 px-4 bg-gradient-to-b from-[#0D0D0D] to-[#0D0D0D]/50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-serif text-brand-text mb-4 text-center">✨ Những Khoảnh Khắc Chính</h2>
-          <p className="text-center text-brand-muted mb-12">Những bước ngoặt quan trọng trong cuộc đời của Trần Đại Nghĩa</p>
+          <h2 className="text-4xl font-serif text-[#F4D03F] mb-4 text-center">✨ Những Khoảnh Khắc Chính</h2>
+          <p className="text-center text-[#9CA3AF] mb-12">Những bước ngoặt quan trọng trong cuộc đời của Trần Đại Nghĩa</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {highlights.map((highlight, idx) => (
               <div
                 key={idx}
-                className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                className="group relative overflow-hidden rounded-2xl bg-[#1A1A1A] p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, var(--tw-gradient-stops))`,
                 }}
@@ -308,7 +308,7 @@ const EventDetailEnhanced = () => {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="relative z-10">
                   <span className="text-5xl mb-4 block">{highlight.icon}</span>
-                  <p className="text-brand-text font-medium leading-relaxed">{highlight.text}</p>
+                  <p className="text-[#F4D03F] font-medium leading-relaxed">{highlight.text}</p>
                 </div>
               </div>
             ))}
@@ -317,14 +317,14 @@ const EventDetailEnhanced = () => {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-[#1A1A1A]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-serif text-brand-text mb-4 text-center">🕰️ Dòng Thời Gian Sự Kiện</h2>
-          <p className="text-center text-brand-muted mb-16">Hành trình 50 năm cống hiến cho giáo dục</p>
+          <h2 className="text-4xl font-serif text-[#F4D03F] mb-4 text-center">🕰️ Dòng Thời Gian Sự Kiện</h2>
+          <p className="text-center text-[#9CA3AF] mb-16">Hành trình 50 năm cống hiến cho giáo dục</p>
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-blue via-purple-500 to-pink-500" />
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#F4D03F] via-purple-500 to-pink-500" />
 
             {/* Timeline Items */}
             <div className="space-y-12">
@@ -332,20 +332,20 @@ const EventDetailEnhanced = () => {
                 <div key={idx} className={`flex items-center gap-8 ${idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                   {/* Content */}
                   <div className={`w-1/2 ${idx % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                    <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-brand-blue/10">
+                    <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#F4D03F]/10">
                       <div className="flex items-center gap-2 mb-2">
-                        <Calendar size={16} className="text-brand-blue" />
-                        <span className="text-sm font-semibold text-brand-blue">{item.year}</span>
-                        {item.month && <span className="text-xs text-brand-muted">Tháng {item.month}</span>}
+                        <Calendar size={16} className="text-[#F4D03F]" />
+                        <span className="text-sm font-semibold text-[#F4D03F]">{item.year}</span>
+                        {item.month && <span className="text-xs text-[#9CA3AF]">Tháng {item.month}</span>}
                       </div>
-                      <h3 className="text-xl font-serif text-brand-text mb-2">{item.title}</h3>
-                      <p className="text-brand-muted text-sm leading-relaxed">{item.description}</p>
+                      <h3 className="text-xl font-serif text-[#F4D03F] mb-2">{item.title}</h3>
+                      <p className="text-[#9CA3AF] text-sm leading-relaxed">{item.description}</p>
                     </div>
                   </div>
 
                   {/* Center Dot */}
                   <div className="relative w-auto flex justify-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brand-blue to-purple-500 flex items-center justify-center text-white text-xl shadow-lg ring-4 ring-white z-10">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#F4D03F] to-purple-500 flex items-center justify-center text-[#E5E5E5] text-xl shadow-lg ring-4 ring-white z-10">
                       {item.icon}
                     </div>
                   </div>
@@ -360,10 +360,10 @@ const EventDetailEnhanced = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-brand-base/50 to-brand-base">
+      <section className="py-20 px-4 bg-gradient-to-b from-[#0D0D0D]/50 to-[#0D0D0D]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-serif text-brand-text mb-4 text-center">📸 Tư Liệu Hình Ảnh</h2>
-          <p className="text-center text-brand-muted mb-12">Những bức ảnh lịch sử quý giá</p>
+          <h2 className="text-4xl font-serif text-[#F4D03F] mb-4 text-center">📸 Tư Liệu Hình Ảnh</h2>
+          <p className="text-center text-[#9CA3AF] mb-12">Những bức ảnh lịch sử quý giá</p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Main Image */}
@@ -375,8 +375,8 @@ const EventDetailEnhanced = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                 <div>
-                  <p className="text-white font-serif text-xl mb-1">{gallery[activeGalleryIndex].caption}</p>
-                  {gallery[activeGalleryIndex].year && <span className="text-white/80 text-sm">{gallery[activeGalleryIndex].year}</span>}
+                  <p className="text-[#E5E5E5] font-serif text-xl mb-1">{gallery[activeGalleryIndex].caption}</p>
+                  {gallery[activeGalleryIndex].year && <span className="text-[#E5E5E5]/80 text-sm">{gallery[activeGalleryIndex].year}</span>}
                 </div>
               </div>
             </div>
@@ -388,12 +388,12 @@ const EventDetailEnhanced = () => {
                   key={image.id}
                   onClick={() => setActiveGalleryIndex(idx)}
                   className={`relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 transform hover:scale-105 ${
-                    activeGalleryIndex === idx ? 'ring-4 ring-brand-blue shadow-lg scale-105' : 'opacity-70 hover:opacity-100'
+                    activeGalleryIndex === idx ? 'ring-4 ring-[#F4D03F] shadow-lg scale-105' : 'opacity-70 hover:opacity-100'
                   }`}
                 >
                   <img src={image.src} alt={image.caption} className="w-full h-24 object-cover" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all" />
-                  <p className="absolute bottom-2 left-2 text-white text-xs font-semibold bg-black/40 px-2 py-1 rounded">{image.caption}</p>
+                  <p className="absolute bottom-2 left-2 text-[#E5E5E5] text-xs font-semibold bg-black/40 px-2 py-1 rounded">{image.caption}</p>
                 </div>
               ))}
             </div>
@@ -402,35 +402,35 @@ const EventDetailEnhanced = () => {
       </section>
 
       {/* Expandable Sections */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-[#1A1A1A]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-serif text-brand-text mb-4 text-center">📚 Thông Tin Chi Tiết</h2>
+          <h2 className="text-4xl font-serif text-[#F4D03F] mb-4 text-center">📚 Thông Tin Chi Tiết</h2>
 
           <div className="space-y-4">
             {sections.map((section) => (
-              <div key={section.id} className="border-2 border-brand-blue/20 rounded-xl overflow-hidden hover:border-brand-blue/40 transition-all duration-300">
+              <div key={section.id} className="border-2 border-[#F4D03F]/20 rounded-xl overflow-hidden hover:border-[#F4D03F]/40 transition-all duration-300">
                 <button
                   onClick={() => toggleSection(section.id)}
-                  className="w-full flex items-center justify-between p-6 bg-white hover:bg-brand-base/50 transition-colors duration-200"
+                  className="w-full flex items-center justify-between p-6 bg-[#1A1A1A] hover:bg-[#0D0D0D]/50 transition-colors duration-200"
                 >
                   <div className="flex items-center gap-4">
                     <span className="text-3xl">{section.icon}</span>
-                    <h3 className="text-xl font-serif text-brand-text">{section.title}</h3>
+                    <h3 className="text-xl font-serif text-[#F4D03F]">{section.title}</h3>
                   </div>
                   <ChevronDown
                     size={24}
-                    className={`text-brand-blue transition-transform duration-300 ${expandedSections[section.id] ? 'rotate-180' : ''}`}
+                    className={`text-[#F4D03F] transition-transform duration-300 ${expandedSections[section.id] ? 'rotate-180' : ''}`}
                   />
                 </button>
 
                 {expandedSections[section.id] && (
-                  <div className="px-6 pb-6 border-t border-brand-blue/10 animate-fade-in">
-                    <p className="text-brand-muted leading-relaxed mb-4">{section.content}</p>
+                  <div className="px-6 pb-6 border-t border-[#F4D03F]/10 animate-fade-in">
+                    <p className="text-[#9CA3AF] leading-relaxed mb-4">{section.content}</p>
                     {section.details && (
                       <ul className="space-y-2">
                         {section.details.map((detail, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-brand-text">
-                            <span className="text-brand-blue font-bold mt-1">✓</span>
+                          <li key={idx} className="flex items-start gap-3 text-[#F4D03F]">
+                            <span className="text-[#F4D03F] font-bold mt-1">✓</span>
                             <span>{detail}</span>
                           </li>
                         ))}
@@ -447,16 +447,16 @@ const EventDetailEnhanced = () => {
       {/* Interactive Map Section */}
       <section className="py-20 px-4 bg-gradient-to-b from-blue-50 to-purple-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-serif text-brand-text mb-4 text-center">🗺️ Bản Đồ Sự Kiện</h2>
-          <p className="text-center text-brand-muted mb-12">Những địa điểm quan trọng trong cuộc đời</p>
+          <h2 className="text-4xl font-serif text-[#F4D03F] mb-4 text-center">🗺️ Bản Đồ Sự Kiện</h2>
+          <p className="text-center text-[#9CA3AF] mb-12">Những địa điểm quan trọng trong cuộc đời</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Map Placeholder */}
-            <div className="relative overflow-hidden rounded-2xl shadow-lg bg-white p-8 border border-brand-blue/20">
+            <div className="relative overflow-hidden rounded-2xl shadow-lg bg-[#1A1A1A] p-8 border border-[#F4D03F]/20">
               <div className="w-full h-96 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center relative">
                 <span className="text-6xl">🗺️</span>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-center text-brand-muted text-sm">Interactive Map sẽ được thêm vào</p>
+                  <p className="text-center text-[#9CA3AF] text-sm">Interactive Map sẽ được thêm vào</p>
                 </div>
               </div>
             </div>
@@ -470,16 +470,16 @@ const EventDetailEnhanced = () => {
                   onMouseLeave={() => setHoveredPin(null)}
                   className={`p-4 rounded-lg border-2 transition-all duration-300 cursor-pointer ${
                     hoveredPin === pin.id
-                      ? 'border-brand-blue bg-brand-blue/10 shadow-lg scale-105'
-                      : 'border-brand-blue/20 bg-white hover:border-brand-blue/40'
+                      ? 'border-[#F4D03F] bg-[#F4D03F]/10 shadow-lg scale-105'
+                      : 'border-[#F4D03F]/20 bg-[#1A1A1A] hover:border-[#F4D03F]/40'
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <span className="text-3xl">{pin.icon}</span>
                     <div>
-                      <h4 className="font-semibold text-brand-text">{pin.name}</h4>
-                      <p className="text-sm text-brand-blue font-medium">{pin.date}</p>
-                      <p className="text-sm text-brand-muted mt-1">{pin.description}</p>
+                      <h4 className="font-semibold text-[#F4D03F]">{pin.name}</h4>
+                      <p className="text-sm text-[#F4D03F] font-medium">{pin.date}</p>
+                      <p className="text-sm text-[#9CA3AF] mt-1">{pin.description}</p>
                     </div>
                   </div>
                 </div>
@@ -490,44 +490,44 @@ const EventDetailEnhanced = () => {
       </section>
 
       {/* Quiz CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-brand-blue via-purple-600 to-pink-600 relative overflow-hidden">
+      <section className="py-20 px-4 bg-gradient-to-r from-[#F4D03F] via-purple-600 to-pink-600 relative overflow-hidden">
         {/* Background Animation */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#1A1A1A] rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#1A1A1A] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6 drop-shadow-lg">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#E5E5E5] mb-6 drop-shadow-lg">
             ✨ Sẵn Sàng Kiểm Tra Kiến Thức?
           </h2>
-          <p className="text-xl text-white/90 mb-12 drop-shadow-md max-w-2xl mx-auto">
+          <p className="text-xl text-[#E5E5E5]/90 mb-12 drop-shadow-md max-w-2xl mx-auto">
             Trả lời 3 câu hỏi trong 20 giây để kiểm tra hiểu biết của bạn về Trần Đại Nghĩa và kỷ nguyên giáo dục của ông.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate(historyTarget)}
-              className="px-10 py-4 bg-white text-brand-blue font-bold text-lg rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
+              className="px-10 py-4 bg-[#1A1A1A] text-[#F4D03F] font-bold text-lg rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               <Zap size={20} className="group-hover:animate-spin" />
               Bắt Đầu Quiz Ngay
             </button>
             <button
               onClick={() => navigate(-1)}
-              className="px-10 py-4 bg-white/20 text-white font-bold text-lg rounded-lg border-2 border-white/40 backdrop-blur-sm hover:bg-white/30 transition-all duration-300"
+              className="px-10 py-4 bg-[#1A1A1A]/20 text-[#E5E5E5] font-bold text-lg rounded-lg border-2 border-white/40 backdrop-blur-sm hover:bg-[#1A1A1A]/30 transition-all duration-300"
             >
               Quay Lại
             </button>
           </div>
 
-          <p className="text-white/70 text-sm mt-6">🎯 Hoàn thành quiz để mở khóa thêm nội dung & nhận sao</p>
+          <p className="text-[#E5E5E5]/70 text-sm mt-6">🎯 Hoàn thành quiz để mở khóa thêm nội dung & nhận sao</p>
         </div>
       </section>
 
       {/* Footer Info */}
-      <section className="py-12 px-4 bg-brand-base text-center">
-        <p className="text-brand-muted text-sm">
+      <section className="py-12 px-4 bg-[#0D0D0D] text-center">
+        <p className="text-[#9CA3AF] text-sm">
           📚 Nguồn tài liệu: Bảo tàng Lịch sử Quốc gia Việt Nam | Cập nhật: 2025
         </p>
       </section>
